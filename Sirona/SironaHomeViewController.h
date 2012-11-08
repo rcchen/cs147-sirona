@@ -8,6 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
-@interface SironaHomeViewController : NSObject
+@interface SironaHomeViewController : UIViewController
+{
+    
+}
+
+- (IBAction)pressButton:(id)sender;
+
 
 @end

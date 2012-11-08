@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-@interface SironaSettingsViewController : NSObject
+@interface SironaSettingsViewController : UIViewController
+{
+    
+}
 
 @end

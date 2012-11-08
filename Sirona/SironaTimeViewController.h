@@ -8,6 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
-@interface SironaTimeViewController : NSObject
+@interface SironaTimeViewController : UIViewController
+{
+    IBOutlet UILabel *timeLabel;
+}
+
+@property (nonatomic, retain) IBOutlet UIDatePicker *datePicker;
+
+- (IBAction)showCurrentTime:(id)sender;
+- (IBAction)scheduleAlarm:(id)sender;
 
 @end

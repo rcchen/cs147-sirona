@@ -7,7 +7,39 @@
 //
 
 #import "SironaLibraryList.h"
+#import "SironaLibraryItem.h"
 
 @implementation SironaLibraryList
+
++ (SironaLibraryList *)sharedLibrary
+{
+    static SironaLibraryList *sharedLibrary = nil;
+    if (!sharedLibrary)
+        sharedLibrary = [[super allocWithZone:nil] init];
+    return sharedLibrary;
+}
+
++ (id)allocWithZone:(NSZone *)zone
+{
+    return [self sharedLibrary];    
+}
+
+- (id)init
+{
+    self = [super init];
+    if (self) {
+        allItems = [[NSMutableArray alloc] init];
+    } return self;
+}
+
+- (NSArray *)allItems
+{
+    return allItems;
+}
+
+- (void)createItem:(SironaLibraryItem *)item;
+{
+    [allItems addObject:item];
+}
 
 @end

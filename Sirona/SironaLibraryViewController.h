@@ -8,6 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-@interface SironaLibraryViewController : NSObject
+@interface SironaLibraryViewController : UITableViewController
+{
+    IBOutlet UITableView *medicineTable;
+}
+
+@property NSMutableArray *medicines;
 
 @end

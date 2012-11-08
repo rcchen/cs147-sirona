@@ -8,6 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-@interface SironaHomeView : NSObject
+@interface SironaHomeView : UIView
 
 @end

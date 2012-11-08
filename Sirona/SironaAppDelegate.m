@@ -7,16 +7,53 @@
 //
 
 #import "SironaAppDelegate.h"
+#import "SironaHomeViewController.h"
+#import "SironaTimeViewController.h"
+#import "SironaLibraryViewController.h"
+#import "SironaSettingsViewController.h"
 
 @implementation SironaAppDelegate
 
+@synthesize window = _window;
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
+    
+    SironaHomeViewController *shvc = [[SironaHomeViewController alloc] init];
+    SironaTimeViewController *stvc = [[SironaTimeViewController alloc] init];
+    SironaLibraryViewController *slvc = [[SironaLibraryViewController alloc] init];
+    SironaSettingsViewController *ssvc = [[SironaSettingsViewController alloc] init];
+    
+    // Create the tab bar controller
+    UITabBarController *tabBarController = [[UITabBarController alloc] init];
+    
+    // Create an array of the available view controllers, then set them to the TabBar
+    NSArray *viewControllers = [NSArray arrayWithObjects:shvc, stvc, slvc, ssvc, nil];
+    [tabBarController setViewControllers:viewControllers];
+    
+    [[self window] setRootViewController:tabBarController];
+    
+    
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
+    
+    application.applicationIconBadgeNumber = 0;
+    
+    UILocalNotification *localNotif = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
+    if (localNotif) {
+        NSLog(@"Received notification (localNotif): %@", localNotif);
+    }
+    
     return YES;
+    
+}
+
+- (void)application:(UIApplication *)app didReceiveLocalNotification:(UILocalNotification *)notification
+{
+    NSLog(@"Received notification (didReceive): %@", notification);
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

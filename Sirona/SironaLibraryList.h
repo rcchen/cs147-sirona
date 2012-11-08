@@ -8,6 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
+@class SironaLibraryItem;
+
 @interface SironaLibraryList : NSObject
+{
+    NSMutableArray *allItems;
+}
+
++ (SironaLibraryList *)sharedLibrary;
+
+- (NSArray *)allItems;
+- (void)createItem:(SironaLibraryItem *)item;
 
 @end
