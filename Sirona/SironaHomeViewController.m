@@ -11,6 +11,75 @@
 
 @implementation SironaHomeViewController
 
+- (void)viewDidLoad
+{
+    
+
+    
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    
+    // instantaneously make the image view small (scaled to 1% of its actual size)
+    orangeCircle.transform = CGAffineTransformMakeScale(0.01, 0.01);
+    blueCircle.transform = CGAffineTransformMakeScale(0.01, 0.01);
+    greenCircle.transform = CGAffineTransformMakeScale(0.01, 0.01);
+    
+    [UIView animateWithDuration:0.4 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+        // animate it to the identity transform (100% scale)
+        orangeCircle.transform = CGAffineTransformIdentity;
+    } completion:^(BOOL finished){
+        // if you want to do something once the animation finishes, put it here
+    }];
+    
+    [UIView animateWithDuration:0.4 delay:0.3 options:UIViewAnimationOptionCurveEaseOut animations:^{
+        // animate it to the identity transform (100% scale)
+        blueCircle.transform = CGAffineTransformIdentity;
+    } completion:^(BOOL finished){
+        // if you want to do something once the animation finishes, put it here
+    }];
+    
+    [UIView animateWithDuration:0.4 delay:0.5 options:UIViewAnimationOptionCurveEaseOut animations:^{
+        // animate it to the identity transform (100% scale)
+        greenCircle.transform = CGAffineTransformIdentity;
+    } completion:^(BOOL finished){
+        // if you want to do something once the animation finishes, put it here
+    }];
+    
+}
+
+- (IBAction)pressBoom:(id)sender
+{
+    
+    // instantaneously make the image view small (scaled to 1% of its actual size)
+    orangeCircle.transform = CGAffineTransformMakeScale(0.01, 0.01);
+    blueCircle.transform = CGAffineTransformMakeScale(0.01, 0.01);
+    greenCircle.transform = CGAffineTransformMakeScale(0.01, 0.01);
+
+    [UIView animateWithDuration:0.4 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+        // animate it to the identity transform (100% scale)
+        orangeCircle.transform = CGAffineTransformIdentity;
+    } completion:^(BOOL finished){
+        // if you want to do something once the animation finishes, put it here
+    }];
+    
+    [UIView animateWithDuration:0.4 delay:0.3 options:UIViewAnimationOptionCurveEaseOut animations:^{
+        // animate it to the identity transform (100% scale)
+        blueCircle.transform = CGAffineTransformIdentity;
+    } completion:^(BOOL finished){
+        // if you want to do something once the animation finishes, put it here
+    }];
+    
+    [UIView animateWithDuration:0.4 delay:0.5 options:UIViewAnimationOptionCurveEaseOut animations:^{
+        // animate it to the identity transform (100% scale)
+        greenCircle.transform = CGAffineTransformIdentity;
+    } completion:^(BOOL finished){
+        // if you want to do something once the animation finishes, put it here
+    }];
+    
+}
+
 - (id)initWithNibName:(NSString *)nibName bundle:(NSBundle *)bundle
 {
     

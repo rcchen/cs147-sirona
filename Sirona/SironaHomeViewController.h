@@ -10,10 +10,12 @@
 
 @interface SironaHomeViewController : UIViewController
 {
-    
+    IBOutlet UIImageView *orangeCircle;
+    IBOutlet UIImageView *greenCircle;
+    IBOutlet UIImageView *blueCircle;
 }
 
 - (IBAction)pressButton:(id)sender;
-
+- (IBAction)pressBoom:(id)sender;
 
 @end
