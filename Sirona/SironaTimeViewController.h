@@ -8,15 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
-@interface SironaTimeViewController : UIViewController
-{
+#import "SironaTimeEditViewController.h"
 
+@interface SironaTimeViewController : UITableViewController
+{
+    IBOutlet UITableView *alarmsTable;
 }
 
-@property (nonatomic, retain) IBOutlet UIDatePicker *datePicker;
+@property NSMutableArray *alerts;
 
-/*
-- (IBAction)scheduleAlarm:(id)sender;
-*/
- 
+- (IBAction)addNewItem:(id)sender;
+
 @end

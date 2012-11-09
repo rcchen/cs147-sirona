@@ -10,8 +10,39 @@
 #import "SironaLibraryViewController.h"
 #import "SironaLibraryList.h"
 #import "SironaLibraryItem.h"
+#import "SironaLibraryCellView.h"
 
 @implementation SironaLibraryViewController
+
+- (IBAction)addNewItem:(id)sender
+{
+    
+}
+
+- (id)init
+{
+    // Call the superclass's designated initializer
+    self = [super initWithStyle:UITableViewStyleGrouped];
+    if (self) {
+        
+        // Get the tab bar item and give it a label
+        UITabBarItem *tbi = [self tabBarItem];
+        [tbi setTitle:@"Library"];
+        
+        // Now give it an image
+        UIImage *i = [UIImage imageNamed:@"96-book.png"];
+        [tbi setImage:i];
+        
+        UINavigationItem *n = [self navigationItem];
+        
+        [n setTitle:NSLocalizedString(@"Library", @"Application title")];
+
+    }
+    
+    [self refreshDisplay];
+    
+    return self;
+}
 
 @synthesize medicines;
 
@@ -25,11 +56,11 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"UITableViewCell"];
     SironaLibraryItem *sli = [[[SironaLibraryList sharedLibrary] allItems] objectAtIndex:[indexPath row]];
-    NSLog(@"row: %@", indexPath);
-    [[cell textLabel] setText:[sli getBrand]];
-    return cell;
+    SironaLibraryCellView *slcv = [tableView dequeueReusableCellWithIdentifier:@"SironaLibraryCellView"];
+    [[slcv cellMain] setText:[sli getBrand]];
+    [[slcv cellSecondary] setText:[sli getCategory]];
+    return slcv;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -72,6 +103,14 @@
     [self refreshDisplay];
 }
 
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    UINib *nib = [UINib nibWithNibName:@"SironaLibraryCellView" bundle:nil];
+    [[self tableView] registerNib:nib forCellReuseIdentifier:@"SironaLibraryCellView"];
+}
+
+/*
 - (id)initWithNibName:(NSString *)nibName bundle:(NSBundle *)bundle
 {
     
@@ -99,5 +138,6 @@
     return self;
     
 }
+*/
 
 @end

@@ -11,9 +11,6 @@
 
 @implementation SironaHomeViewController
 
-
-
-
 - (void)updateTime:(NSTimer *)timer {
     
     NSDateFormatter *formatter;
@@ -30,6 +27,8 @@
 
 - (void)circleAppear
 {
+    
+    [timeLabel setHidden:YES];
     
     // instantaneously make the image view small (scaled to 1% of its actual size)
     circleOne.transform = CGAffineTransformMakeScale(0.01, 0.01);
@@ -78,6 +77,8 @@
         // if you want to do something once the animation finishes, put it here
     }];
     
+    [timeLabel setHidden:NO];
+    
     timer = [NSTimer scheduledTimerWithTimeInterval: 1.0 target:self selector:@selector(updateTime:) userInfo:nil repeats: YES];
     
 }
@@ -122,6 +123,11 @@
     for (UILocalNotification* notif in notifs)
         NSLog(@"%@", [notif fireDate]);
     
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [timeLabel setHidden:YES];
 }
 
 @end

@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 #import "SironaLibraryDetailViewController.h"
+#import "SironaLibraryCellView.h"
 
 @interface SironaLibraryViewController : UITableViewController
 {
@@ -18,5 +19,6 @@
 @property NSMutableArray *medicines;
 
 - (void)refreshDisplay;
+- (IBAction)addNewItem:(id)sender;
 
 @end

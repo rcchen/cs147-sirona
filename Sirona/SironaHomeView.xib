@@ -46,11 +46,14 @@
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="447494876"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
-						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<object class="NSCustomResource" key="IBUIImage" id="903143772">
 							<string key="NSClassName">NSImage</string>
 							<string key="NSResourceName">circle-orange.png</string>
+						</object>
+						<object class="NSCustomResource" key="IBUIHighlightedImage" id="197379668">
+							<string key="NSClassName">NSImage</string>
+							<string key="NSResourceName">circle-orange-highlighted.png</string>
 						</object>
 					</object>
 					<object class="IBUIImageView" id="735968128">
@@ -64,6 +67,7 @@
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<reference key="IBUIImage" ref="903143772"/>
+						<reference key="IBUIHighlightedImage" ref="197379668"/>
 					</object>
 					<object class="IBUIImageView" id="570248674">
 						<reference key="NSNextResponder" ref="119505424"/>
@@ -73,11 +77,14 @@
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="994453046"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
-						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<object class="NSCustomResource" key="IBUIImage" id="741817498">
 							<string key="NSClassName">NSImage</string>
 							<string key="NSResourceName">circle-blue.png</string>
+						</object>
+						<object class="NSCustomResource" key="IBUIHighlightedImage" id="326155002">
+							<string key="NSClassName">NSImage</string>
+							<string key="NSResourceName">circle-blue-highlighted.png</string>
 						</object>
 					</object>
 					<object class="IBUIImageView" id="347427218">
@@ -86,10 +93,11 @@
 						<string key="NSFrame">{{183, 282}, {104, 100}}</string>
 						<reference key="NSSuperview" ref="119505424"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="425938227"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
-						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<reference key="IBUIImage" ref="741817498"/>
+						<reference key="IBUIHighlightedImage" ref="326155002"/>
 					</object>
 					<object class="IBUIImageView" id="447494876">
 						<reference key="NSNextResponder" ref="119505424"/>
@@ -99,11 +107,14 @@
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="445805704"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
-						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<object class="NSCustomResource" key="IBUIImage">
 							<string key="NSClassName">NSImage</string>
 							<string key="NSResourceName">circle-green.png</string>
+						</object>
+						<object class="NSCustomResource" key="IBUIHighlightedImage">
+							<string key="NSClassName">NSImage</string>
+							<string key="NSResourceName">circle-green-highlighted.png</string>
 						</object>
 					</object>
 					<object class="IBUIButton" id="425938227">
@@ -112,7 +123,7 @@
 						<string key="NSFrame">{{282, 401}, {18, 19}}</string>
 						<reference key="NSSuperview" ref="119505424"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="735968128"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -144,11 +155,11 @@
 					</object>
 					<object class="IBUILabel" id="445805704">
 						<reference key="NSNextResponder" ref="119505424"/>
-						<int key="NSvFlags">292</int>
+						<int key="NSvFlags">-2147483356</int>
 						<string key="NSFrame">{{92, 200}, {137, 19}}</string>
 						<reference key="NSSuperview" ref="119505424"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="425938227"/>
+						<reference key="NSNextKeyView" ref="735968128"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -1023,8 +1034,11 @@
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
+			<string key="circle-blue-highlighted.png">{100, 100}</string>
 			<string key="circle-blue.png">{100, 100}</string>
+			<string key="circle-green-highlighted.png">{100, 100}</string>
 			<string key="circle-green.png">{100, 100}</string>
+			<string key="circle-orange-highlighted.png">{100, 100}</string>
 			<string key="circle-orange.png">{100, 100}</string>
 		</dictionary>
 		<bool key="IBDocument.UseAutolayout">YES</bool>

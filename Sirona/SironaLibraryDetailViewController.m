@@ -51,6 +51,7 @@
 - (void)setItem:(SironaLibraryItem *)theItem
 {
     item = theItem;
+    [[self navigationItem] setTitle:[item getBrand]];
 }
 
 @end
