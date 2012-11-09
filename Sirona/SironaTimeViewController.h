@@ -15,6 +15,8 @@
 
 @property (nonatomic, retain) IBOutlet UIDatePicker *datePicker;
 
+/*
 - (IBAction)scheduleAlarm:(id)sender;
-
+*/
+ 
 @end

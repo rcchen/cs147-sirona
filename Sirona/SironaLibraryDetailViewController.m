@@ -7,12 +7,11 @@
 //
 
 #import "SironaLibraryDetailViewController.h"
-
-@interface SironaLibraryDetailViewController ()
-
-@end
+#import "SironaLibraryItem.h"
 
 @implementation SironaLibraryDetailViewController
+
+@synthesize item;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -34,6 +33,24 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    
+    [super viewWillAppear:animated];
+    
+    [dataBrand setText:[item getBrand]];
+    [dataCategory setText:[item getCategory]];
+    [dataId setText:[item getId]];
+    [dataPrecautions setText:[item getPrecautions]];
+    [dataSideEffects setText:[item getSideEffects]];
+    
+}
+
+- (void)setItem:(SironaLibraryItem *)theItem
+{
+    item = theItem;
 }
 
 @end

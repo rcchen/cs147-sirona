@@ -27,7 +27,8 @@
 
 - (NSString *)getBrand;
 - (NSString *)getCategory;
-- (void)setBrand:(NSString *)brand;
-- (void)setCategory:(NSString *)category;
+- (NSString *)getId;
+- (NSString *)getPrecautions;
+- (NSString *)getSideEffects;
 
 @end

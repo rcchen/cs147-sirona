@@ -12,6 +12,8 @@
 
 @synthesize datePicker;
 
+
+/*
 - (IBAction)scheduleAlarm:(id)sender
 {
 
@@ -38,6 +40,7 @@
     [[UIApplication sharedApplication] scheduleLocalNotification:localNotif];
     
 }
+*/
 
 - (id)initWithNibName:(NSString *)nibName bundle:(NSBundle *)bundle
 {

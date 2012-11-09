@@ -6,6 +6,7 @@
 //  Copyright (c) 2012 Roger Chen. All rights reserved.
 //
 
+#import "SironaLibraryDetailViewController.h"
 #import "SironaLibraryViewController.h"
 #import "SironaLibraryList.h"
 #import "SironaLibraryItem.h"
@@ -29,6 +30,17 @@
     NSLog(@"row: %@", indexPath);
     [[cell textLabel] setText:[sli getBrand]];
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    SironaLibraryDetailViewController *sldvc = [[SironaLibraryDetailViewController alloc] init];
+    
+    NSArray *items = [[SironaLibraryList sharedLibrary] allItems];
+    SironaLibraryItem *selectedItem = [items objectAtIndex:[indexPath row]];
+    [sldvc setItem:selectedItem];
+    
+    [[self navigationController] pushViewController:sldvc animated:YES];
 }
 
 - (void)refreshDisplay
@@ -68,6 +80,9 @@
     
     // If it exists, then we can customize it
     if (self) {
+        
+        UINavigationController *n = [self navigationController];
+        [n setTitle:@"My Alerts"];
         
         // Get the tab bar item and give it a label
         UITabBarItem *tbi = [self tabBarItem];

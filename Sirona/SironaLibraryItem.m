@@ -34,19 +34,24 @@
     return mdataBrand;
 }
 
-- (void)setBrand:(NSString *)brand;
-{
-    mdataBrand = brand;
-}
-
 - (NSString *)getCategory
 {
     return mdataCategory;
 }
 
-- (void)setCategory:(NSString *)category;
+- (NSString *)getId
 {
-    mdataCategory = category;
+    return mdataId;
+}
+
+- (NSString *)getPrecautions
+{
+    return mdataPrecautions;
+}
+
+- (NSString *)getSideEffects
+{
+    return mdataSideEffects;
 }
 
 @end

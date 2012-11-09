@@ -20,6 +20,7 @@
 {
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
     // Override point for customization after application launch.
     
     SironaHomeViewController *shvc = [[SironaHomeViewController alloc] init];
@@ -27,15 +28,19 @@
     SironaLibraryViewController *slvc = [[SironaLibraryViewController alloc] init];
     SironaSettingsViewController *ssvc = [[SironaSettingsViewController alloc] init];
     
+    UINavigationController *timeViewController = [[UINavigationController alloc] initWithRootViewController:stvc];
+    UINavigationController *libraryViewController = [[UINavigationController alloc] initWithRootViewController:slvc];
+    
+    [libraryViewController setTitle:@"Library"];
+    
     // Create the tab bar controller
     UITabBarController *tabBarController = [[UITabBarController alloc] init];
     
     // Create an array of the available view controllers, then set them to the TabBar
-    NSArray *viewControllers = [NSArray arrayWithObjects:shvc, stvc, slvc, ssvc, nil];
+    NSArray *viewControllers = [NSArray arrayWithObjects:shvc, timeViewController, libraryViewController, ssvc, nil];
     [tabBarController setViewControllers:viewControllers];
     
     [[self window] setRootViewController:tabBarController];
-    
     
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];

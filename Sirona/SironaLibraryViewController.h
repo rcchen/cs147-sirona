@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+#import "SironaLibraryDetailViewController.h"
+
 @interface SironaLibraryViewController : UITableViewController
 {
     IBOutlet UITableView *medicineTable;

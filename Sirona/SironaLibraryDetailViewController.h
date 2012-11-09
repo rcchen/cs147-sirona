@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+@class SironaLibraryItem;
+
 @interface SironaLibraryDetailViewController : UIViewController
 {
     __weak IBOutlet UILabel *dataBrand;
@@ -16,5 +18,9 @@
     __weak IBOutlet UILabel *dataPrecautions;
     __weak IBOutlet UILabel *dataSideEffects;
 }
+
+@property (nonatomic, strong)SironaLibraryItem *item;
+
+- (void)setItem:(SironaLibraryItem *)theItem;
 
 @end
