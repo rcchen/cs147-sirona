@@ -13,4 +13,6 @@
     
 }
 
+@property NSMutableArray *settings;
+
 @end

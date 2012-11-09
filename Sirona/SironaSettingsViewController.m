@@ -10,6 +10,34 @@
 
 @implementation SironaSettingsViewController
 
+@synthesize settings;
+
+// Returns the count of the number of rows in the table view
+- (NSInteger)tableView:(UITableView *)tableView
+ numberOfRowsInSection:(NSInteger)section
+{
+    return 5;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView
+         cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    NSString *value = [settings objectAtIndex:[indexPath row]];
+    
+    UITableViewCell *utvc = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"UITableViewCell"];
+    [[utvc textLabel] setText:value];
+    
+    return utvc;
+    
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+   
+}
+
+
 - (id)initWithNibName:(NSString *)nibName bundle:(NSBundle *)bundle
 {
     
@@ -28,6 +56,8 @@
         [tbi setImage:i];
         
     }
+    
+    settings = [settings initWithObjects:@"Sound",@"Alert",@"Cloud sync", nil];
     
     NSArray *notifs = [[UIApplication sharedApplication] scheduledLocalNotifications];
     for (UILocalNotification* notif in notifs)

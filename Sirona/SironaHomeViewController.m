@@ -37,6 +37,12 @@
     circleFour.transform = CGAffineTransformMakeScale(0.01, 0.01);
     circleFive.transform = CGAffineTransformMakeScale(0.01, 0.01);
     
+    [circleOne setHidden:NO];
+    [circleTwo setHidden:NO];
+    [circleThree setHidden:NO];
+    [circleFour setHidden:NO];
+    [circleFive setHidden:NO];
+    
     // Animate in circle one
     [UIView animateWithDuration:0.4 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
         // animate it to the identity transform (100% scale)
@@ -125,9 +131,25 @@
     
 }
 
+- (void)cleanupObjects
+{
+    // instantaneously make the image view small (scaled to 1% of its actual size)
+    [circleOne setHidden:YES];
+    [circleTwo setHidden:YES];
+    [circleThree setHidden:YES];
+    [circleFour setHidden:YES];
+    [circleFive setHidden:YES];
+    [timeLabel setHidden:YES];
+}
+
 - (void)viewDidDisappear:(BOOL)animated
 {
-    [timeLabel setHidden:YES];
+    [self cleanupObjects];
+}
+
+- (void)viewDidUnload
+{
+    [self cleanupObjects];
 }
 
 @end

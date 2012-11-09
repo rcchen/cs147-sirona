@@ -56,8 +56,9 @@
     
 }
 
-- (void)application:(UIApplication *)app didReceiveLocalNotification:(UILocalNotification *)notification
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
 {
+    application.applicationIconBadgeNumber = 0;
     NSLog(@"Received notification (didReceive): %@", notification);
 }
 
