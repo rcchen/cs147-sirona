@@ -15,4 +15,6 @@
 
 @property NSMutableArray *medicines;
 
+- (void)refreshDisplay;
+
 @end

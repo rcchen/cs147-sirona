@@ -12,18 +12,6 @@
 
 @synthesize datePicker;
 
-- (IBAction)showCurrentTime:(id)sender
-{
-
-    NSDate *now = [NSDate date];
-    
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setTimeStyle:NSDateFormatterMediumStyle];
-    
-    [timeLabel setText:[formatter stringFromDate:now]];
-
-}
-
 - (IBAction)scheduleAlarm:(id)sender
 {
 
@@ -62,7 +50,7 @@
         
         // Get the tab bar item and give it a label
         UITabBarItem *tbi = [self tabBarItem];
-        [tbi setTitle:@"Time"];
+        [tbi setTitle:@"My Meds"];
         
         // Now give it an image
         UIImage *i = [UIImage imageNamed:@"10-medical.png"];

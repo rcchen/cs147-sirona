@@ -11,73 +11,85 @@
 
 @implementation SironaHomeViewController
 
-- (void)viewDidLoad
+
+
+
+- (void)updateTime:(NSTimer *)timer {
+    
+    NSDateFormatter *formatter;
+    NSString        *dateString;
+    
+    formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"h:mm:ss a"];
+    
+    dateString = [formatter stringFromDate:[NSDate date]];
+    
+    [timeLabel setText:dateString];
+    
+}
+
+- (void)circleAppear
 {
     
-
+    // instantaneously make the image view small (scaled to 1% of its actual size)
+    circleOne.transform = CGAffineTransformMakeScale(0.01, 0.01);
+    circleTwo.transform = CGAffineTransformMakeScale(0.01, 0.01);
+    circleThree.transform = CGAffineTransformMakeScale(0.01, 0.01);
+    circleFour.transform = CGAffineTransformMakeScale(0.01, 0.01);
+    circleFive.transform = CGAffineTransformMakeScale(0.01, 0.01);
+    
+    // Animate in circle one
+    [UIView animateWithDuration:0.4 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+        // animate it to the identity transform (100% scale)
+        circleOne.transform = CGAffineTransformIdentity;
+    } completion:^(BOOL finished){
+        // if you want to do something once the animation finishes, put it here
+    }];
+    
+    // Animate in circle two
+    [UIView animateWithDuration:0.4 delay:0.3 options:UIViewAnimationOptionCurveEaseOut animations:^{
+        // animate it to the identity transform (100% scale)
+        circleTwo.transform = CGAffineTransformIdentity;
+    } completion:^(BOOL finished){
+        // if you want to do something once the animation finishes, put it here
+    }];
+    
+    // Animate in circle three
+    [UIView animateWithDuration:0.4 delay:0.5 options:UIViewAnimationOptionCurveEaseOut animations:^{
+        // animate it to the identity transform (100% scale)
+        circleThree.transform = CGAffineTransformIdentity;
+    } completion:^(BOOL finished){
+        // if you want to do something once the animation finishes, put it here
+    }];
+    
+    // Animate in circle four
+    [UIView animateWithDuration:0.4 delay:0.7 options:UIViewAnimationOptionCurveEaseOut animations:^{
+        // animate it to the identity transform (100% scale)
+        circleFour.transform = CGAffineTransformIdentity;
+    } completion:^(BOOL finished){
+        // if you want to do something once the animation finishes, put it here
+    }];
+    
+    // Animate in circle five
+    [UIView animateWithDuration:0.4 delay:0.9 options:UIViewAnimationOptionCurveEaseOut animations:^{
+        // animate it to the identity transform (100% scale)
+        circleFive.transform = CGAffineTransformIdentity;
+    } completion:^(BOOL finished){
+        // if you want to do something once the animation finishes, put it here
+    }];
+    
+    timer = [NSTimer scheduledTimerWithTimeInterval: 1.0 target:self selector:@selector(updateTime:) userInfo:nil repeats: YES];
     
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    
-    // instantaneously make the image view small (scaled to 1% of its actual size)
-    orangeCircle.transform = CGAffineTransformMakeScale(0.01, 0.01);
-    blueCircle.transform = CGAffineTransformMakeScale(0.01, 0.01);
-    greenCircle.transform = CGAffineTransformMakeScale(0.01, 0.01);
-    
-    [UIView animateWithDuration:0.4 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
-        // animate it to the identity transform (100% scale)
-        orangeCircle.transform = CGAffineTransformIdentity;
-    } completion:^(BOOL finished){
-        // if you want to do something once the animation finishes, put it here
-    }];
-    
-    [UIView animateWithDuration:0.4 delay:0.3 options:UIViewAnimationOptionCurveEaseOut animations:^{
-        // animate it to the identity transform (100% scale)
-        blueCircle.transform = CGAffineTransformIdentity;
-    } completion:^(BOOL finished){
-        // if you want to do something once the animation finishes, put it here
-    }];
-    
-    [UIView animateWithDuration:0.4 delay:0.5 options:UIViewAnimationOptionCurveEaseOut animations:^{
-        // animate it to the identity transform (100% scale)
-        greenCircle.transform = CGAffineTransformIdentity;
-    } completion:^(BOOL finished){
-        // if you want to do something once the animation finishes, put it here
-    }];
-    
+    [self circleAppear];
 }
 
-- (IBAction)pressBoom:(id)sender
+- (void)viewDidLoad
 {
-    
-    // instantaneously make the image view small (scaled to 1% of its actual size)
-    orangeCircle.transform = CGAffineTransformMakeScale(0.01, 0.01);
-    blueCircle.transform = CGAffineTransformMakeScale(0.01, 0.01);
-    greenCircle.transform = CGAffineTransformMakeScale(0.01, 0.01);
-
-    [UIView animateWithDuration:0.4 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
-        // animate it to the identity transform (100% scale)
-        orangeCircle.transform = CGAffineTransformIdentity;
-    } completion:^(BOOL finished){
-        // if you want to do something once the animation finishes, put it here
-    }];
-    
-    [UIView animateWithDuration:0.4 delay:0.3 options:UIViewAnimationOptionCurveEaseOut animations:^{
-        // animate it to the identity transform (100% scale)
-        blueCircle.transform = CGAffineTransformIdentity;
-    } completion:^(BOOL finished){
-        // if you want to do something once the animation finishes, put it here
-    }];
-    
-    [UIView animateWithDuration:0.4 delay:0.5 options:UIViewAnimationOptionCurveEaseOut animations:^{
-        // animate it to the identity transform (100% scale)
-        greenCircle.transform = CGAffineTransformIdentity;
-    } completion:^(BOOL finished){
-        // if you want to do something once the animation finishes, put it here
-    }];
-    
+    [self circleAppear];
 }
 
 - (id)initWithNibName:(NSString *)nibName bundle:(NSBundle *)bundle
@@ -98,7 +110,6 @@
         [tbi setImage:i];
         
     }
-    
 
     return self;
     
@@ -106,9 +117,11 @@
 
 - (IBAction)pressButton:(id)sender
 {
+    
     NSArray *notifs = [[UIApplication sharedApplication] scheduledLocalNotifications];
     for (UILocalNotification* notif in notifs)
         NSLog(@"%@", [notif fireDate]);
+    
 }
 
 @end

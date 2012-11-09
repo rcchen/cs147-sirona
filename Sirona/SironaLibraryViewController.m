@@ -31,6 +31,35 @@
     return cell;
 }
 
+- (void)refreshDisplay
+{
+    
+    // Get the data from the endpoint
+    NSURL *url = [NSURL URLWithString:@"http://cs147.adamantinelabs.com/get-medications.php"];
+    NSData *jsonData = [NSData dataWithContentsOfURL:url];
+    
+    // Serialize the returned data into a JSON array
+    NSError *jsonError;
+    NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:&jsonError];
+    
+    for (NSDictionary *item in jsonArray) {
+        
+        // Create a new Sirona Library Item
+        SironaLibraryItem *sli = [[SironaLibraryItem alloc] initWithMDataBrand:[item objectForKey:@"mdataBrand"] mdataCategory:[item objectForKey:@"mdataCategory"] mdataId:[item objectForKey:@"mdataId"] mdataName:[item objectForKey:@"mdataName"] mdataPrecautions:[item objectForKey:@"mdataPrecautions"] mdataSideEffects:[item objectForKey:@"mdataSideEffects"]];
+        
+        [[SironaLibraryList sharedLibrary] createItem:sli];
+        
+        NSLog(@"Added: %@", [item objectForKey:@"mdataBrand"]);
+        
+    }
+
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [self refreshDisplay];
+}
+
 - (id)initWithNibName:(NSString *)nibName bundle:(NSBundle *)bundle
 {
     
@@ -50,24 +79,7 @@
         
     }
     
-    // Get the data from the endpoint
-    NSURL *url = [NSURL URLWithString:@"http://cs147.adamantinelabs.com/get-medications.php"];
-    NSData *jsonData = [NSData dataWithContentsOfURL:url];
-    
-    // Serialize the returned data into a JSON array
-    NSError *jsonError;
-    NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:&jsonError];
-    
-    for (NSDictionary *item in jsonArray) {
-        
-        // Create a new Sirona Library Item
-        SironaLibraryItem *sli = [[SironaLibraryItem alloc] initWithMDataBrand:[item objectForKey:@"mdataBrand"] mdataCategory:[item objectForKey:@"mdataCategory"] mdataId:[item objectForKey:@"mdataId"] mdataName:[item objectForKey:@"mdataName"] mdataPrecautions:[item objectForKey:@"mdataPrecautions"] mdataSideEffects:[item objectForKey:@"mdataSideEffects"]];
-        
-        [[SironaLibraryList sharedLibrary] createItem:sli];
-        
-        NSLog(@"Added: %@", [item objectForKey:@"mdataBrand"]);
-
-    }
+    [self refreshDisplay];
     
     return self;
     

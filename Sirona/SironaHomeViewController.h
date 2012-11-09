@@ -10,12 +10,20 @@
 
 @interface SironaHomeViewController : UIViewController
 {
-    IBOutlet UIImageView *orangeCircle;
-    IBOutlet UIImageView *greenCircle;
-    IBOutlet UIImageView *blueCircle;
+    
+    // IBOutlets for the circles
+    IBOutlet UIImageView *circleOne;
+    IBOutlet UIImageView *circleTwo;
+    IBOutlet UIImageView *circleThree;
+    IBOutlet UIImageView *circleFour;
+    IBOutlet UIImageView *circleFive;
+    
+    // IBOutlet for the time
+    IBOutlet UILabel *timeLabel;
+    NSTimer *timer;
+    
 }
 
 - (IBAction)pressButton:(id)sender;
-- (IBAction)pressBoom:(id)sender;
 
 @end

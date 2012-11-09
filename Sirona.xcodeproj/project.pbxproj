@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		33070760164C81B300DCC33B /* SironaLibraryDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3307075E164C81B300DCC33B /* SironaLibraryDetailViewController.m */; };
+		33070761164C81B300DCC33B /* SironaLibraryDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3307075F164C81B300DCC33B /* SironaLibraryDetailView.xib */; };
+		33070765164C897400DCC33B /* SironaTimeTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33070764164C897400DCC33B /* SironaTimeTableViewController.m */; };
 		330C86BF164C726000461063 /* circle-orange.png in Resources */ = {isa = PBXBuildFile; fileRef = 330C86BC164C726000461063 /* circle-orange.png */; };
 		330C86C0164C726000461063 /* circle-green.png in Resources */ = {isa = PBXBuildFile; fileRef = 330C86BD164C726000461063 /* circle-green.png */; };
 		330C86C1164C726000461063 /* circle-blue.png in Resources */ = {isa = PBXBuildFile; fileRef = 330C86BE164C726000461063 /* circle-blue.png */; };
@@ -48,9 +51,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3307075D164C81B300DCC33B /* SironaLibraryDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SironaLibraryDetailViewController.h; sourceTree = "<group>"; };
+		3307075E164C81B300DCC33B /* SironaLibraryDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SironaLibraryDetailViewController.m; sourceTree = "<group>"; };
+		3307075F164C81B300DCC33B /* SironaLibraryDetailView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SironaLibraryDetailView.xib; sourceTree = "<group>"; };
+		33070763164C897400DCC33B /* SironaTimeTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SironaTimeTableViewController.h; sourceTree = "<group>"; };
+		33070764164C897400DCC33B /* SironaTimeTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SironaTimeTableViewController.m; sourceTree = "<group>"; };
 		330C86BC164C726000461063 /* circle-orange.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "circle-orange.png"; sourceTree = "<group>"; };
 		330C86BD164C726000461063 /* circle-green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "circle-green.png"; sourceTree = "<group>"; };
 		330C86BE164C726000461063 /* circle-blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "circle-blue.png"; sourceTree = "<group>"; };
+		330C86C4164C790900461063 /* Lobster 1.4.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lobster 1.4.otf"; sourceTree = "<group>"; };
 		33DD20D4164B960000B4E5F7 /* Sirona.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sirona.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		33DD20D8164B960000B4E5F7 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		33DD20DA164B960000B4E5F7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -117,6 +126,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		330C86C3164C78F800461063 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				330C86C4164C790900461063 /* Lobster 1.4.otf */,
+			);
+			name = Fonts;
+			sourceTree = "<group>";
+		};
 		33DD20C9164B960000B4E5F7 = {
 			isa = PBXGroup;
 			children = (
@@ -149,6 +166,7 @@
 		33DD20DE164B960000B4E5F7 /* Sirona */ = {
 			isa = PBXGroup;
 			children = (
+				330C86C3164C78F800461063 /* Fonts */,
 				33DD2120164C397300B4E5F7 /* Objects */,
 				33DD2116164BBFC000B4E5F7 /* JSONKit */,
 				33DD2106164BA3CA00B4E5F7 /* Resources */,
@@ -187,6 +205,10 @@
 				33DD210C164BA72B00B4E5F7 /* SironaLibraryViewController.m */,
 				33DD212B164C46E800B4E5F7 /* SironaSettingsViewController.h */,
 				33DD212C164C46E800B4E5F7 /* SironaSettingsViewController.m */,
+				3307075D164C81B300DCC33B /* SironaLibraryDetailViewController.h */,
+				3307075E164C81B300DCC33B /* SironaLibraryDetailViewController.m */,
+				33070763164C897400DCC33B /* SironaTimeTableViewController.h */,
+				33070764164C897400DCC33B /* SironaTimeTableViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -203,6 +225,7 @@
 		33DD2100164B991A00B4E5F7 /* XIBs */ = {
 			isa = PBXGroup;
 			children = (
+				3307075F164C81B300DCC33B /* SironaLibraryDetailView.xib */,
 				33DD210E164BA81B00B4E5F7 /* SironaLibraryView.xib */,
 				33DD2101164B993700B4E5F7 /* SironaTimeView.xib */,
 				33DD212E164C49BF00B4E5F7 /* SironaSettingsView.xib */,
@@ -334,6 +357,7 @@
 				330C86BF164C726000461063 /* circle-orange.png in Resources */,
 				330C86C0164C726000461063 /* circle-green.png in Resources */,
 				330C86C1164C726000461063 /* circle-blue.png in Resources */,
+				33070761164C81B300DCC33B /* SironaLibraryDetailView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -353,6 +377,8 @@
 				33DD2123164C39F600B4E5F7 /* SironaLibraryList.m in Sources */,
 				33DD2126164C3AA700B4E5F7 /* SironaLibraryItem.m in Sources */,
 				33DD212D164C46E800B4E5F7 /* SironaSettingsViewController.m in Sources */,
+				33070760164C81B300DCC33B /* SironaLibraryDetailViewController.m in Sources */,
+				33070765164C897400DCC33B /* SironaTimeTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
