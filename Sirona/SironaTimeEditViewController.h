@@ -10,7 +10,7 @@
 
 #import "SironaAlertItem.h"
 
-@interface SironaTimeEditViewController : UIViewController
+@interface SironaTimeEditViewController : UITableViewController
 {
     __weak IBOutlet UIButton *setAlert;
     __weak IBOutlet UIDatePicker *datePicker;
@@ -19,6 +19,8 @@
 }
 
 @property (nonatomic, strong)SironaAlertItem *item;
+
+@property NSMutableArray *alarmSettings;
 
 - (void)setItem:(SironaAlertItem *)theItem;
 

@@ -34,7 +34,6 @@
         [tbi setImage:i];
         
         UINavigationItem *n = [self navigationItem];
-        
         [n setTitle:NSLocalizedString(@"Library", @"Application title")];
 
     }

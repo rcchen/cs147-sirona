@@ -30,7 +30,6 @@
         [tbi setImage:i];
         
         UINavigationItem *n = [self navigationItem];
-        
         [n setTitle:NSLocalizedString(@"Alarms", @"Application title")];
         
         // Create a new bar button item that will send

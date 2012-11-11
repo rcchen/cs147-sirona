@@ -24,6 +24,7 @@
 		33562265164DA91800A30BE5 /* circle-green-highlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 33562262164DA91800A30BE5 /* circle-green-highlighted.png */; };
 		33562266164DA91800A30BE5 /* circle-orange-highlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 33562263164DA91800A30BE5 /* circle-orange-highlighted.png */; };
 		3356226A164DADD700A30BE5 /* rio1.png in Resources */ = {isa = PBXBuildFile; fileRef = 33562269164DADD700A30BE5 /* rio1.png */; };
+		3388028D16502D3D0031B123 /* SironaTimeEditViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3388028C16502D3D0031B123 /* SironaTimeEditViewCell.xib */; };
 		33DD20D9164B960000B4E5F7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33DD20D8164B960000B4E5F7 /* UIKit.framework */; };
 		33DD20DB164B960000B4E5F7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33DD20DA164B960000B4E5F7 /* Foundation.framework */; };
 		33DD20DD164B960000B4E5F7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33DD20DC164B960000B4E5F7 /* CoreGraphics.framework */; };
@@ -85,6 +86,7 @@
 		33562262164DA91800A30BE5 /* circle-green-highlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "circle-green-highlighted.png"; sourceTree = "<group>"; };
 		33562263164DA91800A30BE5 /* circle-orange-highlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "circle-orange-highlighted.png"; sourceTree = "<group>"; };
 		33562269164DADD700A30BE5 /* rio1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rio1.png; sourceTree = "<group>"; };
+		3388028C16502D3D0031B123 /* SironaTimeEditViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SironaTimeEditViewCell.xib; sourceTree = "<group>"; };
 		33DD20D4164B960000B4E5F7 /* Sirona.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sirona.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		33DD20D8164B960000B4E5F7 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		33DD20DA164B960000B4E5F7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -309,6 +311,7 @@
 				33562257164D996700A30BE5 /* SironaTimeEditView.xib */,
 				33DD2101164B993700B4E5F7 /* SironaTimeView.xib */,
 				3356225F164DA59B00A30BE5 /* SironaTimeCellView.xib */,
+				3388028C16502D3D0031B123 /* SironaTimeEditViewCell.xib */,
 			);
 			name = XIBs;
 			sourceTree = "<group>";
@@ -434,6 +437,7 @@
 				33562265164DA91800A30BE5 /* circle-green-highlighted.png in Resources */,
 				33562266164DA91800A30BE5 /* circle-orange-highlighted.png in Resources */,
 				3356226A164DADD700A30BE5 /* rio1.png in Resources */,
+				3388028D16502D3D0031B123 /* SironaTimeEditViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -30,14 +30,16 @@
     
     UINavigationController *timeViewController = [[UINavigationController alloc] initWithRootViewController:stvc];
     UINavigationController *libraryViewController = [[UINavigationController alloc] initWithRootViewController:slvc];
+    UINavigationController *settingsViewController = [[UINavigationController alloc] initWithRootViewController:ssvc];
     
     [libraryViewController setTitle:@"Library"];
+    [settingsViewController setTitle:@"Settings"];
     
     // Create the tab bar controller
     UITabBarController *tabBarController = [[UITabBarController alloc] init];
     
     // Create an array of the available view controllers, then set them to the TabBar
-    NSArray *viewControllers = [NSArray arrayWithObjects:shvc, timeViewController, libraryViewController, ssvc, nil];
+    NSArray *viewControllers = [NSArray arrayWithObjects:shvc, timeViewController, libraryViewController, settingsViewController, nil];
     [tabBarController setViewControllers:viewControllers];
     
     [[self window] setRootViewController:tabBarController];

@@ -16,7 +16,7 @@
 - (NSInteger)tableView:(UITableView *)tableView
  numberOfRowsInSection:(NSInteger)section
 {
-    return 5;
+    return [settings count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
@@ -24,10 +24,13 @@
 {
     
     NSString *value = [settings objectAtIndex:[indexPath row]];
-    
+    NSLog(@"value: %@", value);
     UITableViewCell *utvc = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"UITableViewCell"];
     [[utvc textLabel] setText:value];
-    
+    if (value == @"Sound") {
+        UISwitch *switchview = [[UISwitch alloc] initWithFrame:CGRectZero];
+        utvc.accessoryView = switchview;
+    }
     return utvc;
     
 }
@@ -57,11 +60,14 @@
         
     }
     
-    settings = [settings initWithObjects:@"Sound",@"Alert",@"Cloud sync", nil];
+    settings = [[NSMutableArray alloc] initWithObjects:@"Sound", @"Alert", @"Cloud sync", nil];
     
-    NSArray *notifs = [[UIApplication sharedApplication] scheduledLocalNotifications];
-    for (UILocalNotification* notif in notifs)
-        NSLog(@"%@", [notif fireDate]);
+    for (NSString* str in settings)
+        NSLog(@"%@", str);
+    
+    UINavigationItem *n = [self navigationItem];
+    
+    [n setTitle:NSLocalizedString(@"Settings", @"Application title")];
     
     return self;
     

@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface SironaSettingsViewController : UIViewController
+@interface SironaSettingsViewController : UITableViewController
 {
     
 }

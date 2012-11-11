@@ -12,6 +12,41 @@
 @implementation SironaTimeEditViewController
 
 @synthesize item;
+@synthesize alarmSettings;
+
+// Returns the count of the number of rows in the table view
+- (NSInteger)tableView:(UITableView *)tableView
+ numberOfRowsInSection:(NSInteger)section
+{
+    return [alarmSettings count];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView
+         cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    NSString *value = [alarmSettings objectAtIndex:[indexPath row]];
+    NSLog(@"value: %@", value);
+    UITableViewCell *utvc;
+    if (value == @"Snooze") {
+        utvc = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"UITableViewCell"];
+        [[utvc textLabel] setText:value];
+        UISwitch *switchview = [[UISwitch alloc] initWithFrame:CGRectZero];
+        utvc.accessoryView = switchview;
+    } else {
+        utvc = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"UITableViewCell"];
+        [[utvc textLabel] setText:value];
+        [[utvc detailTextLabel] setText:@"Value"];
+        utvc.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    }
+    return utvc;
+    
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+}
 
 - (void)setItem:(SironaAlertItem *)theItem
 {
@@ -53,5 +88,26 @@
     [[UIApplication sharedApplication] scheduleLocalNotification:localNotif];
     
 }
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        // Custom initialization
+    }
+    
+    alarmSettings = [[NSMutableArray alloc] initWithObjects:@"Repeat", @"Sound", @"Snooze", @"Label", @"Times", nil];
+    
+    NSLog(@"Item: %@", item);
+
+    if (item == NULL) {
+        UINavigationItem *n = [self navigationItem];
+        [n setTitle:NSLocalizedString(@"Alarms", @"Application title")];
+    }
+    
+    return self;
+}
+
 
 @end
