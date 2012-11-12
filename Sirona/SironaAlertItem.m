@@ -10,8 +10,37 @@
 
 @implementation SironaAlertItem
 
+- (id)init {
+    
+    // After initiating with the NSObject alloc, init the individual properties
+    if (self = [super init]) {
+        alertDays = [[NSMutableArray alloc] init];
+        alertTimes = [[NSMutableArray alloc] init];
+    }
+    
+    // Return pointer to the object
+    return self;
+    
+}
+
 - (SironaLibraryItem *)getLibraryItem {
     return sli;
+}
+
+- (NSMutableArray *)getAlertDays {
+    return alertDays;
+}
+
+- (NSMutableArray *)getAlertTimes {
+    return alertTimes;
+}
+
+- (void)setAlertDays:(NSMutableArray*)days {
+    alertDays = days;
+}
+
+- (void)setAlertTimes:(NSMutableArray*)times {
+    alertTimes = times;
 }
 
 @end

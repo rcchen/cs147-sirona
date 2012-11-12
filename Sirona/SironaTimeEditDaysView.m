@@ -12,6 +12,7 @@
 @implementation SironaTimeEditDaysView
 
 @synthesize possibleDays;
+@synthesize item;
 
 - (IBAction)finishEditingDays:(id)sender
 {
@@ -33,21 +34,46 @@
     UITableViewCell *utvc = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"UITableViewCell"];
     [[utvc textLabel] setText:value];
     [utvc setUserInteractionEnabled:YES];
-    //utvc.accessoryType = UITableViewCellAccessoryCheckmark;
+    
+    // If the item already contains the day, set the checkmark
+    if ([[item getAlertDays] containsObject:value])
+        utvc.accessoryType = UITableViewCellAccessoryCheckmark;
+    
+    // Return the formatted table cell
     return utvc;
+    
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
+    // Get a pointer to the cell
     UITableViewCell *cell = [[self tableView] cellForRowAtIndexPath:indexPath];
     NSLog(@"Selected %@", cell);
+    
+    // If it is not checked yet, check it and add it to the NSMutableArray
     if (cell.accessoryType == UITableViewCellAccessoryNone) {
         NSLog(@"Not checked, changing to checked");
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
-    } else {
+        NSMutableArray *alertDays = [item getAlertDays];
+        [alertDays addObject:[[cell textLabel] text]];
+        [item setAlertDays:alertDays];
+    }
+    
+    // If it is checked, uncheck it and remove from NSMutableArray
+    else {
         NSLog(@"Checked, changing to not checked");
         cell.accessoryType = UITableViewCellAccessoryNone;
-    } [tableView deselectRowAtIndexPath:indexPath animated:YES];
+        NSMutableArray *alertDays = [item getAlertDays];
+        [alertDays removeObject:[[cell textLabel] text]];
+        [item setAlertDays:alertDays];
+    }
+    
+    NSLog(@"%@", [item getAlertDays]);
+    
+    // Deselect the row when the operation is completed
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
