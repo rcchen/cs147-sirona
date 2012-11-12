@@ -8,12 +8,18 @@
 
 #import "SironaTimeEditViewController.h"
 #import "SironaTimeEditDaysView.h"
+#import "SironaTimeEditTimesView.h"
 #import "SironaAlertItem.h"
 
 @implementation SironaTimeEditViewController
 
 @synthesize item;
 @synthesize alarmSettings;
+
+- (void)saveItem:(SironaAlertItem *)theItem
+{
+    
+}
 
 // Returns the count of the number of rows in the table view
 - (NSInteger)tableView:(UITableView *)tableView
@@ -62,7 +68,7 @@
                     [daysLabel appendString:@"Daily"];
                 
                 // If only Saturday and Sunday are selected, replace with Weekends
-                else if ([days containsObject:@"Saturday"] && [days containsObject:@"Sunday"])
+                else if ([days containsObject:@"Saturday"] && [days containsObject:@"Sunday"] && [days count] == 2)
                     [daysLabel appendString:@"Weekends"];
                 
                 // If Saturday and Sunday are not selected and there are 5 days, replace with Weekdays
@@ -71,9 +77,19 @@
                 
                 // Otherwise do the default print with prefixes
                 else {
-                    for (NSString* day in days) {
-                        [daysLabel appendFormat:@"%@ ", [day substringToIndex:3]];
+                    
+                    // Create an array of possible days
+                    // TODO: Replace with static const
+                    NSMutableArray *possibleDays = [[NSMutableArray alloc] initWithObjects:@"Sunday", @"Monday", @"Tuesday", @"Wednesday", @"Thursday", @"Friday", @"Saturday", nil];
+                    
+                    // This is to make sure that days show up in the right order
+                    for (int i = 0; i < [possibleDays count]; i++) {
+                        NSString *day = [possibleDays objectAtIndex:i];
+                        if ([days containsObject:day]) {
+                            [daysLabel appendFormat:@"%@ ", [day substringToIndex:3]];
+                        }
                     }
+                    
                 }
 
             }
@@ -110,6 +126,8 @@
 {
     NSString *selectedItem = [alarmSettings objectAtIndex:[indexPath row]];
     NSLog(@"Selected %@", selectedItem);
+
+    // Covers the selection of Repeat to push SironaTimeEditDaysView
     if (selectedItem == @"Repeat") {
         SironaTimeEditDaysView *stedv = [[SironaTimeEditDaysView alloc] init];
         // Set the current days to the days that are currently selected
@@ -117,6 +135,14 @@
         [stedv setItem:item];
         [[self navigationController] pushViewController:stedv animated:YES];
     }
+    
+    // Covers the selection of Times to push SironaTimeEditTimesView
+    else if (selectedItem == @"Times") {
+        SironaTimeEditTimesView *stetv = [[SironaTimeEditTimesView alloc] init];
+        [stetv setItem:item];
+        [[self navigationController] pushViewController:stetv animated:YES];
+    }
+    
 }
 
 - (void)setItem:(SironaAlertItem *)theItem
@@ -160,24 +186,43 @@
     
 }
 
+- (void)viewDidLoad {
+    
+    NSString *brand = [[item getLibraryItem] getBrand];
+    
+    // If there is no brand, then set the title to new alert
+    if (!brand)
+        self.title = @"New alert";
+    
+    // Otherwise use the brand name of the item as the title
+    else
+        self.title = brand;
+    
+    NSLog(@"Title: %@", self.title);
+    
+}
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        
+        // Create a new bar button item that will send
+        // addNewItem: to ItemsViewController
+        UIBarButtonItem *bbi = [[UIBarButtonItem alloc]
+                                initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                                target:self
+                                action:@selector(saveItem:)];
+        [[self navigationItem] setRightBarButtonItem:bbi];
+        
     }
     
+    // Initialize the objects that show up in the TableView
     alarmSettings = [[NSMutableArray alloc] initWithObjects:@"Repeat", @"Sound", @"Snooze", @"Label", @"Times", nil];
     
-    NSLog(@"Item: %@", item);
-
-    if (!item) {
-        NSLog(@"No item");
-        self.title = @"Add new alert";
-    }
-    
     return self;
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated {

@@ -16,7 +16,7 @@
 
 - (IBAction)finishEditingDays:(id)sender
 {
-    
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 // Returns the count of the number of rows in the table view
@@ -85,8 +85,7 @@
         
         self.title = @"Repeat";
         
-        // Create a new bar button item that will send
-        // addNewItem: to ItemsViewController
+        // Bar button for "Done"
         UIBarButtonItem *bbi = [[UIBarButtonItem alloc]
                                 initWithBarButtonSystemItem:UIBarButtonSystemItemDone
                                 target:self

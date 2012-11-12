@@ -23,5 +23,6 @@
 @property NSMutableArray *alarmSettings;
 
 - (void)setItem:(SironaAlertItem *)theItem;
+- (void)saveItem:(SironaAlertItem *)theItem;
 
 @end
