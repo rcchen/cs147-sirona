@@ -7,6 +7,7 @@
 //
 
 #import "SironaTimeEditViewController.h"
+#import "SironaTimeEditDaysView.h"
 #import "SironaAlertItem.h"
 
 @implementation SironaTimeEditViewController
@@ -45,7 +46,14 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    NSString *selectedItem = [alarmSettings objectAtIndex:[indexPath row]];
+    NSLog(@"Selected %@", selectedItem);
+    if (selectedItem == @"Repeat") {
+        SironaTimeEditDaysView *stedv = [[SironaTimeEditDaysView alloc] init];
+        // Set the current days to the days that are currently selected
+        // Actually just make sure the entire SironaAlertItem pointer gets copied over
+        [[self navigationController] pushViewController:stedv animated:YES];
+    }
 }
 
 - (void)setItem:(SironaAlertItem *)theItem
@@ -101,9 +109,9 @@
     
     NSLog(@"Item: %@", item);
 
-    if (item == NULL) {
-        UINavigationItem *n = [self navigationItem];
-        [n setTitle:NSLocalizedString(@"Alarms", @"Application title")];
+    if (!item) {
+        NSLog(@"No item");
+        self.title = @"Add new alert";
     }
     
     return self;

@@ -58,6 +58,7 @@
         UIImage *i = [UIImage imageNamed:@"19-gear.png"];
         [tbi setImage:i];
         
+        
     }
     
     settings = [[NSMutableArray alloc] initWithObjects:@"Sound", @"Alert", @"Cloud sync", nil];
@@ -66,7 +67,6 @@
         NSLog(@"%@", str);
     
     UINavigationItem *n = [self navigationItem];
-    
     [n setTitle:NSLocalizedString(@"Settings", @"Application title")];
     
     return self;
