@@ -20,10 +20,32 @@
 
 - (IBAction)saveAlert:(id)sender{
     
-    alertList = [[SironaAlertList alloc] init];
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-    alertList = [prefs objectForKey:@"userAlerts"];
-    [[alertList allAlerts] delete:item];
+    NSData *encodedAlertList = [prefs objectForKey:@"alertList"];
+    if (encodedAlertList) {
+        NSMutableArray *prefAlerts = (NSMutableArray *)[NSKeyedUnarchiver unarchiveObjectWithData:encodedAlertList];
+        alertList = prefAlerts;
+    }
+    
+    NSLog(@"Items after retrieval: %u", [alertList count]);
+    
+    /*for (int i = 0; i < [alertList count]; i++) {
+        if ([[alertList objectAtIndex:i] getLibraryItem] == [item getLibraryItem]) {
+            NSLog(@"Item removed");
+            [alertList removeObjectAtIndex:i];
+            break;
+        }
+    }*/
+    
+    NSLog(@"Items before: %u", [alertList count]);
+    [alertList addObject:item];
+    NSLog(@"Items after: %u", [alertList count]);
+
+    // Now save it to NSUserDefaults
+    encodedAlertList = [NSKeyedArchiver archivedDataWithRootObject:alertList];
+    [prefs setObject:encodedAlertList forKey:@"alertList"];
+    
+    [[self navigationController] popViewControllerAnimated:YES];
     
 }
 
@@ -176,7 +198,7 @@
         UIBarButtonItem *bbi = [[UIBarButtonItem alloc]
                                 initWithBarButtonSystemItem:UIBarButtonSystemItemDone
                                 target:self
-                                action:@selector(saveItem:)];
+                                action:@selector(saveAlert:)];
         [[self navigationItem] setRightBarButtonItem:bbi];
         
     }

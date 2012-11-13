@@ -17,7 +17,8 @@
 
 + (SironaAlertList *)sharedAlerts;
 
-- (NSArray *)allAlerts;
+- (NSMutableArray *)allAlerts;
 - (void)createAlert:(SironaAlertItem *)alert;
+- (void)deleteAlert:(SironaAlertItem *)alert;
 
 @end

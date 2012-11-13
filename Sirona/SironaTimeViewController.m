@@ -8,7 +8,6 @@
 
 #import "SironaTimeEditAlertView.h"
 #import "SironaTimeViewController.h"
-#import "SironaAlertList.h"
 #import "SironaAlertItem.h"
 
 @implementation SironaTimeViewController
@@ -28,10 +27,11 @@
         // Now give it an image
         UIImage *i = [UIImage imageNamed:@"10-medical.png"];
         [tbi setImage:i];
-        
-        alerts = [[SironaAlertList alloc] init];
-        NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-        alerts = [prefs objectForKey:@"userAlerts"];
+    
+        // Pull in the alerts from NSUserDefaults
+        alerts = [[NSMutableArray alloc] init];
+        //NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+        //alerts = [prefs objectForKey:@"userAlerts"];
         
         UINavigationItem *n = [self navigationItem];
         [n setTitle:NSLocalizedString(@"Alarms", @"Application title")];
@@ -56,16 +56,15 @@
 - (NSInteger)tableView:(UITableView *)tableView
  numberOfRowsInSection:(NSInteger)section
 {
-    return [[[SironaAlertList sharedAlerts] allAlerts] count];
+    return [alerts count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"UITableViewCell"];
-    SironaAlertItem *sai = [[[SironaAlertList sharedAlerts] allAlerts] objectAtIndex:[indexPath row]];
-    NSLog(@"row: %@", indexPath);
-    [[cell textLabel] setText:[[sai getLibraryItem] getBrand]];
+    SironaAlertItem *sai = [alerts objectAtIndex:[indexPath row]];
+    [[cell textLabel] setText:@"Lol an item"];
     return cell;
 }
 
@@ -73,21 +72,37 @@
 {
     
     SironaTimeEditAlertView *stevc = [[SironaTimeEditAlertView alloc] init];
-    NSArray *items = [[SironaAlertList sharedAlerts] allAlerts];
-    SironaAlertItem *selectedItem = [items objectAtIndex:[indexPath row]];
+    SironaAlertItem *selectedItem = [alerts objectAtIndex:[indexPath row]];
     [stevc setItem:selectedItem];
-    
     [[self navigationController] pushViewController:stevc animated:YES];
+    
 }
 
 - (IBAction)addNewItem:(id)sender
 {
+    
     SironaTimeEditAlertView *stevc = [[SironaTimeEditAlertView alloc] init];
     SironaAlertItem *newItem = [[SironaAlertItem alloc] init];
     [stevc setItem:newItem];
+    [stevc setAlertList:alerts];
     [[self navigationController] pushViewController:stevc animated:YES];
+
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    NSData *encodedAlertList = [prefs objectForKey:@"alertList"];
+    if (encodedAlertList) {
+        NSMutableArray *prefAlerts = (NSMutableArray *)[NSKeyedUnarchiver unarchiveObjectWithData:encodedAlertList];
+        alerts = prefAlerts;
+    }
+        
+    NSLog(@"Alert count: %u", [alerts count]);
+    [[self tableView] reloadData];
+
+}
 
 /*
 - (IBAction)scheduleAlarm:(id)sender

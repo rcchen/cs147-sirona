@@ -43,4 +43,21 @@
     alertTimes = times;
 }
 
+- (void)encodeWithCoder:(NSCoder *)encoder {
+    //Encode properties, other class variables, etc
+    [encoder encodeObject:alertDays forKey:@"alertDays"];
+    [encoder encodeObject:alertTimes forKey:@"alertTimes"];
+    [encoder encodeObject:sli forKey:@"alertLibraryItem"];
+}
+
+- (id)initWithCoder:(NSCoder *)decoder {
+    if((self = [super init])) {
+        //decode properties, other class vars
+        alertDays = [decoder decodeObjectForKey:@"alertDays"];
+        alertTimes = [decoder decodeObjectForKey:@"alertTimes"];
+        sli = [decoder decodeObjectForKey:@"alertLibraryItem"];
+    }
+    return self;
+}
+
 @end

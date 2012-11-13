@@ -40,6 +40,7 @@
 - (void)createAlert:(SironaAlertItem *)alert
 {
     [allAlerts addObject:alert];
+    NSLog(@"SironaAlertList.m: %@", alert);
 }
 
 - (void)deleteAlert:(SironaAlertItem *)alert
