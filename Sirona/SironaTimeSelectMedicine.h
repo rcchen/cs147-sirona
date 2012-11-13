@@ -8,8 +8,21 @@
 
 #import <Foundation/Foundation.h>
 
-@interface SironaTimeSelectMedicine : NSObject
+#import "SironaAlertItem.h"
+#import "SironaLibraryDetailViewController.h"
+#import "SironaLibraryCellView.h"
 
+@interface SironaTimeSelectMedicine : UITableViewController
+{
+    IBOutlet UITableView *medicineTable;
+}
 
+@property NSMutableArray *medicines;
+@property SironaAlertItem *item;
+@property UITableViewCell *previous_cell;
+
+- (void)setItem:(SironaAlertItem *)item;
+- (void)refreshDisplay;
+- (IBAction)addNewItem:(id)sender;
 
 @end

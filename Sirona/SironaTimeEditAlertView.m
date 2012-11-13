@@ -9,6 +9,7 @@
 #import "SironaTimeEditAlertView.h"
 #import "SironaTimeEditDaysView.h"
 #import "SironaTimeEditTimesView.h"
+#import "SironaTimeSelectMedicine.h"
 
 #import "SironaAlertList.h"
 
@@ -125,6 +126,18 @@
             
         }
         
+        // Sets the text on the right side of the Medication cell
+        if (value == @"Medication") {
+            SironaLibraryItem *med = [item getLibraryItem];
+            NSMutableString *medLabel = [[NSMutableString alloc] init];
+            if (med) {
+                [medLabel appendFormat:@"%@", [med getBrand]];
+            }
+            
+            [[utvc detailTextLabel] setText:medLabel];
+        }
+        
+        
         // Sets the text on the right side of the Times cell
         if (value == @"Times") {
             
@@ -140,6 +153,7 @@
             [[utvc detailTextLabel] setText:timesLabel];
             
         }
+        
         
         // Add the disclosure indicator (chevron) on the right
         utvc.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -169,20 +183,16 @@
         [[self navigationController] pushViewController:stetv animated:YES];
     }
     
+    // Covers the selection of Medication to push SironaTimeSelectMedicineView
+    else if (selectedItem == @"Medication") {
+        SironaTimeSelectMedicine *stsm = [[SironaTimeSelectMedicine alloc] init];
+        [stsm setItem:item];
+        [[self navigationController] pushViewController:stsm animated:YES];
+    }
+    
 }
 
 - (void)viewDidLoad {
-    
-    // Get the name of the brand of the library item
-    NSString *brand = [[item getLibraryItem] getBrand];
-    
-    // If there is no brand, then set the title to new alert
-    if (!brand)
-        self.title = @"New alert";
-    
-    // Otherwise use the brand name of the item as the title
-    else
-        self.title = brand;
     
 }
 
@@ -204,7 +214,7 @@
     }
     
     // Initialize the objects that show up in the TableView
-    alertSettings = [[NSMutableArray alloc] initWithObjects:@"Repeat", @"Sound", @"Snooze", @"Label", @"Times", nil];
+    alertSettings = [[NSMutableArray alloc] initWithObjects:@"Repeat", @"Sound", @"Snooze", @"Medication", @"Times", nil];
     
     return self;
     
@@ -212,6 +222,17 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [self.tableView reloadData];
+    
+    // Get the name of the brand of the library item
+    NSString *brand = [[item getLibraryItem] getBrand];
+    
+    // If there is no brand, then set the title to new alert
+    if (!brand)
+        self.title = @"New alert";
+    
+    // Otherwise use the brand name of the item as the title
+    else
+        self.title = brand;
 }
 
 
