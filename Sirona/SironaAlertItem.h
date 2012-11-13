@@ -19,6 +19,7 @@
 - (SironaLibraryItem *)getLibraryItem;
 - (NSMutableArray *)getAlertDays;
 - (NSMutableArray *)getAlertTimes;
+- (void)setLibraryItem:(SironaLibraryItem *)item;
 - (void)setAlertDays:(NSMutableArray*)days;
 - (void)setAlertTimes:(NSMutableArray*)times;
 

@@ -35,6 +35,10 @@
     return alertTimes;
 }
 
+- (void)setLibraryItem:(SironaLibraryItem *)item {
+    sli = item;
+}
+
 - (void)setAlertDays:(NSMutableArray*)days {
     alertDays = days;
 }

@@ -194,17 +194,6 @@
 
 - (void)viewDidLoad {
     
-    // Get the name of the brand of the library item
-    NSString *brand = [[item getLibraryItem] getBrand];
-    
-    // If there is no brand, then set the title to new alert
-    if (!brand)
-        self.title = @"New alert";
-    
-    // Otherwise use the brand name of the item as the title
-    else
-        self.title = brand;
-    
 }
 
 
@@ -236,6 +225,8 @@
     
     [self.tableView reloadData];
     
+<<<<<<< HEAD
+=======
     // Get the name of the brand of the library item
     NSString *brand = [[item getLibraryItem] getBrand];
     
@@ -246,6 +237,7 @@
     // Otherwise use the brand name of the item as the title
     else
         self.title = brand;
+>>>>>>> 49671060904208a41076a1f0340be78730e94348
 }
 
 
