@@ -84,15 +84,15 @@
     NSError *jsonError;
     NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:&jsonError];
     
+    // Add something here to catch the error
+    
     for (NSDictionary *item in jsonArray) {
         
         // Create a new Sirona Library Item
         SironaLibraryItem *sli = [[SironaLibraryItem alloc] initWithMDataBrand:[item objectForKey:@"mdataBrand"] mdataCategory:[item objectForKey:@"mdataCategory"] mdataId:[item objectForKey:@"mdataId"] mdataName:[item objectForKey:@"mdataName"] mdataPrecautions:[item objectForKey:@"mdataPrecautions"] mdataSideEffects:[item objectForKey:@"mdataSideEffects"]];
         
         [[SironaLibraryList sharedLibrary] createItem:sli];
-        
-        NSLog(@"Added: %@", [item objectForKey:@"mdataBrand"]);
-        
+                
     }
 
 }

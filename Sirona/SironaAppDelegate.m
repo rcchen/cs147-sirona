@@ -12,9 +12,12 @@
 #import "SironaLibraryViewController.h"
 #import "SironaSettingsViewController.h"
 
+#import "SironaAlertList.h"
+
 @implementation SironaAppDelegate
 
 @synthesize window = _window;
+@synthesize userAlerts;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -48,6 +51,10 @@
     [self.window makeKeyAndVisible];
     
     application.applicationIconBadgeNumber = 0;
+    
+    userAlerts = [[SironaAlertList alloc] init];
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    userAlerts = [prefs objectForKey:@"userAlerts"];
     
     UILocalNotification *localNotif = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
     if (localNotif) {

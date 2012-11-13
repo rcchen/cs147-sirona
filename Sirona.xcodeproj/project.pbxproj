@@ -15,7 +15,6 @@
 		3331D80B164CFF3400D9FB7E /* SironaLibraryRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3331D80A164CFF3400D9FB7E /* SironaLibraryRootViewController.m */; };
 		3356224F164D798700A30BE5 /* SironaAlertItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 3356224E164D798700A30BE5 /* SironaAlertItem.m */; };
 		33562253164D799100A30BE5 /* SironaAlertList.m in Sources */ = {isa = PBXBuildFile; fileRef = 33562252164D799100A30BE5 /* SironaAlertList.m */; };
-		33562256164D95DF00A30BE5 /* SironaTimeEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33562255164D95DF00A30BE5 /* SironaTimeEditViewController.m */; };
 		33562258164D996700A30BE5 /* SironaTimeEditTimesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 33562257164D996700A30BE5 /* SironaTimeEditTimesView.xib */; };
 		3356225A164DA13900A30BE5 /* SironaLibraryCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 33562259164DA13900A30BE5 /* SironaLibraryCellView.xib */; };
 		3356225E164DA17800A30BE5 /* SironaLibraryCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3356225D164DA17800A30BE5 /* SironaLibraryCellView.m */; };
@@ -27,6 +26,12 @@
 		3385862B1650780B008B5A53 /* SironaTimeEditDaysView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3385862A1650780B008B5A53 /* SironaTimeEditDaysView.xib */; };
 		3385862F16507864008B5A53 /* SironaTimeEditDaysView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3385862E16507864008B5A53 /* SironaTimeEditDaysView.m */; };
 		3388028D16502D3D0031B123 /* SironaTimeEditViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3388028C16502D3D0031B123 /* SironaTimeEditViewCell.xib */; };
+		33CAFCC61651AF0200CFA474 /* SironaTimeSelectMedicine.xib in Resources */ = {isa = PBXBuildFile; fileRef = 33CAFCC51651AF0200CFA474 /* SironaTimeSelectMedicine.xib */; };
+		33CAFCCD1651AF9A00CFA474 /* SironaTimeSelectMedicine.m in Sources */ = {isa = PBXBuildFile; fileRef = 33CAFCCC1651AF9A00CFA474 /* SironaTimeSelectMedicine.m */; };
+		33CAFCCF1651B05A00CFA474 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33CAFCCE1651B05A00CFA474 /* CoreData.framework */; };
+		33CAFCD31651B08800CFA474 /* SironaAlertItem.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 33CAFCD11651B08800CFA474 /* SironaAlertItem.xcdatamodeld */; };
+		33CAFCD51651B4A900CFA474 /* SironaTimeEditAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 33CAFCD41651B4A900CFA474 /* SironaTimeEditAlertView.xib */; };
+		33CAFCD81651B4FA00CFA474 /* SironaTimeEditAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33CAFCD71651B4FA00CFA474 /* SironaTimeEditAlertView.m */; };
 		33CEF41C165183ED006F3C92 /* SironaTimeEditTimesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33CEF41B165183ED006F3C92 /* SironaTimeEditTimesView.m */; };
 		33CEF420165185D4006F3C92 /* SironaTimeAddTimeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33CEF41F165185D4006F3C92 /* SironaTimeAddTimeView.m */; };
 		33CEF4221651870F006F3C92 /* SironaTimeAddTimeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 33CEF4211651870F006F3C92 /* SironaTimeAddTimeView.xib */; };
@@ -82,8 +87,6 @@
 		3356224E164D798700A30BE5 /* SironaAlertItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SironaAlertItem.m; sourceTree = "<group>"; };
 		33562251164D799100A30BE5 /* SironaAlertList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SironaAlertList.h; sourceTree = "<group>"; };
 		33562252164D799100A30BE5 /* SironaAlertList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SironaAlertList.m; sourceTree = "<group>"; };
-		33562254164D95DF00A30BE5 /* SironaTimeEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SironaTimeEditViewController.h; sourceTree = "<group>"; };
-		33562255164D95DF00A30BE5 /* SironaTimeEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SironaTimeEditViewController.m; sourceTree = "<group>"; };
 		33562257164D996700A30BE5 /* SironaTimeEditTimesView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SironaTimeEditTimesView.xib; sourceTree = "<group>"; };
 		33562259164DA13900A30BE5 /* SironaLibraryCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SironaLibraryCellView.xib; sourceTree = "<group>"; };
 		3356225C164DA17800A30BE5 /* SironaLibraryCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SironaLibraryCellView.h; sourceTree = "<group>"; };
@@ -97,6 +100,14 @@
 		3385862D16507864008B5A53 /* SironaTimeEditDaysView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SironaTimeEditDaysView.h; sourceTree = "<group>"; };
 		3385862E16507864008B5A53 /* SironaTimeEditDaysView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SironaTimeEditDaysView.m; sourceTree = "<group>"; };
 		3388028C16502D3D0031B123 /* SironaTimeEditViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SironaTimeEditViewCell.xib; sourceTree = "<group>"; };
+		33CAFCC51651AF0200CFA474 /* SironaTimeSelectMedicine.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SironaTimeSelectMedicine.xib; sourceTree = "<group>"; };
+		33CAFCCB1651AF9A00CFA474 /* SironaTimeSelectMedicine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SironaTimeSelectMedicine.h; sourceTree = "<group>"; };
+		33CAFCCC1651AF9A00CFA474 /* SironaTimeSelectMedicine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SironaTimeSelectMedicine.m; sourceTree = "<group>"; };
+		33CAFCCE1651B05A00CFA474 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		33CAFCD21651B08800CFA474 /* SironaAlertItem.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SironaAlertItem.xcdatamodel; sourceTree = "<group>"; };
+		33CAFCD41651B4A900CFA474 /* SironaTimeEditAlertView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SironaTimeEditAlertView.xib; sourceTree = "<group>"; };
+		33CAFCD61651B4FA00CFA474 /* SironaTimeEditAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SironaTimeEditAlertView.h; sourceTree = "<group>"; };
+		33CAFCD71651B4FA00CFA474 /* SironaTimeEditAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SironaTimeEditAlertView.m; sourceTree = "<group>"; };
 		33CEF41A165183ED006F3C92 /* SironaTimeEditTimesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SironaTimeEditTimesView.h; sourceTree = "<group>"; };
 		33CEF41B165183ED006F3C92 /* SironaTimeEditTimesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SironaTimeEditTimesView.m; sourceTree = "<group>"; };
 		33CEF41E165185D4006F3C92 /* SironaTimeAddTimeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SironaTimeAddTimeView.h; sourceTree = "<group>"; };
@@ -160,6 +171,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				33CAFCCF1651B05A00CFA474 /* CoreData.framework in Frameworks */,
 				33DD20D9164B960000B4E5F7 /* UIKit.framework in Frameworks */,
 				33DD20DB164B960000B4E5F7 /* Foundation.framework in Frameworks */,
 				33DD20DD164B960000B4E5F7 /* CoreGraphics.framework in Frameworks */,
@@ -227,6 +239,14 @@
 			name = Icons;
 			sourceTree = "<group>";
 		};
+		33CAFCD01651B06C00CFA474 /* Data Models */ = {
+			isa = PBXGroup;
+			children = (
+				33CAFCD11651B08800CFA474 /* SironaAlertItem.xcdatamodeld */,
+			);
+			name = "Data Models";
+			sourceTree = "<group>";
+		};
 		33CEF42316518815006F3C92 /* Patterns */ = {
 			isa = PBXGroup;
 			children = (
@@ -236,18 +256,10 @@
 			name = Patterns;
 			sourceTree = "<group>";
 		};
-		33CEF428165193AB006F3C92 /* Old Code */ = {
-			isa = PBXGroup;
-			children = (
-				33562254164D95DF00A30BE5 /* SironaTimeEditViewController.h */,
-				33562255164D95DF00A30BE5 /* SironaTimeEditViewController.m */,
-			);
-			name = "Old Code";
-			sourceTree = "<group>";
-		};
 		33DD20C9164B960000B4E5F7 = {
 			isa = PBXGroup;
 			children = (
+				33CAFCCE1651B05A00CFA474 /* CoreData.framework */,
 				33DD20D7164B960000B4E5F7 /* Frameworks */,
 				33DD20D5164B960000B4E5F7 /* Products */,
 				33DD20DE164B960000B4E5F7 /* Sirona */,
@@ -279,11 +291,11 @@
 			children = (
 				3356225B164DA16100A30BE5 /* Cells */,
 				33DD20F5164B961800B4E5F7 /* Controllers */,
+				33CAFCD01651B06C00CFA474 /* Data Models */,
 				330C86C3164C78F800461063 /* Fonts */,
 				33DD2116164BBFC000B4E5F7 /* JSONKit */,
 				3331D806164CFEB900D9FB7E /* NavigationControllers */,
 				33DD2120164C397300B4E5F7 /* Objects */,
-				33CEF428165193AB006F3C92 /* Old Code */,
 				33DD2106164BA3CA00B4E5F7 /* Resources */,
 				33DD20E7164B960000B4E5F7 /* SironaAppDelegate.h */,
 				33DD20E8164B960000B4E5F7 /* SironaAppDelegate.m */,
@@ -327,6 +339,10 @@
 				33CEF41B165183ED006F3C92 /* SironaTimeEditTimesView.m */,
 				33DD2103164B9BFF00B4E5F7 /* SironaTimeViewController.h */,
 				33DD2104164B9BFF00B4E5F7 /* SironaTimeViewController.m */,
+				33CAFCCB1651AF9A00CFA474 /* SironaTimeSelectMedicine.h */,
+				33CAFCCC1651AF9A00CFA474 /* SironaTimeSelectMedicine.m */,
+				33CAFCD61651B4FA00CFA474 /* SironaTimeEditAlertView.h */,
+				33CAFCD71651B4FA00CFA474 /* SironaTimeEditAlertView.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -354,6 +370,8 @@
 				33562257164D996700A30BE5 /* SironaTimeEditTimesView.xib */,
 				3388028C16502D3D0031B123 /* SironaTimeEditViewCell.xib */,
 				33DD2101164B993700B4E5F7 /* SironaTimeView.xib */,
+				33CAFCC51651AF0200CFA474 /* SironaTimeSelectMedicine.xib */,
+				33CAFCD41651B4A900CFA474 /* SironaTimeEditAlertView.xib */,
 			);
 			name = XIBs;
 			sourceTree = "<group>";
@@ -485,6 +503,8 @@
 				33CEF4221651870F006F3C92 /* SironaTimeAddTimeView.xib in Resources */,
 				33CEF42616518838006F3C92 /* hexabump_@2X.png in Resources */,
 				33CEF42716518838006F3C92 /* hexabump.png in Resources */,
+				33CAFCC61651AF0200CFA474 /* SironaTimeSelectMedicine.xib in Resources */,
+				33CAFCD51651B4A900CFA474 /* SironaTimeEditAlertView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -508,11 +528,13 @@
 				3331D80B164CFF3400D9FB7E /* SironaLibraryRootViewController.m in Sources */,
 				3356224F164D798700A30BE5 /* SironaAlertItem.m in Sources */,
 				33562253164D799100A30BE5 /* SironaAlertList.m in Sources */,
-				33562256164D95DF00A30BE5 /* SironaTimeEditViewController.m in Sources */,
 				3356225E164DA17800A30BE5 /* SironaLibraryCellView.m in Sources */,
 				3385862F16507864008B5A53 /* SironaTimeEditDaysView.m in Sources */,
 				33CEF41C165183ED006F3C92 /* SironaTimeEditTimesView.m in Sources */,
 				33CEF420165185D4006F3C92 /* SironaTimeAddTimeView.m in Sources */,
+				33CAFCCD1651AF9A00CFA474 /* SironaTimeSelectMedicine.m in Sources */,
+				33CAFCD31651B08800CFA474 /* SironaAlertItem.xcdatamodeld in Sources */,
+				33CAFCD81651B4FA00CFA474 /* SironaTimeEditAlertView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -623,6 +645,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		33CAFCD11651B08800CFA474 /* SironaAlertItem.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				33CAFCD21651B08800CFA474 /* SironaAlertItem.xcdatamodel */,
+			);
+			currentVersion = 33CAFCD21651B08800CFA474 /* SironaAlertItem.xcdatamodel */;
+			path = SironaAlertItem.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 33DD20CB164B960000B4E5F7 /* Project object */;
 }

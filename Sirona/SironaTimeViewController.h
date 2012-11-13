@@ -7,15 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
-
-#import "SironaTimeEditViewController.h"
+#import "SironaAlertList.h"
+#import "SironaTimeEditAlertView.h"
 
 @interface SironaTimeViewController : UITableViewController
 {
     IBOutlet UITableView *alarmsTable;
 }
 
-@property NSMutableArray *alerts;
+@property SironaAlertList *alerts;
 
 - (IBAction)addNewItem:(id)sender;
 

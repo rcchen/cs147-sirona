@@ -24,7 +24,6 @@
 {
     
     NSString *value = [settings objectAtIndex:[indexPath row]];
-    NSLog(@"value: %@", value);
     UITableViewCell *utvc = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"UITableViewCell"];
     [[utvc textLabel] setText:value];
     if (value == @"Sound") {
@@ -62,10 +61,7 @@
     }
     
     settings = [[NSMutableArray alloc] initWithObjects:@"Sound", @"Alert", @"Cloud sync", nil];
-    
-    for (NSString* str in settings)
-        NSLog(@"%@", str);
-    
+
     UINavigationItem *n = [self navigationItem];
     [n setTitle:NSLocalizedString(@"Settings", @"Application title")];
     

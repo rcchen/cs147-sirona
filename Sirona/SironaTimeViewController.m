@@ -6,7 +6,7 @@
 //  Copyright (c) 2012 Roger Chen. All rights reserved.
 //
 
-#import "SironaTimeEditViewController.h"
+#import "SironaTimeEditAlertView.h"
 #import "SironaTimeViewController.h"
 #import "SironaAlertList.h"
 #import "SironaAlertItem.h"
@@ -28,6 +28,10 @@
         // Now give it an image
         UIImage *i = [UIImage imageNamed:@"10-medical.png"];
         [tbi setImage:i];
+        
+        alerts = [[SironaAlertList alloc] init];
+        NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+        alerts = [prefs objectForKey:@"userAlerts"];
         
         UINavigationItem *n = [self navigationItem];
         [n setTitle:NSLocalizedString(@"Alarms", @"Application title")];
@@ -68,7 +72,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    SironaTimeEditViewController *stevc = [[SironaTimeEditViewController alloc] init];
+    SironaTimeEditAlertView *stevc = [[SironaTimeEditAlertView alloc] init];
     NSArray *items = [[SironaAlertList sharedAlerts] allAlerts];
     SironaAlertItem *selectedItem = [items objectAtIndex:[indexPath row]];
     [stevc setItem:selectedItem];
@@ -78,7 +82,7 @@
 
 - (IBAction)addNewItem:(id)sender
 {
-    SironaTimeEditViewController *stevc = [[SironaTimeEditViewController alloc] init];
+    SironaTimeEditAlertView *stevc = [[SironaTimeEditAlertView alloc] init];
     SironaAlertItem *newItem = [[SironaAlertItem alloc] init];
     [stevc setItem:newItem];
     [[self navigationController] pushViewController:stevc animated:YES];

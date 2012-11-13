@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SironaAlertList.h"
 
 @interface SironaAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+
+@property SironaAlertList *userAlerts;
 
 @end

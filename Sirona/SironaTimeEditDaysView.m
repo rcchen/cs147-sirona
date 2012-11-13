@@ -29,8 +29,9 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+
+    // Initialize a UITableViewCell with the string
     NSString *value = [possibleDays objectAtIndex:[indexPath row]];
-    NSLog(@"value: %@", value);
     UITableViewCell *utvc = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"UITableViewCell"];
     [[utvc textLabel] setText:value];
     [utvc setUserInteractionEnabled:YES];
@@ -49,11 +50,9 @@
     
     // Get a pointer to the cell
     UITableViewCell *cell = [[self tableView] cellForRowAtIndexPath:indexPath];
-    NSLog(@"Selected %@", cell);
     
     // If it is not checked yet, check it and add it to the NSMutableArray
     if (cell.accessoryType == UITableViewCellAccessoryNone) {
-        NSLog(@"Not checked, changing to checked");
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
         NSMutableArray *alertDays = [item getAlertDays];
         [alertDays addObject:[[cell textLabel] text]];
@@ -62,15 +61,12 @@
     
     // If it is checked, uncheck it and remove from NSMutableArray
     else {
-        NSLog(@"Checked, changing to not checked");
         cell.accessoryType = UITableViewCellAccessoryNone;
         NSMutableArray *alertDays = [item getAlertDays];
         [alertDays removeObject:[[cell textLabel] text]];
         [item setAlertDays:alertDays];
     }
-    
-    NSLog(@"%@", [item getAlertDays]);
-    
+        
     // Deselect the row when the operation is completed
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     

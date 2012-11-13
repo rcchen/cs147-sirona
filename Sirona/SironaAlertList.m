@@ -42,5 +42,10 @@
     [allAlerts addObject:alert];
 }
 
+- (void)deleteAlert:(SironaAlertItem *)alert
+{
+    [allAlerts delete:alert];
+}
+
 
 @end
