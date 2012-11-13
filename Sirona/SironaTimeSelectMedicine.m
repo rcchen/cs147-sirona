@@ -8,6 +8,7 @@
 
 #import "SironaTimeSelectMedicine.h"
 
+#import "SironaTimeAddNewMedicine.h"
 #import "SironaTimeSelectMedicineCellView.h"
 #import "SironaLibraryList.h"
 #import "SironaLibraryItem.h"
@@ -18,10 +19,10 @@
 @synthesize item;
 @synthesize previous_cell;
 
-- (IBAction)addNewItem:(id)sender
+/*- (IBAction)addNewItem:(id)sender
 {
     
-}
+}*/
 
 - (id)init
 {
@@ -41,7 +42,7 @@
     UIBarButtonItem *bbi = [[UIBarButtonItem alloc]
                             initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
                             target:self
-                            action:@selector(addNewItem:)];
+                            action:@selector(setMedicine:)];
     
     // Set this bar button item as the right item in the navigationItem
     [[self navigationItem] setRightBarButtonItem:bbi];
@@ -56,22 +57,28 @@
 - (NSInteger)tableView:(UITableView *)tableView
  numberOfRowsInSection:(NSInteger)section
 {
-    return [[[SironaLibraryList sharedLibrary] allItems] count];
+    return [medicines count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     SironaLibraryItem *sli = [medicines objectAtIndex:[indexPath row]];
-    SironaTimeSelectMedicineCellView *slcv = [tableView dequeueReusableCellWithIdentifier:@"SironaTimeSelectMedicineCellView"];    [[slcv cellMain] setText:[sli getBrand]];
+    SironaTimeSelectMedicineCellView *slcv = [tableView dequeueReusableCellWithIdentifier:@"SironaTimeSelectMedicineCellView"];
+    [[slcv cellMain] setText:[sli getBrand]];
     [[slcv cellSecondary] setText:[sli getCategory]];
     
 
     //UITableViewCell *cell = [[self tableView] cellForRowAtIndexPath:indexPath];
 
-    // If the item already contains the day, set the checkmark
-    if ([[[item getLibraryItem] getBrand] isEqualToString: [sli getBrand]])
+    // If the medication was previously selected, set the checkmark
+    if ([[[item getLibraryItem] getBrand] isEqualToString: [sli getBrand]]) {
         slcv.accessoryType = UITableViewCellAccessoryCheckmark;
+        NSLog(@"%@", [item getLibraryItem]);
+    }
+    
+    /*if ([previous_cell isEqual: slcv])
+        slcv.accessoryType = UITableViewCellAccessoryCheckmark;*/
     
     return slcv;
 }
@@ -79,16 +86,17 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Get a pointer to the cell
+        
     UITableViewCell *cell = [[self tableView] cellForRowAtIndexPath:indexPath];
     
     if (cell.accessoryType == UITableViewCellAccessoryNone) {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
         [item setLibraryItem:[medicines objectAtIndex:[indexPath row]]];
         
-        if (previous_cell) {
+        /*if (previous_cell) {
             previous_cell.accessoryType = UITableViewCellAccessoryNone;
         }
-        previous_cell = cell;
+        previous_cell = cell;*/
         
         [[self navigationController] popViewControllerAnimated:YES];
 
@@ -136,34 +144,15 @@
     [[self tableView] registerNib:nib forCellReuseIdentifier:@"SironaTimeSelectMedicineCellView"];
 }
 
-/*
- - (id)initWithNibName:(NSString *)nibName bundle:(NSBundle *)bundle
- {
- 
- // Call the superclass' designated initializer
- self = [super initWithNibName:nil bundle:nil];
- 
- // If it exists, then we can customize it
- if (self) {
- 
- UINavigationController *n = [self navigationController];
- [n setTitle:@"My Alerts"];
- 
- // Get the tab bar item and give it a label
- UITabBarItem *tbi = [self tabBarItem];
- [tbi setTitle:@"Library"];
- 
- // Now give it an image
- UIImage *i = [UIImage imageNamed:@"96-book.png"];
- [tbi setImage:i];
- 
- }
- 
- [self refreshDisplay];
- 
- return self;
- 
- }
- */
+- (IBAction)setMedicine:(id)sender
+{
+    
+    SironaTimeAddNewMedicine *stanm = [[SironaTimeAddNewMedicine alloc] init];
+    //SironaAlertItem *newItem = [[SironaAlertItem alloc] init];
+    //[stevc setItem:newItem];
+    //[stevc setAlertList:alerts];
+    [[self navigationController] pushViewController:stanm animated:YES];
+    
+}
 
 @end
