@@ -98,10 +98,69 @@
         NSMutableArray *prefAlerts = (NSMutableArray *)[NSKeyedUnarchiver unarchiveObjectWithData:encodedAlertList];
         alerts = prefAlerts;
     }
+    
+    // This is where we want to clear all the notifications and whatnot
         
     NSLog(@"Alert count: %u", [alerts count]);
+    
+    for (SironaAlertItem *alertItem in alerts)
+        [self setAllAlarms:alertItem];
+    
     [[self tableView] reloadData];
 
+}
+
+- (void)setAllAlarms:(SironaAlertItem *)alertItem
+{
+    NSLog(@"In here");
+    
+    // First delete all of the alarms associated with the alertItem
+    for (UILocalNotification *old in [[UIApplication sharedApplication] scheduledLocalNotifications]) {
+        
+        // Implement some sort of thing with keys
+        
+    }
+    
+    // This is so shoddy :/
+    NSArray *daysOfWeek = [[NSArray alloc] initWithObjects:@"Sunday", @"Monday", @"Tuesday", @"Wednesday", @"Thursday", @"Friday", @"Saturday", nil];
+    
+    for (NSString *time in [alertItem getAlertTimes]) {
+        for (NSString *day in [alertItem getAlertDays]) {
+            
+            int dayNum = [daysOfWeek indexOfObject:day];
+            NSLog(@"%@ on %@ (%u)", time, day, dayNum);
+            
+            /*
+            UILocalNotification *notif = [[UILocalNotification alloc] init];
+            NSDateComponents *components = [[NSDateComponents alloc] init];
+            notif.repeatInterval = kCFCalendarUnitWeekday;
+            */
+             
+        }
+
+    }
+}
+
+// Saves the encoded data into NSUserDefaults
+- (void)saveEncodedData
+{
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    NSData *encodedAlertList = [NSKeyedArchiver archivedDataWithRootObject:alerts];
+    [prefs setObject:encodedAlertList forKey:@"alertList"];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    // Save encoded data to NSUserDefaults in case there were alerts that were deleted
+    [self saveEncodedData];
+}
+
+// Override to support editing the table view.
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        [alerts removeObjectAtIndex:[indexPath row]];
+        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:YES];
+    }
 }
 
 /*

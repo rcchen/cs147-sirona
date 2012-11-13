@@ -191,6 +191,7 @@
 {
         
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    
     if (self) {
         
         // Create a new bar button item that will send
@@ -211,7 +212,9 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    
     [self.tableView reloadData];
+    
 }
 
 
