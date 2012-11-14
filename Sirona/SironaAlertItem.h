@@ -14,13 +14,16 @@
     SironaLibraryItem *sli;
     NSMutableArray *alertDays;
     NSMutableArray *alertTimes;
+    NSString *alertID;
 }
 
 - (SironaLibraryItem *)getLibraryItem;
 - (NSMutableArray *)getAlertDays;
 - (NSMutableArray *)getAlertTimes;
+- (NSString *)getAlertId;
 - (void)setLibraryItem:(SironaLibraryItem *)item;
 - (void)setAlertDays:(NSMutableArray*)days;
 - (void)setAlertTimes:(NSMutableArray*)times;
+- (void)setAlertId;
 
 @end

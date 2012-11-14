@@ -21,6 +21,7 @@
 
 - (IBAction)saveAlert:(id)sender{
     
+    // Set the alerts from NSUserDefaults
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
     NSData *encodedAlertList = [prefs objectForKey:@"alertList"];
     if (encodedAlertList) {
@@ -28,24 +29,23 @@
         alertList = prefAlerts;
     }
     
-    NSLog(@"Items after retrieval: %u", [alertList count]);
-    
-    /*for (int i = 0; i < [alertList count]; i++) {
-        if ([[alertList objectAtIndex:i] getLibraryItem] == [item getLibraryItem]) {
-            NSLog(@"Item removed");
-            [alertList removeObjectAtIndex:i];
+    // Remove the object if it exists already
+    for (SironaAlertItem *sai in alertList) {
+        if ([sai getAlertId] == [item getAlertId]) {
+            NSLog(@"Removing duplicate object");
+            [alertList removeObject:sai];
             break;
         }
-    }*/
+    }
     
-    NSLog(@"Items before: %u", [alertList count]);
+    // Add the item in
     [alertList addObject:item];
-    NSLog(@"Items after: %u", [alertList count]);
-
+    
     // Now save it to NSUserDefaults
     encodedAlertList = [NSKeyedArchiver archivedDataWithRootObject:alertList];
     [prefs setObject:encodedAlertList forKey:@"alertList"];
     
+    // Pop back to the previous view controller
     [[self navigationController] popViewControllerAnimated:YES];
     
 }

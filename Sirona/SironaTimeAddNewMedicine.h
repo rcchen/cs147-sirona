@@ -8,11 +8,17 @@
 
 #import <Foundation/Foundation.h>
 
-@interface SironaTimeAddNewMedicine : UITableViewController
+@interface SironaTimeAddNewMedicine : UITableViewController <UITextFieldDelegate>
 {
     
 }
 
 @property NSMutableArray *medInfo;
+@property NSMutableArray *medicineSections;
+
+// Default setter
+- (void)setMedInfo:(NSMutableArray *)medInfo;
+
+
 
 @end

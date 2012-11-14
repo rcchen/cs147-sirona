@@ -8,6 +8,7 @@
 
 #import "SironaTimeEditAlertView.h"
 #import "SironaTimeViewController.h"
+#import "SironaTimeCellView.h"
 #import "SironaAlertItem.h"
 
 @implementation SironaTimeViewController
@@ -52,6 +53,10 @@
     return self;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 92.0f;
+}
+
 // Returns the count of the number of rows in the table view
 - (NSInteger)tableView:(UITableView *)tableView
  numberOfRowsInSection:(NSInteger)section
@@ -62,10 +67,24 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"UITableViewCell"];
+
+    SironaTimeCellView *cell = [tableView dequeueReusableCellWithIdentifier:@"SironaTimeCellView"];
     SironaAlertItem *sai = [alerts objectAtIndex:[indexPath row]];
-    [[cell textLabel] setText:@"Lol an item"];
+    
+    [[cell cellMain] setText:[[sai getLibraryItem] getBrand]];
+    [[cell cellSecondary] setText:[[sai getLibraryItem] getCategory]];
+    
+    NSMutableString *tertiaryText = [[NSMutableString alloc] init];
+    if ([[sai getAlertDays] count] == 0)
+        [[cell cellTertiary] setText:@"No days set"];
+    else {
+        for (NSString *day in [sai getAlertDays]) {
+            [tertiaryText appendFormat:@"%@ ", [day substringToIndex:3]];
+        } [[cell cellTertiary] setText:tertiaryText];
+    }
+    
     return cell;
+    
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -83,6 +102,7 @@
     
     SironaTimeEditAlertView *stevc = [[SironaTimeEditAlertView alloc] init];
     SironaAlertItem *newItem = [[SironaAlertItem alloc] init];
+    [newItem setAlertId];
     [stevc setItem:newItem];
     [stevc setAlertList:alerts];
     [[self navigationController] pushViewController:stevc animated:YES];
@@ -98,8 +118,6 @@
         NSMutableArray *prefAlerts = (NSMutableArray *)[NSKeyedUnarchiver unarchiveObjectWithData:encodedAlertList];
         alerts = prefAlerts;
     }
-    
-    // This is where we want to clear all the notifications and whatnot
         
     NSLog(@"Alert count: %u", [alerts count]);
     
@@ -113,40 +131,87 @@
 - (void)setAllAlarms:(SironaAlertItem *)alertItem
 {
     NSLog(@"In here");
+ 
+    [[UIApplication sharedApplication] cancelAllLocalNotifications];
     
     // First delete all of the alarms associated with the alertItem
     for (UILocalNotification *old in [[UIApplication sharedApplication] scheduledLocalNotifications]) {
         
-        // Implement some sort of thing with keys
+        // Cancel anything that matches the alertID
+        if ([[old.userInfo objectForKey:@"alertID"] isEqualToString:[alertItem getAlertId]]) {
+            NSLog(@"Removed alert for %@", [alertItem getAlertId]);
+            [[UIApplication sharedApplication] cancelLocalNotification:old];
+        }
         
     }
     
-    // This is so shoddy :/
+    // Then add all of the alerts back in
     NSArray *daysOfWeek = [[NSArray alloc] initWithObjects:@"Sunday", @"Monday", @"Tuesday", @"Wednesday", @"Thursday", @"Friday", @"Saturday", nil];
     
     for (NSString *time in [alertItem getAlertTimes]) {
+        
         for (NSString *day in [alertItem getAlertDays]) {
             
-            int dayNum = [daysOfWeek indexOfObject:day];
-            NSLog(@"%@ on %@ (%u)", time, day, dayNum);
+            NSLog(@"Count: %u", [[[UIApplication sharedApplication] scheduledLocalNotifications] count]);
             
-            /*
+            int dayNum = [daysOfWeek indexOfObject:day];
+            
+            // Let's bring up the notification
             UILocalNotification *notif = [[UILocalNotification alloc] init];
-            NSDateComponents *components = [[NSDateComponents alloc] init];
-            notif.repeatInterval = kCFCalendarUnitWeekday;
-            */
-             
+            notif.repeatInterval = NSWeekCalendarUnit;
+            
+            // Create a date for the notification
+            
+            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+            [dateFormatter setDateFormat:@"HH:mm"];
+            NSDate *dateFromString = [[NSDate alloc] init];
+            dateFromString = [dateFormatter dateFromString:time];
+            
+            NSLog(@"String: %@, date: %@", time, dateFromString);
+
+            NSCalendar *cal = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+            NSDateComponents *components = [cal components:(NSYearCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit) fromDate:dateFromString];
+            [components setWeekday:dayNum];
+            
+            NSDate *adjustedDate = [cal dateFromComponents:components];
+            
+            NSLog(@"Adjusted date: %@", adjustedDate);
+            
+            notif.timeZone = [NSTimeZone defaultTimeZone];
+            notif.fireDate = adjustedDate;
+            notif.alertBody = @"Yay an alert!";
+            notif.alertAction = @"View";
+            notif.applicationIconBadgeNumber += 1;
+            
+            // Use this code to store the ID in the userInfo dictionary
+            NSArray *alertID = [[NSArray alloc] initWithObjects:[alertItem getAlertId], nil];
+            NSArray *alertKey = [[NSArray alloc] initWithObjects:@"alertID", nil];
+            notif.userInfo = [[NSDictionary alloc] initWithObjects:alertID forKeys:alertKey];
+            
+            //NSLog(@"%@ on %@ (%u)", time, day, dayNum);
+            
+            [[UIApplication sharedApplication] scheduleLocalNotification:notif];
+            
+            for (UILocalNotification *old in [[UIApplication sharedApplication] scheduledLocalNotifications]) {
+                NSLog(@"Alert for %@ at %@", [old.userInfo objectForKey:@"alertID"], [old fireDate]);
+            }
+            
         }
 
     }
+    
+
+    
 }
 
 // Saves the encoded data into NSUserDefaults
 - (void)saveEncodedData
 {
+    
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
     NSData *encodedAlertList = [NSKeyedArchiver archivedDataWithRootObject:alerts];
     [prefs setObject:encodedAlertList forKey:@"alertList"];
+    
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -157,10 +222,19 @@
 
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         [alerts removeObjectAtIndex:[indexPath row]];
         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:YES];
     }
+    
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    UINib *nib = [UINib nibWithNibName:@"SironaTimeCellView" bundle:nil];
+    [[self tableView] registerNib:nib forCellReuseIdentifier:@"SironaTimeCellView"];
 }
 
 /*

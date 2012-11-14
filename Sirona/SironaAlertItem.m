@@ -16,6 +16,7 @@
     if (self = [super init]) {
         alertDays = [[NSMutableArray alloc] init];
         alertTimes = [[NSMutableArray alloc] init];
+        alertID = [[NSString alloc] init];
     }
     
     // Return pointer to the object
@@ -47,11 +48,28 @@
     alertTimes = times;
 }
 
+- (NSString*)getAlertId {
+    return alertID;
+}
+
+- (void)setAlertId
+{
+    
+    if (!alertID) {
+        NSDate *now = [[NSDate alloc] init];
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat: @"yyyy-MM-dd HH:mm:ss zzz"];
+        alertID = [formatter stringFromDate:now];
+    }
+    
+}
+
 - (void)encodeWithCoder:(NSCoder *)encoder {
     //Encode properties, other class variables, etc
     [encoder encodeObject:alertDays forKey:@"alertDays"];
     [encoder encodeObject:alertTimes forKey:@"alertTimes"];
     [encoder encodeObject:sli forKey:@"alertLibraryItem"];
+    [encoder encodeObject:alertID forKey:@"alertID"];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder {
@@ -60,6 +78,7 @@
         alertDays = [decoder decodeObjectForKey:@"alertDays"];
         alertTimes = [decoder decodeObjectForKey:@"alertTimes"];
         sli = [decoder decodeObjectForKey:@"alertLibraryItem"];
+        alertID = [decoder decodeObjectForKey:@"alertID"];
     }
     return self;
 }

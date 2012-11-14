@@ -19,10 +19,12 @@
 @synthesize item;
 @synthesize previous_cell;
 
-/*- (IBAction)addNewItem:(id)sender
+- (IBAction)addNewItem:(id)sender
 {
-    
-}*/
+    SironaTimeAddNewMedicine *stanm = [[SironaTimeAddNewMedicine alloc] init];
+    [stanm setMedInfo:medicines];
+    [[self navigationController] pushViewController:stanm animated:YES];
+}
 
 - (id)init
 {
@@ -50,6 +52,7 @@
     [self refreshDisplay];
     
     return self;
+    
 }
 
 
