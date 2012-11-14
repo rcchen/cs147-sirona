@@ -41,6 +41,8 @@
     // Add the item in
     [alertList addObject:item];
     
+    NSLog(@"AlertID: %@", [item getAlertId]);
+    
     // Now save it to NSUserDefaults
     encodedAlertList = [NSKeyedArchiver archivedDataWithRootObject:alertList];
     [prefs setObject:encodedAlertList forKey:@"alertList"];
@@ -153,7 +155,6 @@
             [[utvc detailTextLabel] setText:timesLabel];
             
         }
-        
         
         // Add the disclosure indicator (chevron) on the right
         utvc.accessoryType = UITableViewCellAccessoryDisclosureIndicator;

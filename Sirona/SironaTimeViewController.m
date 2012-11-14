@@ -103,6 +103,7 @@
     SironaTimeEditAlertView *stevc = [[SironaTimeEditAlertView alloc] init];
     SironaAlertItem *newItem = [[SironaAlertItem alloc] init];
     [newItem setAlertId];
+    NSLog(@"The new alert ID is: %@", [newItem getAlertId]);
     [stevc setItem:newItem];
     [stevc setAlertList:alerts];
     [[self navigationController] pushViewController:stevc animated:YES];
@@ -111,6 +112,8 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    
+    [[UIApplication sharedApplication] cancelAllLocalNotifications];
     
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
     NSData *encodedAlertList = [prefs objectForKey:@"alertList"];
@@ -121,8 +124,13 @@
         
     NSLog(@"Alert count: %u", [alerts count]);
     
-    for (SironaAlertItem *alertItem in alerts)
+    for (SironaAlertItem *alertItem in alerts) {
         [self setAllAlarms:alertItem];
+    }
+    
+    for (UILocalNotification *old in [[UIApplication sharedApplication] scheduledLocalNotifications]) {
+        NSLog(@"Alert for %@ at %@", [old.userInfo objectForKey:@"alertID"], [old fireDate]);
+    }
     
     [[self tableView] reloadData];
 
@@ -130,9 +138,7 @@
 
 - (void)setAllAlarms:(SironaAlertItem *)alertItem
 {
-    NSLog(@"In here");
  
-    [[UIApplication sharedApplication] cancelAllLocalNotifications];
     
     // First delete all of the alarms associated with the alertItem
     for (UILocalNotification *old in [[UIApplication sharedApplication] scheduledLocalNotifications]) {
@@ -152,7 +158,7 @@
         
         for (NSString *day in [alertItem getAlertDays]) {
             
-            NSLog(@"Count: %u", [[[UIApplication sharedApplication] scheduledLocalNotifications] count]);
+            //NSLog(@"Count: %u", [[[UIApplication sharedApplication] scheduledLocalNotifications] count]);
             
             int dayNum = [daysOfWeek indexOfObject:day];
             
@@ -161,26 +167,23 @@
             notif.repeatInterval = NSWeekCalendarUnit;
             
             // Create a date for the notification
-            
             NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
             [dateFormatter setDateFormat:@"HH:mm"];
             NSDate *dateFromString = [[NSDate alloc] init];
             dateFromString = [dateFormatter dateFromString:time];
+            dateFromString = [dateFromString dateByAddingTimeInterval:(86400 * ((dayNum+1) % 7))];
             
-            NSLog(@"String: %@, date: %@", time, dateFromString);
-
-            NSCalendar *cal = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-            NSDateComponents *components = [cal components:(NSYearCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit) fromDate:dateFromString];
-            [components setWeekday:dayNum];
-            
-            NSDate *adjustedDate = [cal dateFromComponents:components];
-            
-            NSLog(@"Adjusted date: %@", adjustedDate);
+            //NSLog(@"String: %@, date: %@, daynum: %u", time, dateFromString, dayNum);
             
             notif.timeZone = [NSTimeZone defaultTimeZone];
-            notif.fireDate = adjustedDate;
-            notif.alertBody = @"Yay an alert!";
+            notif.fireDate = dateFromString;
+            
+            NSMutableString *alertBody = [[NSMutableString alloc] init];
+            [alertBody appendFormat:@"Time to take your %@", [[alertItem getLibraryItem] getBrand]];
+            notif.alertBody = alertBody;
+            
             notif.alertAction = @"View";
+            notif.soundName = UILocalNotificationDefaultSoundName;
             notif.applicationIconBadgeNumber += 1;
             
             // Use this code to store the ID in the userInfo dictionary
@@ -188,19 +191,11 @@
             NSArray *alertKey = [[NSArray alloc] initWithObjects:@"alertID", nil];
             notif.userInfo = [[NSDictionary alloc] initWithObjects:alertID forKeys:alertKey];
             
-            //NSLog(@"%@ on %@ (%u)", time, day, dayNum);
-            
             [[UIApplication sharedApplication] scheduleLocalNotification:notif];
-            
-            for (UILocalNotification *old in [[UIApplication sharedApplication] scheduledLocalNotifications]) {
-                NSLog(@"Alert for %@ at %@", [old.userInfo objectForKey:@"alertID"], [old fireDate]);
-            }
             
         }
 
     }
-    
-
     
 }
 

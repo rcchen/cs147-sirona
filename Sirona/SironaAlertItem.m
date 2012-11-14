@@ -54,8 +54,8 @@
 
 - (void)setAlertId
 {
-    
-    if (!alertID) {
+    if (![alertID length]) {
+        NSLog(@"In no ID");
         NSDate *now = [[NSDate alloc] init];
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         [formatter setDateFormat: @"yyyy-MM-dd HH:mm:ss zzz"];
