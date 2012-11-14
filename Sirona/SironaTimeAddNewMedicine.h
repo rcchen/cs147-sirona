@@ -13,10 +13,10 @@
     
 }
 
-@property NSMutableArray *medInfo;
+@property NSMutableArray *medicines;
 @property NSMutableArray *medicineSections;
 
 // Default setter
-- (void)setMedInfo:(NSMutableArray *)medInfo;
+- (void)setMedicines:(NSMutableArray *)medicines;
 
 @end

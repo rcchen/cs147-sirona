@@ -22,7 +22,7 @@
 - (IBAction)addNewItem:(id)sender
 {
     SironaTimeAddNewMedicine *stanm = [[SironaTimeAddNewMedicine alloc] init];
-    [stanm setMedInfo:medicines];
+    [stanm setMedicines:medicines];
     [[self navigationController] pushViewController:stanm animated:YES];
 }
 
@@ -136,7 +136,7 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    [self refreshDisplay];
+    [[self tableView] reloadData];
     
 }
 
