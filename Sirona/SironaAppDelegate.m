@@ -8,6 +8,7 @@
 
 #import "SironaAppDelegate.h"
 #import "SironaHomeViewController.h"
+#import "SironaHomeViewControllerB.h"
 #import "SironaTimeViewController.h"
 #import "SironaLibraryViewController.h"
 #import "SironaSettingsViewController.h"
@@ -34,11 +35,20 @@
     UINavigationController *libraryViewController = [[UINavigationController alloc] initWithRootViewController:slvc];
     UINavigationController *settingsViewController = [[UINavigationController alloc] initWithRootViewController:ssvc];
     
+    UIColor *green = [[UIColor alloc] initWithRed:76/255. green:166/255. blue:93/255. alpha:1];
+    timeViewController.navigationBar.tintColor = green;
+    libraryViewController.navigationBar.tintColor = green;
+    settingsViewController.navigationBar.tintColor = green;
+    
+    [application setStatusBarStyle:UIStatusBarStyleBlackOpaque];
+    
     [libraryViewController setTitle:@"Library"];
     [settingsViewController setTitle:@"Settings"];
     
     // Create the tab bar controller
     UITabBarController *tabBarController = [[UITabBarController alloc] init];
+    
+    SironaHomeViewControllerB *altHome = [[SironaHomeViewControllerB alloc] init];
     
     // Create an array of the available view controllers, then set them to the TabBar
     NSArray *viewControllers = [NSArray arrayWithObjects:shvc, timeViewController, libraryViewController, settingsViewController, nil];
