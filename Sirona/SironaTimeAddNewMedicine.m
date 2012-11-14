@@ -10,6 +10,7 @@
 #import "SironaTimeAddNewMedicineCell.h"
 #import "SironaTimeAddNewMedicineNoteCell.h"
 #import "SironaLibraryItem.h"
+#import "SironaLibraryList.h"
 
 @implementation SironaTimeAddNewMedicine
 
@@ -19,6 +20,32 @@
 - (IBAction)saveMedicine:(id)sender
 {
     // Something is supposed to happen here!
+    
+    
+    // Store Medicine Information
+    NSArray *medicineContents = [medicineSections objectAtIndex:0];
+    
+    NSString *name = [[medicineContents objectAtIndex:0] stringValue];
+    NSString *category = [[medicineContents objectAtIndex:1] stringValue];
+    
+    // Store Notes
+    NSArray *notesArray = [medicineSections objectAtIndex:1];
+    NSString *notes = [[notesArray objectAtIndex:0] stringValue];
+    
+    // Save the information
+    //SironaLibraryItem *sli;
+    SironaLibraryItem *sli = [[SironaLibraryItem alloc] initWithMDataBrand:name mdataCategory:category mdataId:@"" mdataName:@"" mdataPrecautions:@"" mdataSideEffects:@"" mdataNotes:notes];
+
+    [medInfo addObject:sli];
+    
+    /*[sli initWithMDataBrand:name
+         mdataCategory:category
+         mdataId:@""
+         mdataName:@""
+         mdataPrecautions:@""
+         mdataSideEffects:@""
+         mdataNotes:notes];*/
+    
     
 }
 
@@ -58,6 +85,21 @@
     
 }
 
+// Disallows table cells to be selected
+- (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return nil;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    if(section == 0) {
+        return @"Medication Info";
+    } else { // section == 1
+        return @"Notes";
+    }
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if ([indexPath section] == 1) {
@@ -80,7 +122,7 @@
                                 action:@selector(saveMedicine:)];
         [[self navigationItem] setRightBarButtonItem:bbi];
         
-        self.title = @"Add medicine";
+        self.title = @"Add Medicine";
         
     }
     

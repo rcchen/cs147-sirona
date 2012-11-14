@@ -126,7 +126,7 @@
     for (NSDictionary *med in jsonArray) {
         
         // Create a new Sirona Library Item
-        SironaLibraryItem *sli = [[SironaLibraryItem alloc] initWithMDataBrand:[med objectForKey:@"mdataBrand"] mdataCategory:[med objectForKey:@"mdataCategory"] mdataId:[med objectForKey:@"mdataId"] mdataName:[med objectForKey:@"mdataName"] mdataPrecautions:[med objectForKey:@"mdataPrecautions"] mdataSideEffects:[med objectForKey:@"mdataSideEffects"]];
+        SironaLibraryItem *sli = [[SironaLibraryItem alloc] initWithMDataBrand:[med objectForKey:@"mdataBrand"] mdataCategory:[med objectForKey:@"mdataCategory"] mdataId:[med objectForKey:@"mdataId"] mdataName:[med objectForKey:@"mdataName"] mdataPrecautions:[med objectForKey:@"mdataPrecautions"] mdataSideEffects:[med objectForKey:@"mdataSideEffects"] mdataNotes:@""];
         
         [medicines addObject:sli];
 
