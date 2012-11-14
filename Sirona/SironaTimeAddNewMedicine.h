@@ -19,6 +19,4 @@
 // Default setter
 - (void)setMedInfo:(NSMutableArray *)medInfo;
 
-
-
 @end

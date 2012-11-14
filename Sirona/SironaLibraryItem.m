@@ -16,6 +16,7 @@
                mdataName: (NSString *)jsonName
         mdataPrecautions: (NSString *)jsonPrecautions
         mdataSideEffects: (NSString *)jsonSideEffects
+              mdataNotes: (NSString *)notes
 {
     
     mdataBrand = jsonBrand;

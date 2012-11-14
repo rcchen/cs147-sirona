@@ -23,7 +23,8 @@
                  mdataId:(NSString *)jsonId
                mdataName:(NSString *)jsonName
         mdataPrecautions:(NSString *)jsonPrecautions
-        mdataSideEffects:(NSString *)jsonSideEFfects;
+        mdataSideEffects:(NSString *)jsonSideEFfects
+              mdataNotes:(NSString *)notes;
 
 - (NSString *)getBrand;
 - (NSString *)getCategory;
