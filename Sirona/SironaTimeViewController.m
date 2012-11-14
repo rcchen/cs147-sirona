@@ -19,6 +19,7 @@
 {
     // Call the superclass's designated initializer
     self = [super initWithStyle:UITableViewStyleGrouped];
+    
     if (self) {
         
         // Get the tab bar item and give it a label
@@ -103,7 +104,7 @@
     SironaTimeEditAlertView *stevc = [[SironaTimeEditAlertView alloc] init];
     SironaAlertItem *newItem = [[SironaAlertItem alloc] init];
     [newItem setAlertId];
-    NSLog(@"The new alert ID is: %@", [newItem getAlertId]);
+    //NSLog(@"The new alert ID is: %@", [newItem getAlertId]);
     [stevc setItem:newItem];
     [stevc setAlertList:alerts];
     [[self navigationController] pushViewController:stevc animated:YES];

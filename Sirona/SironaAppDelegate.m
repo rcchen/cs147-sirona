@@ -11,7 +11,6 @@
 #import "SironaTimeViewController.h"
 #import "SironaLibraryViewController.h"
 #import "SironaSettingsViewController.h"
-
 #import "SironaAlertList.h"
 
 @implementation SironaAppDelegate
@@ -49,6 +48,14 @@
     
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
+    
+    // uniqueIdentifier deprecated since iOS5
+    #define TESTING 1
+    #ifdef TESTING
+        [TestFlight setDeviceIdentifier:[[UIDevice currentDevice] uniqueIdentifier]];
+    #endif
+    
+    [TestFlight takeOff:@"f9a37f0ed8d5db98483697763b46a443_MTU1MDcwMjAxMi0xMS0xNCAwNDoyNzozNS4wMjEzNzA"];
     
     application.applicationIconBadgeNumber = 0;
     

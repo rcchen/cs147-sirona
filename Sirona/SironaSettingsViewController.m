@@ -23,6 +23,8 @@
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
+    // Initialize the user settings up here
+    
     NSString *value = [settings objectAtIndex:[indexPath row]];
     UITableViewCell *utvc = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"UITableViewCell"];
     [[utvc textLabel] setText:value];
@@ -30,13 +32,18 @@
         UISwitch *switchview = [[UISwitch alloc] initWithFrame:CGRectZero];
         utvc.accessoryView = switchview;
     }
+    
+    //UISwitch *test = [utvc accessoryView];
+    //[test state];
+    
     return utvc;
     
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+// Disallows table cells to be selected
+- (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-   
+    return nil;
 }
 
 
@@ -60,7 +67,7 @@
         
     }
     
-    settings = [[NSMutableArray alloc] initWithObjects:@"Sound", @"Alert", @"Cloud sync", nil];
+    settings = [[NSMutableArray alloc] initWithObjects:@"Sound", @"Alert", nil];
 
     UINavigationItem *n = [self navigationItem];
     [n setTitle:NSLocalizedString(@"Settings", @"Application title")];

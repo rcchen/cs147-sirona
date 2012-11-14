@@ -31,6 +31,10 @@
 		33A4C7B01652D98B00D7A263 /* SironaTimeAddNewMedicineCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33A4C7AF1652D98B00D7A263 /* SironaTimeAddNewMedicineCell.m */; };
 		33A4C7B21652DD9900D7A263 /* SironaTimeAddNewMedicineNoteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 33A4C7B11652DD9900D7A263 /* SironaTimeAddNewMedicineNoteCell.xib */; };
 		33A4C7B51652DDE300D7A263 /* SironaTimeAddNewMedicineNoteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33A4C7B41652DDE300D7A263 /* SironaTimeAddNewMedicineNoteCell.m */; };
+		33BBE4BE16539C0F002449A2 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 33BBE4BA16539C0F002449A2 /* libTestFlight.a */; };
+		33BBE4BF16539C0F002449A2 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 33BBE4BB16539C0F002449A2 /* README.md */; };
+		33BBE4C016539C0F002449A2 /* release_notes.md in Resources */ = {isa = PBXBuildFile; fileRef = 33BBE4BC16539C0F002449A2 /* release_notes.md */; };
+		33BBE4C316539C3E002449A2 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 33BBE4C216539C3E002449A2 /* libz.dylib */; };
 		33CAFCC61651AF0200CFA474 /* SironaTimeSelectMedicine.xib in Resources */ = {isa = PBXBuildFile; fileRef = 33CAFCC51651AF0200CFA474 /* SironaTimeSelectMedicine.xib */; };
 		33CAFCCD1651AF9A00CFA474 /* SironaTimeSelectMedicine.m in Sources */ = {isa = PBXBuildFile; fileRef = 33CAFCCC1651AF9A00CFA474 /* SironaTimeSelectMedicine.m */; };
 		33CAFCCF1651B05A00CFA474 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33CAFCCE1651B05A00CFA474 /* CoreData.framework */; };
@@ -117,6 +121,11 @@
 		33A4C7B11652DD9900D7A263 /* SironaTimeAddNewMedicineNoteCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SironaTimeAddNewMedicineNoteCell.xib; sourceTree = "<group>"; };
 		33A4C7B31652DDE300D7A263 /* SironaTimeAddNewMedicineNoteCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SironaTimeAddNewMedicineNoteCell.h; sourceTree = "<group>"; };
 		33A4C7B41652DDE300D7A263 /* SironaTimeAddNewMedicineNoteCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SironaTimeAddNewMedicineNoteCell.m; sourceTree = "<group>"; };
+		33BBE4BA16539C0F002449A2 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
+		33BBE4BB16539C0F002449A2 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		33BBE4BC16539C0F002449A2 /* release_notes.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = release_notes.md; sourceTree = "<group>"; };
+		33BBE4BD16539C0F002449A2 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
+		33BBE4C216539C3E002449A2 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		33CAFCC51651AF0200CFA474 /* SironaTimeSelectMedicine.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SironaTimeSelectMedicine.xib; sourceTree = "<group>"; };
 		33CAFCCB1651AF9A00CFA474 /* SironaTimeSelectMedicine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SironaTimeSelectMedicine.h; sourceTree = "<group>"; };
 		33CAFCCC1651AF9A00CFA474 /* SironaTimeSelectMedicine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SironaTimeSelectMedicine.m; sourceTree = "<group>"; };
@@ -194,10 +203,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				33BBE4C316539C3E002449A2 /* libz.dylib in Frameworks */,
 				33CAFCCF1651B05A00CFA474 /* CoreData.framework in Frameworks */,
 				33DD20D9164B960000B4E5F7 /* UIKit.framework in Frameworks */,
 				33DD20DB164B960000B4E5F7 /* Foundation.framework in Frameworks */,
 				33DD20DD164B960000B4E5F7 /* CoreGraphics.framework in Frameworks */,
+				33BBE4BE16539C0F002449A2 /* libTestFlight.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -270,6 +281,18 @@
 			name = Icons;
 			sourceTree = "<group>";
 		};
+		33BBE4B916539C0F002449A2 /* TestFlightSDK1.1 */ = {
+			isa = PBXGroup;
+			children = (
+				33BBE4BA16539C0F002449A2 /* libTestFlight.a */,
+				33BBE4BB16539C0F002449A2 /* README.md */,
+				33BBE4BC16539C0F002449A2 /* release_notes.md */,
+				33BBE4BD16539C0F002449A2 /* TestFlight.h */,
+			);
+			name = TestFlightSDK1.1;
+			path = Sirona/TestFlightSDK1.1;
+			sourceTree = "<group>";
+		};
 		33CAFCD01651B06C00CFA474 /* Data Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -290,9 +313,11 @@
 		33DD20C9164B960000B4E5F7 = {
 			isa = PBXGroup;
 			children = (
+				33BBE4C216539C3E002449A2 /* libz.dylib */,
 				33CAFCCE1651B05A00CFA474 /* CoreData.framework */,
 				33DD20D7164B960000B4E5F7 /* Frameworks */,
 				33DD20D5164B960000B4E5F7 /* Products */,
+				33BBE4B916539C0F002449A2 /* TestFlightSDK1.1 */,
 				33DD20DE164B960000B4E5F7 /* Sirona */,
 				33DD2114164BB83100B4E5F7 /* SironaIcon.png */,
 				33DD2112164BB82700B4E5F7 /* SironaIcon@X2.png */,
@@ -546,6 +571,8 @@
 				7130FF1F16521562003F2EB4 /* SironaTimeAddNewMedicine.xib in Resources */,
 				33A4C7AC1652D8E900D7A263 /* SironaTimeAddNewMedicineCell.xib in Resources */,
 				33A4C7B21652DD9900D7A263 /* SironaTimeAddNewMedicineNoteCell.xib in Resources */,
+				33BBE4BF16539C0F002449A2 /* README.md in Resources */,
+				33BBE4C016539C0F002449A2 /* release_notes.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -654,6 +681,11 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Sirona/Sirona-Prefix.pch";
 				INFOPLIST_FILE = "Sirona/Sirona-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Sirona/TestFlightSDK1.1\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
@@ -668,6 +700,11 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Sirona/Sirona-Prefix.pch";
 				INFOPLIST_FILE = "Sirona/Sirona-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Sirona/TestFlightSDK1.1\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
