@@ -14,7 +14,7 @@
 
 @implementation SironaTimeAddNewMedicine
 
-@synthesize medInfo;
+@synthesize medicines;
 @synthesize medicineSections;
 
 - (IBAction)saveMedicine:(id)sender
@@ -25,27 +25,24 @@
     // Store Medicine Information
     NSArray *medicineContents = [medicineSections objectAtIndex:0];
     
-    NSString *name = [[medicineContents objectAtIndex:0] stringValue];
-    NSString *category = [[medicineContents objectAtIndex:1] stringValue];
+    /*NSString *name = [[medicineContents objectAtIndex:0] stringValue];
+    NSString *category = [[medicineContents objectAtIndex:1] stringValue];*/
     
+    NSString *name = @"testName";
+    NSString *category = @"testCategory";
+     
     // Store Notes
     NSArray *notesArray = [medicineSections objectAtIndex:1];
-    NSString *notes = [[notesArray objectAtIndex:0] stringValue];
+    //NSString *notes = [[notesArray objectAtIndex:0] stringValue];
+    NSString *notes = @"testNotes";
+    
     
     // Save the information
     //SironaLibraryItem *sli;
     SironaLibraryItem *sli = [[SironaLibraryItem alloc] initWithMDataBrand:name mdataCategory:category mdataId:@"" mdataName:@"" mdataPrecautions:@"" mdataSideEffects:@"" mdataNotes:notes];
-
-    [medInfo addObject:sli];
     
-    /*[sli initWithMDataBrand:name
-         mdataCategory:category
-         mdataId:@""
-         mdataName:@""
-         mdataPrecautions:@""
-         mdataSideEffects:@""
-         mdataNotes:notes];*/
-    
+    [medicines addObject:sli];
+    [[self navigationController] popViewControllerAnimated:YES];
     
 }
 
@@ -61,8 +58,56 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    static NSString *CELL_ID = @"Cell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CELL_ID];
+    if ([indexPath section] == 0) { // Medicine Info section
+        UITextField *inputField;
+        if (cell == nil ) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CELL_ID];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            inputField = [[UITextField alloc] initWithFrame:CGRectMake(130, 12, 180, 30)];
+            inputField.adjustsFontSizeToFitWidth = NO;
+            // Unique tag for the UITextField
+            inputField.tag = [indexPath row];
+            [cell addSubview:inputField];
+            
+        }
+        inputField.keyboardType = UIKeyboardTypeDefault;
+        switch ([indexPath row]) {
+            case 0:
+                cell.textLabel.text = @"Brand";
+                break;
+            case 1:
+                cell.textLabel.text = @"Category";
+                break;
+            case 2:
+                cell.textLabel.text = @"Precautions";
+                break;
+            case 3:
+                cell.textLabel.text = @"Side effects";
+                break;
+            default:
+                break;
+        }
+    } else { // Notes section
+        UITextView *inputField;
+        if (cell == nil ) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CELL_ID];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            inputField = [[UITextView alloc] initWithFrame:CGRectMake(15, 5, 280, 260)];
+            inputField.backgroundColor = [UIColor clearColor];
+            // Unique tag for the UITextField
+            inputField.tag = [indexPath row];
+            [cell addSubview:inputField];
+            [inputField setFont:[UIFont systemFontOfSize:18]];
+            
+        }
+        //inputField = [[UITextView alloc] initWithFrame:CGRectMake(20, 12, 400, 500)];
+    }
+        
+    return cell;
     
-    NSArray *sectionContents = [medicineSections objectAtIndex:[indexPath section]];
+    /*NSArray *sectionContents = [medicineSections objectAtIndex:[indexPath section]];
     NSString *rowContents = [sectionContents objectAtIndex:[indexPath row]];
     
     // Yes I did this with XIBs instead of programatically.
@@ -76,9 +121,11 @@
     else {
         SironaTimeAddNewMedicineNoteCell *stanmnc = [tableView dequeueReusableCellWithIdentifier:@"SironaTimeAddNewMedicineNoteCell"];
         return stanmnc;
-    }
+    }*/
     
 }
+
+
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -126,7 +173,7 @@
         
     }
     
-    NSArray *sectionOne = [[NSArray alloc] initWithObjects:@"Name", @"Category", nil];
+    NSArray *sectionOne = [[NSArray alloc] initWithObjects:@"Brand", @"Category", @"Precautions", @"Side effects", nil];
     NSArray *sectionTwo = [[NSArray alloc] initWithObjects:@"", nil];
     
     medicineSections = [[NSMutableArray alloc] initWithObjects:sectionOne, sectionTwo, nil];
