@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SironaAlertsViewController : UIViewController
+@interface SironaAlertsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
 @property UITableView *alertsTable;
 @property NSMutableArray *alerts;

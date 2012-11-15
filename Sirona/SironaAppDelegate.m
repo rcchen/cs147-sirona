@@ -27,43 +27,38 @@
     
     // Override point for customization after application launch.
     
+    // First instantiate instances of all of the different UIViewControllers
     SironaHomeViewController *shvc = [[SironaHomeViewController alloc] init];
-    //SironaTimeViewController *stvc = [[SironaTimeViewController alloc] init];
+    SironaAlertsViewController *savc = [[SironaAlertsViewController alloc] init];
     SironaLibraryViewController *slvc = [[SironaLibraryViewController alloc] init];
-    SironaSettingsViewController *ssvc = [[SironaSettingsViewController alloc] init];
     
-    //UINavigationController *timeViewController = [[UINavigationController alloc] initWithRootViewController:stvc];
+    // Establish navigation controllers for each of the UIViewControllers that need one
+    UINavigationController *alertsViewController = [[UINavigationController alloc] initWithRootViewController:savc];
     UINavigationController *libraryViewController = [[UINavigationController alloc] initWithRootViewController:slvc];
-    UINavigationController *settingsViewController = [[UINavigationController alloc] initWithRootViewController:ssvc];
     
+    // Change the UINavigationBar color to green
     UIColor *green = [[UIColor alloc] initWithRed:76/255. green:166/255. blue:93/255. alpha:1];
-    //timeViewController.navigationBar.tintColor = green;
+    alertsViewController.navigationBar.tintColor = green;
     libraryViewController.navigationBar.tintColor = green;
-    settingsViewController.navigationBar.tintColor = green;
     
+    // Set the color of the status bar to be black instead of green
     [application setStatusBarStyle:UIStatusBarStyleBlackOpaque];
     
+    // Set title for the libraryViewController to "Library"
     [libraryViewController setTitle:@"Library"];
-    [settingsViewController setTitle:@"Settings"];
     
     // Create the tab bar controller
     UITabBarController *tabBarController = [[UITabBarController alloc] init];
     
+    /* TESTING AN ALTERNATIVE HOME VIEW HERE */
     SironaHomeViewControllerB *altHome = [[SironaHomeViewControllerB alloc] init];
     
-    /* TRYING SOMETHING HERE  - MIGRATING UITABLEVIEWCONTROLLER TO VIEWCONTROLLER */
-    SironaAlertsViewController *savc = [[SironaAlertsViewController alloc] init];
-    UINavigationController *alertsViewController = [[UINavigationController alloc] initWithRootViewController:savc];
-    alertsViewController.navigationBar.tintColor = green;
-    /* END TRYING SOMETHING */
-    
     // Create an array of the available view controllers, then set them to the TabBar
-    NSArray *viewControllers = [NSArray arrayWithObjects:altHome, alertsViewController, libraryViewController, settingsViewController, nil];
+    NSArray *viewControllers = [NSArray arrayWithObjects:shvc, alertsViewController, libraryViewController, nil];
     [tabBarController setViewControllers:viewControllers];
     
+    // Make it visible
     [[self window] setRootViewController:tabBarController];
-    
-    self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     
     /*

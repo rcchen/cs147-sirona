@@ -33,7 +33,21 @@
     
 }
 
+
 - (void)viewDidUnload {
     [super viewDidUnload];
 }
+
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    
+    UIViewController* c = [[UIViewController alloc] initWithNibName:@"SironaAlertNoneView" bundle:nil];
+    UIView *overlayNone = [c view];
+    overlayNone.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.7];
+    [self.view addSubview:overlayNone];
+    
+}
+
+
 @end

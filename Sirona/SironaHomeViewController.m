@@ -7,6 +7,7 @@
 //
 
 #import "SironaHomeViewController.h"
+#import "SironaAlertItem.h"
 #import "SironaHomeView.h"
 
 @implementation SironaHomeViewController
@@ -91,6 +92,7 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
+    [self findTopFive];
     [self circleAppear];
 }
 
@@ -150,6 +152,36 @@
 - (void)viewDidUnload
 {
     [self cleanupObjects];
+}
+
+- (NSMutableArray *)findTopFive
+{
+    
+    NSMutableArray *topFive = [[NSMutableArray alloc] init];
+    NSMutableArray *userAlerts = [[NSMutableArray alloc] init];
+    
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    NSData *encodedAlertList = [prefs objectForKey:@"alertList"];
+    if (encodedAlertList) {
+        userAlerts = (NSMutableArray *)[NSKeyedUnarchiver unarchiveObjectWithData:encodedAlertList];
+    }
+    
+    for (SironaAlertItem *alert in userAlerts)
+    {
+        
+        NSDate *today = [NSDate date];
+        
+        NSLog(@"Today is %@", today);
+        
+        for (NSString *day in [alert getAlertDays]) {
+            for (NSString *time in [alert getAlertTimes]) {
+                NSLog(@"Day: %@\tTime: %@", day, time);
+            }
+        }
+    }
+    
+    return topFive;
+    
 }
 
 @end

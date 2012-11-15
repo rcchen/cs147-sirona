@@ -227,7 +227,7 @@
     }
     
     // Initialize the objects that show up in the TableView
-    alertSettings = [[NSMutableArray alloc] initWithObjects:@"Repeat", @"Sound", @"Snooze", @"Medication", @"Times", nil];
+    alertSettings = [[NSMutableArray alloc] initWithObjects:@"Medication", @"Repeat", @"Times", nil];
     
     return self;
     

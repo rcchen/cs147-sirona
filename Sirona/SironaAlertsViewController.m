@@ -54,7 +54,9 @@
 
 - (void)viewDidLoad
 {
+    
     [super viewDidLoad];
+    
     UINib *nib = [UINib nibWithNibName:@"SironaTimeCellView" bundle:nil];
     [alertsTable registerNib:nib forCellReuseIdentifier:@"SironaTimeCellView"];
     
@@ -65,15 +67,11 @@
         alerts = prefAlerts;
     }
     
-    //alertsTable.dataSource = alerts;
-    
-    //[alertsTable setDataSource:self];
 }
 
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    
     
     [[UIApplication sharedApplication] cancelAllLocalNotifications];
     
@@ -84,14 +82,13 @@
         alerts = prefAlerts;
     }
     
-    NSLog(@"Alerts: %@", alerts);
-    
     // Programatically add a tableView to the thing
     alertsTable = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
+    self.alertsTable.dataSource = self;
+    self.alertsTable.delegate = self;
+    [[self alertsTable] reloadData];
     [self.view addSubview:alertsTable];
-    
-    NSLog(@"Alert count: %u", [alerts count]);
-    
+        
     for (SironaAlertItem *alertItem in alerts) {
         [self setAllAlarms:alertItem];
     }
@@ -99,8 +96,6 @@
     for (UILocalNotification *old in [[UIApplication sharedApplication] scheduledLocalNotifications]) {
         NSLog(@"Alert for %@ at %@", [old.userInfo objectForKey:@"alertID"], [old fireDate]);
     }
-    
-    [[self alertsTable] reloadData];
     
     if (![alerts count]) {
         
@@ -139,8 +134,14 @@
 {
     
     SironaTimeCellView *cell = [tableView dequeueReusableCellWithIdentifier:@"SironaTimeCellView"];
+    if (cell == nil) {
+        // Load the top-level objects from the custom cell XIB.
+        NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"SironaTimeCellView" owner:self options:nil];
+        // Grab a pointer to the first object (presumably the custom cell, as that's all the XIB should contain).
+        cell = (SironaTimeCellView *)[topLevelObjects objectAtIndex:0];
+    }
+
     SironaAlertItem *sai = [alerts objectAtIndex:[indexPath row]];
-    
     [[cell cellMain] setText:[[sai getLibraryItem] getBrand]];
     [[cell cellSecondary] setText:[[sai getLibraryItem] getCategory]];
     
