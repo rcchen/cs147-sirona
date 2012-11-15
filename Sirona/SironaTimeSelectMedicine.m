@@ -46,6 +46,7 @@
                             target:self
                             action:@selector(setMedicine:)];
     
+    
     // Set this bar button item as the right item in the navigationItem
     [[self navigationItem] setRightBarButtonItem:bbi];
     
@@ -95,11 +96,6 @@
     if (cell.accessoryType == UITableViewCellAccessoryNone) {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
         [item setLibraryItem:[medicines objectAtIndex:[indexPath row]]];
-        
-        /*if (previous_cell) {
-            previous_cell.accessoryType = UITableViewCellAccessoryNone;
-        }
-        previous_cell = cell;*/
         
         [[self navigationController] popViewControllerAnimated:YES];
 
@@ -154,6 +150,8 @@
     //SironaAlertItem *newItem = [[SironaAlertItem alloc] init];
     //[stevc setItem:newItem];
     //[stevc setAlertList:alerts];
+    [stanm setItem:item];
+    [stanm setMedicines:medicines];
     [[self navigationController] pushViewController:stanm animated:YES];
     
 }

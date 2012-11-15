@@ -16,33 +16,33 @@
 
 @synthesize medicines;
 @synthesize medicineSections;
+@synthesize textFields;
+@synthesize item;
 
 - (IBAction)saveMedicine:(id)sender
 {
-    // Something is supposed to happen here!
     
+    NSString *name = [[textFields objectAtIndex:0] text];
+    NSString *category = [[textFields objectAtIndex:1] text];
     
-    // Store Medicine Information
-    NSArray *medicineContents = [medicineSections objectAtIndex:0];
+    //NSLog(@"%@", name);
+    //NSLog(@"%@", category);
     
-    /*NSString *name = [[medicineContents objectAtIndex:0] stringValue];
-    NSString *category = [[medicineContents objectAtIndex:1] stringValue];*/
-    
-    NSString *name = @"testName";
-    NSString *category = @"testCategory";
+    //NSString *name = @"testName";
+    //NSString *category = @"testCategory";
      
-    // Store Notes
-    NSArray *notesArray = [medicineSections objectAtIndex:1];
-    //NSString *notes = [[notesArray objectAtIndex:0] stringValue];
+    //NSString *notes = [[textFields objectAtIndex:2] text];
     NSString *notes = @"testNotes";
     
+    //NSLog(@"%@", notes);
     
     // Save the information
-    //SironaLibraryItem *sli;
     SironaLibraryItem *sli = [[SironaLibraryItem alloc] initWithMDataBrand:name mdataCategory:category mdataId:@"" mdataName:@"" mdataPrecautions:@"" mdataSideEffects:@"" mdataNotes:notes];
     
     [medicines addObject:sli];
-    [[self navigationController] popViewControllerAnimated:YES];
+    [item setLibraryItem:sli];
+    
+    [self.navigationController popToViewController:[[self.navigationController viewControllers] objectAtIndex:1] animated:YES];
     
 }
 
@@ -67,9 +67,11 @@
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             inputField = [[UITextField alloc] initWithFrame:CGRectMake(130, 12, 180, 30)];
             inputField.adjustsFontSizeToFitWidth = NO;
+            [textFields addObject:inputField];
             // Unique tag for the UITextField
-            inputField.tag = [indexPath row];
+            //inputField.tag = [indexPath row];
             [cell addSubview:inputField];
+            [inputField setDelegate:self];
             
         }
         inputField.keyboardType = UIKeyboardTypeDefault;
@@ -96,8 +98,9 @@
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             inputField = [[UITextView alloc] initWithFrame:CGRectMake(15, 5, 280, 260)];
             inputField.backgroundColor = [UIColor clearColor];
+            [textFields addObject:inputField];
             // Unique tag for the UITextField
-            inputField.tag = [indexPath row];
+            //inputField.tag = 2;
             [cell addSubview:inputField];
             [inputField setFont:[UIFont systemFontOfSize:18]];
             
@@ -177,6 +180,8 @@
     NSArray *sectionTwo = [[NSArray alloc] initWithObjects:@"", nil];
     
     medicineSections = [[NSMutableArray alloc] initWithObjects:sectionOne, sectionTwo, nil];
+    
+    textFields = [[NSMutableArray alloc] init];
     
     self.editing = NO;
     
