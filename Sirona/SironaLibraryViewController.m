@@ -92,9 +92,18 @@
         SironaLibraryItem *sli = [[SironaLibraryItem alloc] initWithMDataBrand:[item objectForKey:@"mdataBrand"] mdataCategory:[item objectForKey:@"mdataCategory"] mdataId:[item objectForKey:@"mdataId"] mdataName:[item objectForKey:@"mdataName"] mdataPrecautions:[item objectForKey:@"mdataPrecautions"] mdataSideEffects:[item objectForKey:@"mdataSideEffects"] mdataNotes:@""];
         
         [[SironaLibraryList sharedLibrary] createItem:sli];
-                
     }
-
+    
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    NSData *encodedCustomMedList = [prefs objectForKey:@"customMedList"];
+    
+    // If there are custom meds, they will show up in the list
+    if (encodedCustomMedList) {
+        NSMutableArray *customMeds = (NSMutableArray *)[NSKeyedUnarchiver unarchiveObjectWithData:encodedCustomMedList];
+        for (SironaLibraryItem *sli in customMeds) {
+            [[SironaLibraryList sharedLibrary] createItem:sli];
+        }
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated

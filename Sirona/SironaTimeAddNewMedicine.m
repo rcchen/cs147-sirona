@@ -14,36 +14,46 @@
 
 @implementation SironaTimeAddNewMedicine
 
-@synthesize medicines;
 @synthesize medicineSections;
+@synthesize textFields;
+@synthesize item;
 
 - (IBAction)saveMedicine:(id)sender
 {
-    // Something is supposed to happen here!
     
+    NSString *name = [[textFields objectAtIndex:0] text];
+    if ([name length] == 0) // prevent null field
+        name = @"";
     
-    // Store Medicine Information
-    NSArray *medicineContents = [medicineSections objectAtIndex:0];
-    
-    /*NSString *name = [[medicineContents objectAtIndex:0] stringValue];
-    NSString *category = [[medicineContents objectAtIndex:1] stringValue];*/
-    
-    NSString *name = @"testName";
-    NSString *category = @"testCategory";
+    NSString *category = [[textFields objectAtIndex:1] text];
+    if ([category length] == 0)
+        category = @"";
      
-    // Store Notes
-    NSArray *notesArray = [medicineSections objectAtIndex:1];
-    //NSString *notes = [[notesArray objectAtIndex:0] stringValue];
-    NSString *notes = @"testNotes";
-    
+    NSString *notes = [[textFields objectAtIndex:2] text];
+    if ([notes length] == 0)
+        notes = @"";
     
     // Save the information
-    //SironaLibraryItem *sli;
     SironaLibraryItem *sli = [[SironaLibraryItem alloc] initWithMDataBrand:name mdataCategory:category mdataId:@"" mdataName:@"" mdataPrecautions:@"" mdataSideEffects:@"" mdataNotes:notes];
     
-    [medicines addObject:sli];
-    [[self navigationController] popViewControllerAnimated:YES];
+    [item setLibraryItem:sli];
     
+    // Now save it to NSUserDefaults
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    NSData *encodedCustomMedList = [prefs objectForKey:@"customMedList"];
+    
+    NSMutableArray *customMeds;
+    
+    if (encodedCustomMedList) {
+        customMeds = (NSMutableArray *)[NSKeyedUnarchiver unarchiveObjectWithData:encodedCustomMedList];
+    } else {
+        customMeds = [[NSMutableArray alloc] init];
+    }
+    [customMeds addObject:sli];
+    encodedCustomMedList = [NSKeyedArchiver archivedDataWithRootObject:customMeds];
+    [prefs setObject:encodedCustomMedList forKey:@"customMedList"];
+    
+    [self.navigationController popToViewController:[[self.navigationController viewControllers] objectAtIndex:1] animated:YES];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -67,9 +77,11 @@
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             inputField = [[UITextField alloc] initWithFrame:CGRectMake(130, 12, 180, 30)];
             inputField.adjustsFontSizeToFitWidth = NO;
+            [textFields addObject:inputField];
             // Unique tag for the UITextField
-            inputField.tag = [indexPath row];
+            //inputField.tag = [indexPath row];
             [cell addSubview:inputField];
+            [inputField setDelegate:self];
             
         }
         inputField.keyboardType = UIKeyboardTypeDefault;
@@ -96,32 +108,16 @@
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             inputField = [[UITextView alloc] initWithFrame:CGRectMake(15, 5, 280, 260)];
             inputField.backgroundColor = [UIColor clearColor];
+            [textFields addObject:inputField];
             // Unique tag for the UITextField
-            inputField.tag = [indexPath row];
+            //inputField.tag = 2;
             [cell addSubview:inputField];
             [inputField setFont:[UIFont systemFontOfSize:18]];
             
         }
-        //inputField = [[UITextView alloc] initWithFrame:CGRectMake(20, 12, 400, 500)];
     }
         
     return cell;
-    
-    /*NSArray *sectionContents = [medicineSections objectAtIndex:[indexPath section]];
-    NSString *rowContents = [sectionContents objectAtIndex:[indexPath row]];
-    
-    // Yes I did this with XIBs instead of programatically.
-    
-    if (!(rowContents == @"Notes")) {
-        SironaTimeAddNewMedicineCell *slcv = [tableView dequeueReusableCellWithIdentifier:@"SironaTimeAddNewMedicineCell"];
-        [[slcv cellLabel] setText:rowContents];
-        return slcv;
-    }
-    
-    else {
-        SironaTimeAddNewMedicineNoteCell *stanmnc = [tableView dequeueReusableCellWithIdentifier:@"SironaTimeAddNewMedicineNoteCell"];
-        return stanmnc;
-    }*/
     
 }
 
@@ -177,6 +173,8 @@
     NSArray *sectionTwo = [[NSArray alloc] initWithObjects:@"", nil];
     
     medicineSections = [[NSMutableArray alloc] initWithObjects:sectionOne, sectionTwo, nil];
+    
+    textFields = [[NSMutableArray alloc] init];
     
     self.editing = NO;
     
