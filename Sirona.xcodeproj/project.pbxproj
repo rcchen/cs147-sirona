@@ -29,6 +29,8 @@
 		33562265164DA91800A30BE5 /* circle-green-highlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 33562262164DA91800A30BE5 /* circle-green-highlighted.png */; };
 		33562266164DA91800A30BE5 /* circle-orange-highlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 33562263164DA91800A30BE5 /* circle-orange-highlighted.png */; };
 		3356226A164DADD700A30BE5 /* rio1.png in Resources */ = {isa = PBXBuildFile; fileRef = 33562269164DADD700A30BE5 /* rio1.png */; };
+		33704AA11655ACF50020EC65 /* water.png in Resources */ = {isa = PBXBuildFile; fileRef = 33704AA01655ACF50020EC65 /* water.png */; };
+		33704AA41655B1160020EC65 /* timepicker-back.png in Resources */ = {isa = PBXBuildFile; fileRef = 33704AA31655B1160020EC65 /* timepicker-back.png */; };
 		3385862B1650780B008B5A53 /* SironaTimeEditDaysView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3385862A1650780B008B5A53 /* SironaTimeEditDaysView.xib */; };
 		3385862F16507864008B5A53 /* SironaTimeEditDaysView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3385862E16507864008B5A53 /* SironaTimeEditDaysView.m */; };
 		3388028D16502D3D0031B123 /* SironaTimeEditViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3388028C16502D3D0031B123 /* SironaTimeEditViewCell.xib */; };
@@ -123,6 +125,8 @@
 		33562262164DA91800A30BE5 /* circle-green-highlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "circle-green-highlighted.png"; sourceTree = "<group>"; };
 		33562263164DA91800A30BE5 /* circle-orange-highlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "circle-orange-highlighted.png"; sourceTree = "<group>"; };
 		33562269164DADD700A30BE5 /* rio1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rio1.png; sourceTree = "<group>"; };
+		33704AA01655ACF50020EC65 /* water.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = water.png; sourceTree = "<group>"; };
+		33704AA31655B1160020EC65 /* timepicker-back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "timepicker-back.png"; sourceTree = "<group>"; };
 		3385862A1650780B008B5A53 /* SironaTimeEditDaysView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SironaTimeEditDaysView.xib; sourceTree = "<group>"; };
 		3385862D16507864008B5A53 /* SironaTimeEditDaysView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SironaTimeEditDaysView.h; sourceTree = "<group>"; };
 		3385862E16507864008B5A53 /* SironaTimeEditDaysView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SironaTimeEditDaysView.m; sourceTree = "<group>"; };
@@ -238,6 +242,8 @@
 		3312AEB816547A8100AFA0A8 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				33704AA31655B1160020EC65 /* timepicker-back.png */,
+				33704AA01655ACF50020EC65 /* water.png */,
 				3312AEB916547AA600AFA0A8 /* up-arrow.png */,
 			);
 			name = Images;
@@ -603,6 +609,8 @@
 				333D49C81654437F00C1CE93 /* SironaHomeViewB.xib in Resources */,
 				3312AEB7165477F400AFA0A8 /* SironaAlertNoneView.xib in Resources */,
 				3312AEBA16547AA600AFA0A8 /* up-arrow.png in Resources */,
+				33704AA11655ACF50020EC65 /* water.png in Resources */,
+				33704AA41655B1160020EC65 /* timepicker-back.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

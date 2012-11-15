@@ -33,11 +33,13 @@
     SironaLibraryViewController *slvc = [[SironaLibraryViewController alloc] init];
     
     // Establish navigation controllers for each of the UIViewControllers that need one
+    UINavigationController *homeViewController = [[UINavigationController alloc] initWithRootViewController:shvc];
     UINavigationController *alertsViewController = [[UINavigationController alloc] initWithRootViewController:savc];
     UINavigationController *libraryViewController = [[UINavigationController alloc] initWithRootViewController:slvc];
     
     // Change the UINavigationBar color to green
     UIColor *green = [[UIColor alloc] initWithRed:76/255. green:166/255. blue:93/255. alpha:1];
+    homeViewController.navigationBar.tintColor = green;
     alertsViewController.navigationBar.tintColor = green;
     libraryViewController.navigationBar.tintColor = green;
     
@@ -51,14 +53,15 @@
     UITabBarController *tabBarController = [[UITabBarController alloc] init];
     
     /* TESTING AN ALTERNATIVE HOME VIEW HERE */
-    SironaHomeViewControllerB *altHome = [[SironaHomeViewControllerB alloc] init];
+    //SironaHomeViewControllerB *altHome = [[SironaHomeViewControllerB alloc] init];
     
     // Create an array of the available view controllers, then set them to the TabBar
-    NSArray *viewControllers = [NSArray arrayWithObjects:shvc, alertsViewController, libraryViewController, nil];
+    NSArray *viewControllers = [NSArray arrayWithObjects:homeViewController, alertsViewController, libraryViewController, nil];
     [tabBarController setViewControllers:viewControllers];
     
     // Make it visible
     [[self window] setRootViewController:tabBarController];
+    self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     
     /*

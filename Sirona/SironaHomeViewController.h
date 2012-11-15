@@ -18,12 +18,18 @@
     IBOutlet UIImageView *circleFour;
     IBOutlet UIImageView *circleFive;
     
+    IBOutlet UILabel *labelOne;
+    IBOutlet UILabel *labelTwo;
+    IBOutlet UILabel *labelThree;
+    IBOutlet UILabel *labelFour;
+    IBOutlet UILabel *labelFive;
+    
     // IBOutlet for the time
     IBOutlet UILabel *timeLabel;
     NSTimer *timer;
     
 }
 
-- (IBAction)pressButton:(id)sender;
+- (IBAction)pressLabel:(id)sender;
 
 @end

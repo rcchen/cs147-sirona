@@ -31,7 +31,8 @@
     
     // Remove the object if it exists already
     for (SironaAlertItem *sai in alertList) {
-        if ([sai getAlertId] == [item getAlertId]) {
+        NSLog(@"AlertID: %@, Item: %@", sai.getAlertId, item.getAlertId);
+        if ([[sai getAlertId] isEqualToString:[item getAlertId]]) {
             NSLog(@"Removing duplicate object");
             [alertList removeObject:sai];
             break;

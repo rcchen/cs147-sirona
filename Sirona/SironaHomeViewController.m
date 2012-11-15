@@ -9,6 +9,7 @@
 #import "SironaHomeViewController.h"
 #import "SironaAlertItem.h"
 #import "SironaHomeView.h"
+#import "SironaAlertsViewController.h"
 
 @implementation SironaHomeViewController
 
@@ -26,10 +27,16 @@
     
 }
 
+
 - (void)circleAppear
 {
     
     [timeLabel setHidden:YES];
+    [labelOne setHidden:YES];
+    [labelTwo setHidden:YES];
+    [labelThree setHidden:YES];
+    [labelFour setHidden:YES];
+    [labelFive setHidden:YES];
     
     // instantaneously make the image view small (scaled to 1% of its actual size)
     circleOne.transform = CGAffineTransformMakeScale(0.01, 0.01);
@@ -49,6 +56,7 @@
         // animate it to the identity transform (100% scale)
         circleOne.transform = CGAffineTransformIdentity;
     } completion:^(BOOL finished){
+        [labelOne setHidden:NO];
         // if you want to do something once the animation finishes, put it here
     }];
     
@@ -57,6 +65,7 @@
         // animate it to the identity transform (100% scale)
         circleTwo.transform = CGAffineTransformIdentity;
     } completion:^(BOOL finished){
+        [labelTwo setHidden:NO];
         // if you want to do something once the animation finishes, put it here
     }];
     
@@ -65,6 +74,7 @@
         // animate it to the identity transform (100% scale)
         circleThree.transform = CGAffineTransformIdentity;
     } completion:^(BOOL finished){
+        [labelThree setHidden:NO];
         // if you want to do something once the animation finishes, put it here
     }];
     
@@ -73,6 +83,7 @@
         // animate it to the identity transform (100% scale)
         circleFour.transform = CGAffineTransformIdentity;
     } completion:^(BOOL finished){
+        [labelFour setHidden:NO];
         // if you want to do something once the animation finishes, put it here
     }];
     
@@ -81,6 +92,7 @@
         // animate it to the identity transform (100% scale)
         circleFive.transform = CGAffineTransformIdentity;
     } completion:^(BOOL finished){
+        [labelFive setHidden:NO];
         // if you want to do something once the animation finishes, put it here
     }];
     
@@ -90,16 +102,33 @@
     
 }
 
+
 - (void)viewDidAppear:(BOOL)animated
 {
+    [self.navigationController setNavigationBarHidden:YES animated:animated];
     [self findTopFive];
     [self circleAppear];
 }
+
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [self.navigationController setNavigationBarHidden:NO animated:animated];
+}
+
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [self cleanupObjects];
+}
+
 
 - (void)viewDidLoad
 {
     [self circleAppear];
 }
+
 
 - (id)initWithNibName:(NSString *)nibName bundle:(NSBundle *)bundle
 {
@@ -124,6 +153,7 @@
     
 }
 
+
 - (IBAction)pressButton:(id)sender
 {
     
@@ -132,6 +162,24 @@
         NSLog(@"%@", [notif fireDate]);
     
 }
+
+
+- (IBAction)pressLabel:(id)sender
+{
+    NSArray *notifs = [[UIApplication sharedApplication] scheduledLocalNotifications];
+    for (UILocalNotification* notif in notifs)
+        NSLog(@"%@", [notif fireDate]);
+    
+    NSLog(@"This works");
+    
+    SironaAlertsViewController *savc = [[SironaAlertsViewController alloc] init];
+    //[[self navigationController] pushViewController:timeViewController animated:YES];
+    
+    [[self navigationController] pushViewController:savc animated:YES];
+    
+    
+}
+
 
 - (void)cleanupObjects
 {
@@ -144,15 +192,12 @@
     [timeLabel setHidden:YES];
 }
 
-- (void)viewDidDisappear:(BOOL)animated
-{
-    [self cleanupObjects];
-}
 
 - (void)viewDidUnload
 {
     [self cleanupObjects];
 }
+
 
 - (NSMutableArray *)findTopFive
 {
@@ -166,18 +211,18 @@
         userAlerts = (NSMutableArray *)[NSKeyedUnarchiver unarchiveObjectWithData:encodedAlertList];
     }
     
+    NSDate *today = [NSDate date];
+    NSLog(@"Today is %@", today);
+    
     for (SironaAlertItem *alert in userAlerts)
     {
-        
-        NSDate *today = [NSDate date];
-        
-        NSLog(@"Today is %@", today);
         
         for (NSString *day in [alert getAlertDays]) {
             for (NSString *time in [alert getAlertTimes]) {
                 NSLog(@"Day: %@\tTime: %@", day, time);
             }
         }
+        
     }
     
     return topFive;
