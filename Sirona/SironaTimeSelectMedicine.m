@@ -50,6 +50,7 @@
     // Set this bar button item as the right item in the navigationItem
     [[self navigationItem] setRightBarButtonItem:bbi];
     
+    
     [self refreshDisplay];
     
     return self;
@@ -119,6 +120,7 @@
     
     // Add something here to catch the error
     
+    
     for (NSDictionary *med in jsonArray) {
         
         // Create a new Sirona Library Item
@@ -126,6 +128,17 @@
         
         [medicines addObject:sli];
 
+    }
+    
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    NSData *encodedCustomMedList = [prefs objectForKey:@"customMedList"];
+    
+    // If there are custom meds, they will show up in the list
+    if (encodedCustomMedList) {
+        NSMutableArray *customMeds = (NSMutableArray *)[NSKeyedUnarchiver unarchiveObjectWithData:encodedCustomMedList];
+        for (SironaLibraryItem *sli in customMeds) {
+            [medicines addObject:sli];
+        }
     }
     
 }
@@ -147,11 +160,7 @@
 {
     
     SironaTimeAddNewMedicine *stanm = [[SironaTimeAddNewMedicine alloc] init];
-    //SironaAlertItem *newItem = [[SironaAlertItem alloc] init];
-    //[stevc setItem:newItem];
-    //[stevc setAlertList:alerts];
     [stanm setItem:item];
-    [stanm setMedicines:medicines];
     [[self navigationController] pushViewController:stanm animated:YES];
     
 }

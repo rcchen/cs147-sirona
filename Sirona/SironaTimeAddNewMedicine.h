@@ -15,7 +15,7 @@
     
 }
 
-@property NSMutableArray *medicines;
+//@property NSMutableArray *medicines;
 @property NSMutableArray *medicineSections;
 @property NSMutableArray *textFields;
 @property (nonatomic, strong)SironaAlertItem *item;
