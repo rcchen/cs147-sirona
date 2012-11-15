@@ -109,34 +109,12 @@
     [[self tableView] registerNib:nib forCellReuseIdentifier:@"SironaLibraryCellView"];
 }
 
-/*
-- (id)initWithNibName:(NSString *)nibName bundle:(NSBundle *)bundle
-{
-    
-    // Call the superclass' designated initializer
-    self = [super initWithNibName:nil bundle:nil];
-    
-    // If it exists, then we can customize it
-    if (self) {
-        
-        UINavigationController *n = [self navigationController];
-        [n setTitle:@"My Alerts"];
-        
-        // Get the tab bar item and give it a label
-        UITabBarItem *tbi = [self tabBarItem];
-        [tbi setTitle:@"Library"];
-        
-        // Now give it an image
-        UIImage *i = [UIImage imageNamed:@"96-book.png"];
-        [tbi setImage:i];
-        
+- (id)initWithStyle:(UITableViewStyle)style {
+    // Override initWithStyle: if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
+    style = UITableViewStylePlain;
+    if (self = [super initWithStyle:style]) {
     }
-    
-    [self refreshDisplay];
-    
     return self;
-    
 }
-*/
 
 @end

@@ -1,27 +1,25 @@
 //
-//  SironaTimeViewController.m
+//  SironaAlertsViewController.m
 //  Sirona
 //
-//  Created by Roger Chen on 11/7/12.
+//  Created by Roger Chen on 11/14/12.
 //  Copyright (c) 2012 Roger Chen. All rights reserved.
 //
 
-#import "SironaTimeEditAlertView.h"
-#import "SironaTimeViewController.h"
+#import "SironaAlertsViewController.h"
 #import "SironaTimeCellView.h"
+#import "SironaTimeEditAlertView.h"
 #import "SironaAlertItem.h"
 
-@implementation SironaTimeViewController
+@implementation SironaAlertsViewController
 
+@synthesize alertsTable;
 @synthesize alerts;
 
-- (id)init
+- (id) init
 {
     
     self = [super init];
-    
-    // Call the superclass's designated initializer
-    //self = [super initWithStyle:UITableViewStyleGrouped];
     
     if (self) {
         
@@ -32,17 +30,11 @@
         // Now give it an image
         UIImage *i = [UIImage imageNamed:@"10-medical.png"];
         [tbi setImage:i];
-    
-        // Pull in the alerts from NSUserDefaults
-        alerts = [[NSMutableArray alloc] init];
-        //NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-        //alerts = [prefs objectForKey:@"userAlerts"];
         
         UINavigationItem *n = [self navigationItem];
         [n setTitle:NSLocalizedString(@"Alerts", @"Application title")];
         
-        // Create a new bar button item that will send
-        // addNewItem: to ItemsViewController
+        // Create a new bar button item that will send addNewItem: to ItemsViewController
         UIBarButtonItem *bbi = [[UIBarButtonItem alloc]
                                 initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
                                 target:self
@@ -51,27 +43,101 @@
         // Set this bar button item as the right item in the navigationItem
         [[self navigationItem] setRightBarButtonItem:bbi];
         
+        // Set the button on the left to edit for the navigationItem
         [[self navigationItem] setLeftBarButtonItem:[self editButtonItem]];
         
     }
     return self;
+    
 }
+
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    UINib *nib = [UINib nibWithNibName:@"SironaTimeCellView" bundle:nil];
+    [alertsTable registerNib:nib forCellReuseIdentifier:@"SironaTimeCellView"];
+    
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    NSData *encodedAlertList = [prefs objectForKey:@"alertList"];
+    if (encodedAlertList) {
+        NSMutableArray *prefAlerts = (NSMutableArray *)[NSKeyedUnarchiver unarchiveObjectWithData:encodedAlertList];
+        alerts = prefAlerts;
+    }
+    
+    //alertsTable.dataSource = alerts;
+    
+    //[alertsTable setDataSource:self];
+}
+
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    
+    
+    [[UIApplication sharedApplication] cancelAllLocalNotifications];
+    
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    NSData *encodedAlertList = [prefs objectForKey:@"alertList"];
+    if (encodedAlertList) {
+        NSMutableArray *prefAlerts = (NSMutableArray *)[NSKeyedUnarchiver unarchiveObjectWithData:encodedAlertList];
+        alerts = prefAlerts;
+    }
+    
+    NSLog(@"Alerts: %@", alerts);
+    
+    // Programatically add a tableView to the thing
+    alertsTable = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
+    [self.view addSubview:alertsTable];
+    
+    NSLog(@"Alert count: %u", [alerts count]);
+    
+    for (SironaAlertItem *alertItem in alerts) {
+        [self setAllAlarms:alertItem];
+    }
+    
+    for (UILocalNotification *old in [[UIApplication sharedApplication] scheduledLocalNotifications]) {
+        NSLog(@"Alert for %@ at %@", [old.userInfo objectForKey:@"alertID"], [old fireDate]);
+    }
+    
+    [[self alertsTable] reloadData];
+    
+    if (![alerts count]) {
+        
+        // Handles the overlay
+        UIViewController* c = [[UIViewController alloc] initWithNibName:@"SironaAlertNoneView" bundle:nil];
+        UIView *overlayNone = [c view];
+        overlayNone.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.7];
+        [self.view addSubview:overlayNone];
+        
+    }
+
+}
+
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    // Save encoded data to NSUserDefaults in case there were alerts that were deleted
+    [self saveEncodedData];
+}
+
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 92.0f;
 }
 
-// Returns the count of the number of rows in the table view
+
 - (NSInteger)tableView:(UITableView *)tableView
  numberOfRowsInSection:(NSInteger)section
 {
     return [alerts count];
 }
 
+
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
+    
     SironaTimeCellView *cell = [tableView dequeueReusableCellWithIdentifier:@"SironaTimeCellView"];
     SironaAlertItem *sai = [alerts objectAtIndex:[indexPath row]];
     
@@ -91,6 +157,7 @@
     
 }
 
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
@@ -101,63 +168,38 @@
     
 }
 
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        [alerts removeObjectAtIndex:[indexPath row]];
+        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:YES];
+    }
+    
+}
+
+
 - (IBAction)addNewItem:(id)sender
 {
     
     SironaTimeEditAlertView *stevc = [[SironaTimeEditAlertView alloc] init];
     SironaAlertItem *newItem = [[SironaAlertItem alloc] init];
     [newItem setAlertId];
-    //NSLog(@"The new alert ID is: %@", [newItem getAlertId]);
     [stevc setItem:newItem];
     [stevc setAlertList:alerts];
     [[self navigationController] pushViewController:stevc animated:YES];
-
+    
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    
-    [[UIApplication sharedApplication] cancelAllLocalNotifications];
-    
-    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-    NSData *encodedAlertList = [prefs objectForKey:@"alertList"];
-    if (encodedAlertList) {
-        NSMutableArray *prefAlerts = (NSMutableArray *)[NSKeyedUnarchiver unarchiveObjectWithData:encodedAlertList];
-        alerts = prefAlerts;
-    }
-        
-    NSLog(@"Alert count: %u", [alerts count]);
-    
-    for (SironaAlertItem *alertItem in alerts) {
-        [self setAllAlarms:alertItem];
-    }
-    
-    for (UILocalNotification *old in [[UIApplication sharedApplication] scheduledLocalNotifications]) {
-        NSLog(@"Alert for %@ at %@", [old.userInfo objectForKey:@"alertID"], [old fireDate]);
-    }
-    
-    //[[self tableView] reloadData];
-    
-    if (![alerts count]) {
-
-        NSArray *nibs = [[NSBundle mainBundle] loadNibNamed:@"SironaAlertNoneView" owner:self options:nil];
-        [self.navigationController.view addSubview:[nibs objectAtIndex:0]];
-
-        // Add the SironaAlertNoneView subview here
-    }
-
-}
 
 - (void)setAllAlarms:(SironaAlertItem *)alertItem
 {
- 
     
     // First delete all of the alarms associated with the alertItem
     for (UILocalNotification *old in [[UIApplication sharedApplication] scheduledLocalNotifications]) {
         
         // Cancel anything that matches the alertID
         if ([[old.userInfo objectForKey:@"alertID"] isEqualToString:[alertItem getAlertId]]) {
-            NSLog(@"Removed alert for %@", [alertItem getAlertId]);
             [[UIApplication sharedApplication] cancelLocalNotification:old];
         }
         
@@ -169,31 +211,26 @@
     for (NSString *time in [alertItem getAlertTimes]) {
         
         for (NSString *day in [alertItem getAlertDays]) {
-            
-            //NSLog(@"Count: %u", [[[UIApplication sharedApplication] scheduledLocalNotifications] count]);
-            
+
             int dayNum = [daysOfWeek indexOfObject:day];
-            
-            // Let's bring up the notification
-            UILocalNotification *notif = [[UILocalNotification alloc] init];
-            notif.repeatInterval = NSWeekCalendarUnit;
-            
+
             // Create a date for the notification
             NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
             [dateFormatter setDateFormat:@"HH:mm"];
             NSDate *dateFromString = [[NSDate alloc] init];
             dateFromString = [dateFormatter dateFromString:time];
             dateFromString = [dateFromString dateByAddingTimeInterval:(86400 * ((dayNum+1) % 7))];
-            
-            //NSLog(@"String: %@, date: %@, daynum: %u", time, dateFromString, dayNum);
-            
-            notif.timeZone = [NSTimeZone defaultTimeZone];
-            notif.fireDate = dateFromString;
+                        
             
             NSMutableString *alertBody = [[NSMutableString alloc] init];
             [alertBody appendFormat:@"Time to take your %@", [[alertItem getLibraryItem] getBrand]];
-            notif.alertBody = alertBody;
             
+            // Create and set properties of the UILocalNotification
+            UILocalNotification *notif = [[UILocalNotification alloc] init];
+            notif.repeatInterval = NSWeekCalendarUnit;
+            notif.alertBody = alertBody;
+            notif.timeZone = [NSTimeZone defaultTimeZone];
+            notif.fireDate = dateFromString;
             notif.alertAction = @"View";
             notif.soundName = UILocalNotificationDefaultSoundName;
             notif.applicationIconBadgeNumber += 1;
@@ -206,12 +243,11 @@
             [[UIApplication sharedApplication] scheduleLocalNotification:notif];
             
         }
-
+        
     }
     
 }
 
-// Saves the encoded data into NSUserDefaults
 - (void)saveEncodedData
 {
     
@@ -221,61 +257,4 @@
     
 }
 
-- (void)viewWillDisappear:(BOOL)animated
-{
-    // Save encoded data to NSUserDefaults in case there were alerts that were deleted
-    [self saveEncodedData];
-}
-
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        [alerts removeObjectAtIndex:[indexPath row]];
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:YES];
-    }
-    
-}
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    UINib *nib = [UINib nibWithNibName:@"SironaTimeCellView" bundle:nil];
-    //[[self tableView] registerNib:nib forCellReuseIdentifier:@"SironaTimeCellView"];
-}
-
-
-/*
-- (IBAction)scheduleAlarm:(id)sender
-{
-
-    UILocalNotification *localNotif = [[UILocalNotification alloc] init];
-    if (localNotif == nil)
-        return;
-    
-    // Grab the picker time, floor func to reset seconds to 0
-    NSDate *pickerDate = [self.datePicker date];
-    NSTimeInterval time = floor([pickerDate timeIntervalSinceReferenceDate] / 60.0) * 60.0;
-    pickerDate = [NSDate dateWithTimeIntervalSinceReferenceDate:time];
-    
-    // Set the local notification
-    localNotif.fireDate = pickerDate;
-    localNotif.timeZone = [NSTimeZone defaultTimeZone];
-    
-    NSLog(@"Scheduled for %@", pickerDate);
-    
-    // It's an alert of some sort that we want to schedule
-    localNotif.alertBody = @"Yay an alert!";
-    localNotif.alertAction = @"View";
-    localNotif.applicationIconBadgeNumber = 1;
-    
-    [[UIApplication sharedApplication] scheduleLocalNotification:localNotif];
-    
-}
-*/
-
-- (void)viewDidUnload {
-    noneView = nil;
-    [super viewDidUnload];
-}
 @end

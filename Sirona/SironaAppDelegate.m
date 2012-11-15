@@ -13,6 +13,7 @@
 #import "SironaLibraryViewController.h"
 #import "SironaSettingsViewController.h"
 #import "SironaAlertList.h"
+#import "SironaAlertsViewController.h"
 
 @implementation SironaAppDelegate
 
@@ -27,16 +28,16 @@
     // Override point for customization after application launch.
     
     SironaHomeViewController *shvc = [[SironaHomeViewController alloc] init];
-    SironaTimeViewController *stvc = [[SironaTimeViewController alloc] init];
+    //SironaTimeViewController *stvc = [[SironaTimeViewController alloc] init];
     SironaLibraryViewController *slvc = [[SironaLibraryViewController alloc] init];
     SironaSettingsViewController *ssvc = [[SironaSettingsViewController alloc] init];
     
-    UINavigationController *timeViewController = [[UINavigationController alloc] initWithRootViewController:stvc];
+    //UINavigationController *timeViewController = [[UINavigationController alloc] initWithRootViewController:stvc];
     UINavigationController *libraryViewController = [[UINavigationController alloc] initWithRootViewController:slvc];
     UINavigationController *settingsViewController = [[UINavigationController alloc] initWithRootViewController:ssvc];
     
     UIColor *green = [[UIColor alloc] initWithRed:76/255. green:166/255. blue:93/255. alpha:1];
-    timeViewController.navigationBar.tintColor = green;
+    //timeViewController.navigationBar.tintColor = green;
     libraryViewController.navigationBar.tintColor = green;
     settingsViewController.navigationBar.tintColor = green;
     
@@ -50,8 +51,14 @@
     
     SironaHomeViewControllerB *altHome = [[SironaHomeViewControllerB alloc] init];
     
+    /* TRYING SOMETHING HERE  - MIGRATING UITABLEVIEWCONTROLLER TO VIEWCONTROLLER */
+    SironaAlertsViewController *savc = [[SironaAlertsViewController alloc] init];
+    UINavigationController *alertsViewController = [[UINavigationController alloc] initWithRootViewController:savc];
+    alertsViewController.navigationBar.tintColor = green;
+    /* END TRYING SOMETHING */
+    
     // Create an array of the available view controllers, then set them to the TabBar
-    NSArray *viewControllers = [NSArray arrayWithObjects:shvc, timeViewController, libraryViewController, settingsViewController, nil];
+    NSArray *viewControllers = [NSArray arrayWithObjects:altHome, alertsViewController, libraryViewController, settingsViewController, nil];
     [tabBarController setViewControllers:viewControllers];
     
     [[self window] setRootViewController:tabBarController];
@@ -59,6 +66,7 @@
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     
+    /*
     // uniqueIdentifier deprecated since iOS5
     #define TESTING 1
     #ifdef TESTING
@@ -66,6 +74,7 @@
     #endif
     
     [TestFlight takeOff:@"f9a37f0ed8d5db98483697763b46a443_MTU1MDcwMjAxMi0xMS0xNCAwNDoyNzozNS4wMjEzNzA"];
+    */
     
     application.applicationIconBadgeNumber = 0;
     

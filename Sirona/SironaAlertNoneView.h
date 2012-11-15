@@ -1,5 +1,5 @@
 //
-//  SironaHomeViewControllerB.h
+//  SironaAlertNoneView.h
 //  Sirona
 //
 //  Created by Roger Chen on 11/14/12.
@@ -8,8 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-@interface SironaHomeViewControllerB : UIViewController
-{
-    __weak IBOutlet UILabel *homeLabel;
-}
+@interface SironaAlertNoneView : NSObject
+
 @end

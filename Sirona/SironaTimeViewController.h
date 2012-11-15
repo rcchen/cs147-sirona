@@ -9,9 +9,10 @@
 #import <Foundation/Foundation.h>
 #import "SironaTimeEditAlertView.h"
 
-@interface SironaTimeViewController : UITableViewController
+@interface SironaTimeViewController : UIViewController <UITableViewDelegate, UITableViewDelegate>
 {
     IBOutlet UITableView *alarmsTable;
+    IBOutlet UIView *noneView;
 }
 
 @property NSMutableArray *alerts;
