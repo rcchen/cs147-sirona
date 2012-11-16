@@ -63,6 +63,10 @@
     
 }
 
+- (NSComparisonResult)compare:(SironaAlertItem *)otherObject {
+    return self.getLibraryItem.getBrand.length - otherObject.getLibraryItem.getBrand.length;
+}
+
 - (void)encodeWithCoder:(NSCoder *)encoder {
     //Encode properties, other class variables, etc
     [encoder encodeObject:alertDays forKey:@"alertDays"];

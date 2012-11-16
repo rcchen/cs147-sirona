@@ -10,8 +10,12 @@
 #import "SironaAlertItem.h"
 #import "SironaHomeView.h"
 #import "SironaAlertsViewController.h"
+#import "SironaTimeEditAlertView.h"
 
 @implementation SironaHomeViewController
+
+@synthesize topFive;
+@synthesize alerts;
 
 - (void)updateTime:(NSTimer *)timer {
     
@@ -34,9 +38,20 @@
     [timeLabel setHidden:YES];
     [labelOne setHidden:YES];
     [labelTwo setHidden:YES];
-    [labelThree setHidden:YES];
     [labelFour setHidden:YES];
     [labelFive setHidden:YES];
+    
+    labelOne.adjustsFontSizeToFitWidth = YES;
+    labelOne.minimumFontSize = 0;
+    
+    labelTwo.adjustsFontSizeToFitWidth = YES;
+    labelTwo.minimumFontSize = 0;
+    
+    labelFour.adjustsFontSizeToFitWidth = YES;
+    labelFour.minimumFontSize = 0;
+    
+    labelFive.adjustsFontSizeToFitWidth = YES;
+    labelFive.minimumFontSize = 0;
     
     // instantaneously make the image view small (scaled to 1% of its actual size)
     circleOne.transform = CGAffineTransformMakeScale(0.01, 0.01);
@@ -69,17 +84,8 @@
         // if you want to do something once the animation finishes, put it here
     }];
     
-    // Animate in circle three
-    [UIView animateWithDuration:0.4 delay:0.5 options:UIViewAnimationOptionCurveEaseOut animations:^{
-        // animate it to the identity transform (100% scale)
-        circleThree.transform = CGAffineTransformIdentity;
-    } completion:^(BOOL finished){
-        [labelThree setHidden:NO];
-        // if you want to do something once the animation finishes, put it here
-    }];
-    
     // Animate in circle four
-    [UIView animateWithDuration:0.4 delay:0.7 options:UIViewAnimationOptionCurveEaseOut animations:^{
+    [UIView animateWithDuration:0.4 delay:0.5 options:UIViewAnimationOptionCurveEaseOut animations:^{
         // animate it to the identity transform (100% scale)
         circleFour.transform = CGAffineTransformIdentity;
     } completion:^(BOOL finished){
@@ -88,7 +94,7 @@
     }];
     
     // Animate in circle five
-    [UIView animateWithDuration:0.4 delay:0.9 options:UIViewAnimationOptionCurveEaseOut animations:^{
+    [UIView animateWithDuration:0.4 delay:0.7 options:UIViewAnimationOptionCurveEaseOut animations:^{
         // animate it to the identity transform (100% scale)
         circleFive.transform = CGAffineTransformIdentity;
     } completion:^(BOOL finished){
@@ -96,7 +102,15 @@
         // if you want to do something once the animation finishes, put it here
     }];
     
-    [timeLabel setHidden:NO];
+    // Animate in circle three
+    [UIView animateWithDuration:0.4 delay:0.9 options:UIViewAnimationOptionCurveEaseOut animations:^{
+        // animate it to the identity transform (100% scale)
+        circleThree.transform = CGAffineTransformIdentity;
+    } completion:^(BOOL finished){
+        [timeLabel setHidden:NO];
+        // if you want to do something once the animation finishes, put it here
+    }];
+    
     
     timer = [NSTimer scheduledTimerWithTimeInterval: 1.0 target:self selector:@selector(updateTime:) userInfo:nil repeats: YES];
     
@@ -105,9 +119,19 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
+    
     [self.navigationController setNavigationBarHidden:YES animated:animated];
-    [self findTopFive];
+    
+    topFive = [self findTopFive];
+    NSLog(@"Top five: %@", topFive);
+    
     [self circleAppear];
+    
+    labelTwo.text = [[[topFive objectAtIndex:0] getLibraryItem] getBrand];
+    labelFour.text = [[[topFive objectAtIndex:1] getLibraryItem] getBrand];
+    labelOne.text = [[[topFive objectAtIndex:3] getLibraryItem] getBrand];
+    labelFive.text = [[[topFive objectAtIndex:4] getLibraryItem] getBrand];
+    
 }
 
 
@@ -166,23 +190,28 @@
 
 - (IBAction)pressLabel:(id)sender
 {
+    
     NSArray *notifs = [[UIApplication sharedApplication] scheduledLocalNotifications];
     for (UILocalNotification* notif in notifs)
         NSLog(@"%@", [notif fireDate]);
     
     NSLog(@"This works");
     
-    SironaAlertsViewController *savc = [[SironaAlertsViewController alloc] init];
+    SironaTimeEditAlertView *steav = [[SironaTimeEditAlertView alloc] init];
+    
+    [steav setItem:[topFive objectAtIndex:3]];
+    
+    //SironaAlertsViewController *savc = [[SironaAlertsViewController alloc] init];
     //[[self navigationController] pushViewController:timeViewController animated:YES];
     
-    [[self navigationController] pushViewController:savc animated:YES];
-    
+    [[self navigationController] pushViewController:steav animated:YES];
     
 }
 
 
 - (void)cleanupObjects
 {
+    
     // instantaneously make the image view small (scaled to 1% of its actual size)
     [circleOne setHidden:YES];
     [circleTwo setHidden:YES];
@@ -190,6 +219,7 @@
     [circleFour setHidden:YES];
     [circleFive setHidden:YES];
     [timeLabel setHidden:YES];
+    
 }
 
 
@@ -202,7 +232,7 @@
 - (NSMutableArray *)findTopFive
 {
     
-    NSMutableArray *topFive = [[NSMutableArray alloc] init];
+    NSMutableArray *bigFive = [[NSMutableArray alloc] init];
     NSMutableArray *userAlerts = [[NSMutableArray alloc] init];
     
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
@@ -217,16 +247,31 @@
     for (SironaAlertItem *alert in userAlerts)
     {
         
-        for (NSString *day in [alert getAlertDays]) {
-            for (NSString *time in [alert getAlertTimes]) {
-                NSLog(@"Day: %@\tTime: %@", day, time);
-            }
+        if ([bigFive count] == 5) {
+            break;
         }
+        
+        [bigFive addObject:alert];
+
+    }
+
+    while ([bigFive count] < 5) {
+        
+        SironaAlertItem *item = [[SironaAlertItem alloc] init];
+        SironaLibraryItem *libItem = [[SironaLibraryItem alloc] initWithMDataBrand:@":)" mdataCategory:@"" mdataId:@"" mdataName:@"" mdataPrecautions:@"" mdataSideEffects:@"" mdataNotes:@""];
+        [item setLibraryItem:libItem];
+        [bigFive addObject:item];
         
     }
     
-    return topFive;
+    [bigFive sortUsingSelector:@selector(compare:)];
+    
+    return bigFive;
     
 }
+
+
+
+
 
 @end

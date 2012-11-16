@@ -32,4 +32,7 @@
 
 - (IBAction)pressLabel:(id)sender;
 
+@property NSMutableArray *topFive;
+@property NSMutableArray *alerts;
+
 @end
