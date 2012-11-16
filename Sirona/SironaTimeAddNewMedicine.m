@@ -17,6 +17,7 @@
 @synthesize medicineSections;
 @synthesize textFields;
 @synthesize item;
+@synthesize alertList;
 
 - (IBAction)saveMedicine:(id)sender
 {
@@ -50,10 +51,38 @@
         customMeds = [[NSMutableArray alloc] init];
     }
     [customMeds addObject:sli];
+    
     encodedCustomMedList = [NSKeyedArchiver archivedDataWithRootObject:customMeds];
     [prefs setObject:encodedCustomMedList forKey:@"customMedList"];
     
-    [self.navigationController popToViewController:[[self.navigationController viewControllers] objectAtIndex:1] animated:YES];
+    // Set the alerts from NSUserDefaults
+    NSData *encodedAlertList = [prefs objectForKey:@"alertList"];
+    if (encodedAlertList) {
+        NSMutableArray *prefAlerts = (NSMutableArray *)[NSKeyedUnarchiver unarchiveObjectWithData:encodedAlertList];
+        alertList = prefAlerts;
+    }
+    
+    // Remove the object if it exists already
+    for (SironaAlertItem *sai in alertList) {
+        NSLog(@"AlertID: %@, Item: %@", sai.getAlertId, item.getAlertId);
+        if ([[sai getAlertId] isEqualToString:[item getAlertId]]) {
+            NSLog(@"Removing duplicate object");
+            [alertList removeObject:sai];
+            break;
+        }
+    }
+    
+    // Add the item in
+    [alertList addObject:item];
+    
+    NSLog(@"AlertID: %@", [item getAlertId]);
+    
+    // Now save it to NSUserDefaults
+    encodedAlertList = [NSKeyedArchiver archivedDataWithRootObject:alertList];
+    [prefs setObject:encodedAlertList forKey:@"alertList"];
+    
+    int count = [self.navigationController.viewControllers count];
+    [self.navigationController popToViewController:[[self.navigationController viewControllers] objectAtIndex:count-3] animated:YES];    
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -72,7 +101,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CELL_ID];
     if ([indexPath section] == 0) { // Medicine Info section
         UITextField *inputField;
-        if (cell == nil ) {
+        if (cell == nil) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CELL_ID];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             inputField = [[UITextField alloc] initWithFrame:CGRectMake(130, 12, 180, 30)];

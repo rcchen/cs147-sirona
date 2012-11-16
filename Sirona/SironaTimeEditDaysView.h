@@ -13,8 +13,10 @@
 
 @property NSMutableArray *possibleDays;
 @property SironaAlertItem *item;
+@property NSMutableArray *alertList;
 
 - (IBAction)finishEditingDays:(id)sender;
 - (void)setItem:(SironaAlertItem *)item;
+- (void)setAlertList:(NSMutableArray *)alertList;
 
 @end

@@ -19,40 +19,6 @@
 @synthesize alertList;
 @synthesize alertSettings;
 
-- (IBAction)saveAlert:(id)sender{
-    
-    // Set the alerts from NSUserDefaults
-    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-    NSData *encodedAlertList = [prefs objectForKey:@"alertList"];
-    if (encodedAlertList) {
-        NSMutableArray *prefAlerts = (NSMutableArray *)[NSKeyedUnarchiver unarchiveObjectWithData:encodedAlertList];
-        alertList = prefAlerts;
-    }
-    
-    // Remove the object if it exists already
-    for (SironaAlertItem *sai in alertList) {
-        NSLog(@"AlertID: %@, Item: %@", sai.getAlertId, item.getAlertId);
-        if ([[sai getAlertId] isEqualToString:[item getAlertId]]) {
-            NSLog(@"Removing duplicate object");
-            [alertList removeObject:sai];
-            break;
-        }
-    }
-    
-    // Add the item in
-    [alertList addObject:item];
-    
-    NSLog(@"AlertID: %@", [item getAlertId]);
-    
-    // Now save it to NSUserDefaults
-    encodedAlertList = [NSKeyedArchiver archivedDataWithRootObject:alertList];
-    [prefs setObject:encodedAlertList forKey:@"alertList"];
-    
-    // Pop back to the previous view controller
-    [[self navigationController] popViewControllerAnimated:YES];
-    
-}
-
 // Returns the count of the number of rows in the table view
 - (NSInteger)tableView:(UITableView *)tableView
  numberOfRowsInSection:(NSInteger)section
@@ -175,6 +141,7 @@
         // Set the current days to the days that are currently selected
         // Actually just make sure the entire SironaAlertItem pointer gets copied over
         [stedv setItem:item];
+        [stedv setAlertList:alertList];
         [[self navigationController] pushViewController:stedv animated:YES];
     }
     
@@ -182,6 +149,7 @@
     else if (selectedItem == @"Times") {
         SironaTimeEditTimesView *stetv = [[SironaTimeEditTimesView alloc] init];
         [stetv setItem:item];
+        [stetv setAlertList:alertList];
         [[self navigationController] pushViewController:stetv animated:YES];
     }
     
@@ -189,6 +157,7 @@
     else if (selectedItem == @"Medication") {
         SironaTimeSelectMedicine *stsm = [[SironaTimeSelectMedicine alloc] init];
         [stsm setItem:item];
+        [stsm setAlertList:alertList];
         [[self navigationController] pushViewController:stsm animated:YES];
     }
     
@@ -214,18 +183,6 @@
 {
         
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    
-    if (self) {
-        
-        // Create a new bar button item that will send
-        // addNewItem: to ItemsViewController
-        UIBarButtonItem *bbi = [[UIBarButtonItem alloc]
-                                initWithBarButtonSystemItem:UIBarButtonSystemItemDone
-                                target:self
-                                action:@selector(saveAlert:)];
-        [[self navigationItem] setRightBarButtonItem:bbi];
-        
-    }
     
     // Initialize the objects that show up in the TableView
     alertSettings = [[NSMutableArray alloc] initWithObjects:@"Medication", @"Repeat", @"Times", nil];

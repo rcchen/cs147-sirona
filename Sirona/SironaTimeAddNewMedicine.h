@@ -19,6 +19,7 @@
 @property NSMutableArray *medicineSections;
 @property NSMutableArray *textFields;
 @property (nonatomic, strong)SironaAlertItem *item;
+@property NSMutableArray *alertList;
 
 // Default setter
 - (void)setMedicines:(NSMutableArray *)medicines;

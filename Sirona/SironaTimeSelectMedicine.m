@@ -18,6 +18,7 @@
 @synthesize medicines;
 @synthesize item;
 @synthesize previous_cell;
+@synthesize alertList;
 
 - (IBAction)addNewItem:(id)sender
 {
@@ -98,6 +99,33 @@
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
         [item setLibraryItem:[medicines objectAtIndex:[indexPath row]]];
         
+        // Set the alerts from NSUserDefaults
+        NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+        NSData *encodedAlertList = [prefs objectForKey:@"alertList"];
+        if (encodedAlertList) {
+            NSMutableArray *prefAlerts = (NSMutableArray *)[NSKeyedUnarchiver unarchiveObjectWithData:encodedAlertList];
+            alertList = prefAlerts;
+        }
+        
+        // Remove the object if it exists already
+        for (SironaAlertItem *sai in alertList) {
+            NSLog(@"AlertID: %@, Item: %@", sai.getAlertId, item.getAlertId);
+            if ([[sai getAlertId] isEqualToString:[item getAlertId]]) {
+                NSLog(@"Removing duplicate object");
+                [alertList removeObject:sai];
+                break;
+            }
+        }
+        
+        // Add the item in
+        [alertList addObject:item];
+        
+        NSLog(@"AlertID: %@", [item getAlertId]);
+        
+        // Now save it to NSUserDefaults
+        encodedAlertList = [NSKeyedArchiver archivedDataWithRootObject:alertList];
+        [prefs setObject:encodedAlertList forKey:@"alertList"];
+        
         [[self navigationController] popViewControllerAnimated:YES];
 
     }
@@ -161,6 +189,7 @@
     
     SironaTimeAddNewMedicine *stanm = [[SironaTimeAddNewMedicine alloc] init];
     [stanm setItem:item];
+    [stanm setAlertList:alertList];
     [[self navigationController] pushViewController:stanm animated:YES];
     
 }
