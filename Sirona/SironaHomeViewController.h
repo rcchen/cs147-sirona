@@ -7,6 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "UIView+Animation.h"
+#import <QuartzCore/QuartzCore.h>
+
 
 @interface SironaHomeViewController : UIViewController
 {
@@ -34,5 +37,6 @@
 
 @property NSMutableArray *topFive;
 @property NSMutableArray *alerts;
+@property NSTimer *bobbingTimer;
 
 @end

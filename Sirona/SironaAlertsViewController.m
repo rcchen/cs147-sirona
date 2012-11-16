@@ -215,13 +215,16 @@
 
             int dayNum = [daysOfWeek indexOfObject:day];
 
+            NSLog(@"Time: %@", time);
+            
             // Create a date for the notification
             NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-            [dateFormatter setDateFormat:@"HH:mm"];
+            [dateFormatter setDateFormat:@"h:mm a"];
             NSDate *dateFromString = [[NSDate alloc] init];
             dateFromString = [dateFormatter dateFromString:time];
             dateFromString = [dateFromString dateByAddingTimeInterval:(86400 * (dayNum+3))];
                         
+            NSLog(@"Date: %@", dateFromString);
             
             NSMutableString *alertBody = [[NSMutableString alloc] init];
             [alertBody appendFormat:@"Time to take your %@", [[alertItem getLibraryItem] getBrand]];

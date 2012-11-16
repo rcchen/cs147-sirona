@@ -12,10 +12,15 @@
 #import "SironaAlertsViewController.h"
 #import "SironaTimeEditAlertView.h"
 
+#import <QuartzCore/QuartzCore.h>
+#import <UIKit/UIView.h>
+
+
 @implementation SironaHomeViewController
 
 @synthesize topFive;
 @synthesize alerts;
+@synthesize bobbingTimer;
 
 - (void)updateTime:(NSTimer *)timer {
     
@@ -111,9 +116,28 @@
         // if you want to do something once the animation finishes, put it here
     }];
     
-    
     timer = [NSTimer scheduledTimerWithTimeInterval: 1.0 target:self selector:@selector(updateTime:) userInfo:nil repeats: YES];
     
+}
+
+
+- (void)animateUp
+{
+    [circleOne moveTo:CGPointMake(circleOne.center.x - circleOne.frame.size.width/2, circleOne.center.y - circleOne.frame.size.height/2 + 10) duration:2.0 option:0];
+    [labelOne moveTo:CGPointMake(labelOne.center.x - labelOne.frame.size.width/2, labelOne.center.y - labelOne.frame.size.height/2 + 10) duration:2.0 option:0];
+
+}
+
+- (void)animateDown
+{
+    [circleOne moveTo:CGPointMake(circleOne.center.x - circleOne.frame.size.width/2, circleOne.center.y - circleOne.frame.size.height/2 - 10) duration:2.0 option:0];
+    [labelOne moveTo:CGPointMake(labelOne.center.x - labelOne.frame.size.width/2, labelOne.center.y - labelOne.frame.size.height/2 - 10) duration:2.0 option:0];
+}
+
+- (void)animateUpAndDown
+{
+    [NSTimer scheduledTimerWithTimeInterval:0 target:self selector:@selector(animateUp) userInfo:nil repeats:NO];
+    [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(animateDown) userInfo:nil repeats:NO];
 }
 
 
@@ -132,6 +156,9 @@
     labelOne.text = [[[topFive objectAtIndex:3] getLibraryItem] getBrand];
     labelFive.text = [[[topFive objectAtIndex:4] getLibraryItem] getBrand];
     
+    //[self animateCircles];
+    bobbingTimer = [NSTimer scheduledTimerWithTimeInterval:4.2 target:self selector:@selector(animateUpAndDown) userInfo:nil repeats:YES];
+    
 }
 
 
@@ -139,6 +166,7 @@
 {
     [super viewWillDisappear:animated];
     [self.navigationController setNavigationBarHidden:NO animated:animated];
+    [bobbingTimer invalidate];
 }
 
 
