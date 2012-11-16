@@ -16,11 +16,13 @@
 }
 
 // Some properties that we want to access
-@property NSMutableArray* alertTimes;
+@property NSMutableArray *alertTimes;
+@property SironaAlertItem *item;
+@property NSMutableArray *alertList;
 
 // Setters
 - (void)setAlertTimes:(NSMutableArray *)alertTimes;
-
+- (void)setAlertList:(NSMutableArray *)alertList;
 // Button responses
 - (IBAction)addTime:(id)sender;
 

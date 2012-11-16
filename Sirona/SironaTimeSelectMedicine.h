@@ -20,9 +20,11 @@
 @property NSMutableArray *medicines;
 @property SironaAlertItem *item;
 @property UITableViewCell *previous_cell;
+@property NSMutableArray *alertList;
 
 - (void)setItem:(SironaAlertItem *)item;
 - (void)refreshDisplay;
 - (IBAction)addNewItem:(id)sender;
+- (void)setAlertList:(NSMutableArray *)alertList;
 
 @end

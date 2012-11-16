@@ -12,11 +12,14 @@
 @implementation SironaTimeEditTimesView
 
 @synthesize item;
+@synthesize alertList;
 
 - (IBAction)addTime:(id)sender
 {
     SironaTimeAddTimeView *statv = [[SironaTimeAddTimeView alloc] init];
     [statv setAlertTimes:[item getAlertTimes]];
+    [statv setAlertList:alertList];
+    [statv setItem:item];
     [[self navigationController] pushViewController:statv animated:YES];
 }
 
@@ -51,6 +54,34 @@
 - (void)removeTime:(NSString *)time
 {
     [[item getAlertTimes] removeObject:time];
+    
+    // Set the alerts from NSUserDefaults
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    NSData *encodedAlertList = [prefs objectForKey:@"alertList"];
+    if (encodedAlertList) {
+        NSMutableArray *prefAlerts = (NSMutableArray *)[NSKeyedUnarchiver unarchiveObjectWithData:encodedAlertList];
+        alertList = prefAlerts;
+    }
+    
+    // Remove the object if it exists already
+    for (SironaAlertItem *sai in alertList) {
+        NSLog(@"AlertID: %@, Item: %@", sai.getAlertId, item.getAlertId);
+        if ([[sai getAlertId] isEqualToString:[item getAlertId]]) {
+            NSLog(@"Removing duplicate object");
+            [alertList removeObject:sai];
+            break;
+        }
+    }
+    
+    // Add the item in
+    [alertList addObject:item];
+    
+    NSLog(@"AlertID: %@", [item getAlertId]);
+    
+    // Now save it to NSUserDefaults
+    encodedAlertList = [NSKeyedArchiver archivedDataWithRootObject:alertList];
+    [prefs setObject:encodedAlertList forKey:@"alertList"];
+    
     [self.tableView reloadData];
     
 }

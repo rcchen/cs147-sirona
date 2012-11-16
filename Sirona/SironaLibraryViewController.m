@@ -111,6 +111,11 @@
     [self refreshDisplay];
 }
 
+/*- (void)viewWillAppear:(BOOL)animated
+{
+    [self refreshDisplay];
+}*/
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
