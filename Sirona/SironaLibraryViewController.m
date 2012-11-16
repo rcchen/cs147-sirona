@@ -133,10 +133,10 @@
     [self refreshDisplay];
 }
 
-/*- (void)viewWillAppear:(BOOL)animated
-{
-    [self refreshDisplay];
-}*/
+// Makes the table rows taller
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 60;
+}
 
 - (void)viewDidLoad
 {

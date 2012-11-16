@@ -184,6 +184,11 @@
     [[self tableView] registerNib:nib forCellReuseIdentifier:@"SironaTimeSelectMedicineCellView"];
 }
 
+// Makes the table rows taller
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 60;
+}
+
 - (IBAction)setMedicine:(id)sender
 {
     
