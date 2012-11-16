@@ -20,6 +20,8 @@
     IBOutlet UIImageView *circleThree;
     IBOutlet UIImageView *circleFour;
     IBOutlet UIImageView *circleFive;
+    IBOutlet UIImageView *jellyfish;
+    IBOutlet UIImageView *jellyfish2;
     
     IBOutlet UILabel *labelOne;
     IBOutlet UILabel *labelTwo;

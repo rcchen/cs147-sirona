@@ -123,15 +123,14 @@
 
 - (void)animateUp
 {
-    [circleOne moveTo:CGPointMake(circleOne.center.x - circleOne.frame.size.width/2, circleOne.center.y - circleOne.frame.size.height/2 + 10) duration:2.0 option:0];
-    [labelOne moveTo:CGPointMake(labelOne.center.x - labelOne.frame.size.width/2, labelOne.center.y - labelOne.frame.size.height/2 + 10) duration:2.0 option:0];
-
+    [jellyfish moveTo:CGPointMake(jellyfish.center.x - jellyfish.frame.size.width/2, jellyfish.center.y - jellyfish.frame.size.height/2 + 10) duration:2.0 option:0];
+    [jellyfish2 moveTo:CGPointMake(jellyfish2.center.x - jellyfish2.frame.size.width/2, jellyfish2.center.y - jellyfish2.frame.size.height/2 - 10) duration:2.0 option:0];
 }
 
 - (void)animateDown
 {
-    [circleOne moveTo:CGPointMake(circleOne.center.x - circleOne.frame.size.width/2, circleOne.center.y - circleOne.frame.size.height/2 - 10) duration:2.0 option:0];
-    [labelOne moveTo:CGPointMake(labelOne.center.x - labelOne.frame.size.width/2, labelOne.center.y - labelOne.frame.size.height/2 - 10) duration:2.0 option:0];
+    [jellyfish moveTo:CGPointMake(jellyfish.center.x - jellyfish.frame.size.width/2, jellyfish.center.y - jellyfish.frame.size.height/2 - 10) duration:2.0 option:0];
+    [jellyfish2 moveTo:CGPointMake(jellyfish2.center.x - jellyfish2.frame.size.width/2, jellyfish2.center.y - jellyfish2.frame.size.height/2 + 10) duration:2.0 option:0];
 }
 
 - (void)animateUpAndDown

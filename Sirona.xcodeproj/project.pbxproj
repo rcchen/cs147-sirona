@@ -93,6 +93,7 @@
 		33DD213B164C637800B4E5F7 /* 96-book@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 33DD2139164C637800B4E5F7 /* 96-book@2x.png */; };
 		33DD213E164C638C00B4E5F7 /* 78-stopwatch.png in Resources */ = {isa = PBXBuildFile; fileRef = 33DD213C164C638C00B4E5F7 /* 78-stopwatch.png */; };
 		33DD213F164C638C00B4E5F7 /* 78-stopwatch@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 33DD213D164C638C00B4E5F7 /* 78-stopwatch@2x.png */; };
+		33F3BF7E1656B0CC008F80D7 /* jellyfish.png in Resources */ = {isa = PBXBuildFile; fileRef = 33F3BF7D1656B0CC008F80D7 /* jellyfish.png */; };
 		7130FF121651E616003F2EB4 /* SironaTimeSelectMedicineCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7130FF111651E616003F2EB4 /* SironaTimeSelectMedicineCellView.xib */; };
 		7130FF151651E74A003F2EB4 /* SironaTimeSelectMedicineCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7130FF141651E749003F2EB4 /* SironaTimeSelectMedicineCellView.m */; };
 		7130FF1C165213B0003F2EB4 /* SironaTimeAddNewMedicine.m in Sources */ = {isa = PBXBuildFile; fileRef = 7130FF1B165213B0003F2EB4 /* SironaTimeAddNewMedicine.m */; };
@@ -219,6 +220,7 @@
 		33DD2139164C637800B4E5F7 /* 96-book@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "96-book@2x.png"; sourceTree = "<group>"; };
 		33DD213C164C638C00B4E5F7 /* 78-stopwatch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "78-stopwatch.png"; sourceTree = "<group>"; };
 		33DD213D164C638C00B4E5F7 /* 78-stopwatch@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "78-stopwatch@2x.png"; sourceTree = "<group>"; };
+		33F3BF7D1656B0CC008F80D7 /* jellyfish.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jellyfish.png; sourceTree = "<group>"; };
 		7130FF111651E616003F2EB4 /* SironaTimeSelectMedicineCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SironaTimeSelectMedicineCellView.xib; sourceTree = "<group>"; };
 		7130FF131651E749003F2EB4 /* SironaTimeSelectMedicineCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SironaTimeSelectMedicineCellView.h; sourceTree = "<group>"; };
 		7130FF141651E749003F2EB4 /* SironaTimeSelectMedicineCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SironaTimeSelectMedicineCellView.m; sourceTree = "<group>"; };
@@ -255,6 +257,7 @@
 		3312AEB816547A8100AFA0A8 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				33F3BF7D1656B0CC008F80D7 /* jellyfish.png */,
 				33704AA31655B1160020EC65 /* timepicker-back.png */,
 				33704AA01655ACF50020EC65 /* water.png */,
 				3312AEB916547AA600AFA0A8 /* up-arrow.png */,
@@ -644,6 +647,7 @@
 				337EFFAA1655D7610054A006 /* circle-pondwater.png in Resources */,
 				337EFFB0165613070054A006 /* Default.png in Resources */,
 				337EFFB2165613140054A006 /* Default@2x.png in Resources */,
+				33F3BF7E1656B0CC008F80D7 /* jellyfish.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

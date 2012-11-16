@@ -135,6 +135,8 @@
 - (void)refreshDisplay
 {
     
+    [medicines removeAllObjects];
+    
     // Get the data from the endpoint
     NSURL *url = [NSURL URLWithString:@"http://cs147.adamantinelabs.com/get-medications.php"];
     NSData *jsonData = [NSData dataWithContentsOfURL:url];

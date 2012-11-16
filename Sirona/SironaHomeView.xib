@@ -3,12 +3,12 @@
 	<data>
 		<int key="IBDocument.SystemTarget">1536</int>
 		<string key="IBDocument.SystemVersion">11G63</string>
-		<string key="IBDocument.InterfaceBuilderVersion">2840</string>
+		<string key="IBDocument.InterfaceBuilderVersion">2844</string>
 		<string key="IBDocument.AppKitVersion">1138.51</string>
 		<string key="IBDocument.HIToolboxVersion">569.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-			<string key="NS.object.0">1926</string>
+			<string key="NS.object.0">1930</string>
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
 			<string>IBProxyObject</string>
@@ -72,10 +72,10 @@
 					<object class="IBUIImageView" id="570248674">
 						<reference key="NSNextResponder" ref="119505424"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{8, 70}, {104, 100}}</string>
+						<string key="NSFrame">{{8, 60}, {104, 100}}</string>
 						<reference key="NSSuperview" ref="119505424"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="540354335"/>
+						<reference key="NSNextKeyView" ref="589489596"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<reference key="IBUIGestureRecognizers" ref="0"/>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -125,7 +125,7 @@
 						<string key="NSFrame">{{95, 212}, {137, 19}}</string>
 						<reference key="NSSuperview" ref="119505424"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="735968128"/>
+						<reference key="NSNextKeyView" ref="145300324"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -160,7 +160,7 @@
 						<string key="NSFrame">{{202, 80}, {86, 21}}</string>
 						<reference key="NSSuperview" ref="119505424"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="589489596"/>
+						<reference key="NSNextKeyView" ref="831391253"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -183,10 +183,10 @@
 					<object class="IBUILabel" id="589489596">
 						<reference key="NSNextResponder" ref="119505424"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{28, 109}, {65, 21}}</string>
+						<string key="NSFrame">{{28, 99}, {65, 21}}</string>
 						<reference key="NSSuperview" ref="119505424"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="447494876"/>
+						<reference key="NSNextKeyView" ref="540354335"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -209,6 +209,7 @@
 						<string key="NSFrame">{{223, 307}, {67, 21}}</string>
 						<reference key="NSSuperview" ref="119505424"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -262,6 +263,33 @@
 							<string key="NSClassName">NSImage</string>
 							<string key="NSResourceName">water.png</string>
 						</object>
+					</object>
+					<object class="IBUIImageView" id="831391253">
+						<reference key="NSNextResponder" ref="119505424"/>
+						<int key="NSvFlags">292</int>
+						<string key="NSFrame">{{8, 168}, {71, 85}}</string>
+						<reference key="NSSuperview" ref="119505424"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="447494876"/>
+						<string key="NSReuseIdentifierKey">_NS:9</string>
+						<bool key="IBUIUserInteractionEnabled">NO</bool>
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						<object class="NSCustomResource" key="IBUIImage" id="853710498">
+							<string key="NSClassName">NSImage</string>
+							<string key="NSResourceName">jellyfish.png</string>
+						</object>
+					</object>
+					<object class="IBUIImageView" id="145300324">
+						<reference key="NSNextResponder" ref="119505424"/>
+						<int key="NSvFlags">292</int>
+						<string key="NSFrame">{{259, 173}, {41, 58}}</string>
+						<reference key="NSSuperview" ref="119505424"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="735968128"/>
+						<string key="NSReuseIdentifierKey">_NS:9</string>
+						<bool key="IBUIUserInteractionEnabled">NO</bool>
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						<reference key="IBUIImage" ref="853710498"/>
 					</object>
 				</array>
 				<string key="NSFrameSize">{320, 431}</string>
@@ -342,14 +370,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">circleFive</string>
-						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="735968128"/>
-					</object>
-					<int key="connectionID">244</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">timeLabel</string>
 						<reference key="source" ref="841351856"/>
 						<reference key="destination" ref="445805704"/>
@@ -389,6 +409,30 @@
 					<int key="connectionID">487</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">circleFive</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="735968128"/>
+					</object>
+					<int key="connectionID">542</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">jellyfish</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="831391253"/>
+					</object>
+					<int key="connectionID">545</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">jellyfish2</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="145300324"/>
+					</object>
+					<int key="connectionID">546</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletCollectionConnection" key="connection">
 						<string key="label">gestureRecognizers</string>
 						<reference key="source" ref="994453046"/>
@@ -426,7 +470,7 @@
 						<string key="cachedDesigntimeCollectionClassName">NSArray</string>
 						<bool key="addsContentToExistingCollection">YES</bool>
 					</object>
-					<int key="connectionID">525</int>
+					<int key="connectionID">540</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
@@ -517,16 +561,18 @@
 						<reference key="object" ref="119505424"/>
 						<array class="NSMutableArray" key="children">
 							<reference ref="363901457"/>
-							<reference ref="445805704"/>
 							<reference ref="994453046"/>
 							<reference ref="540354335"/>
-							<reference ref="570248674"/>
-							<reference ref="589489596"/>
-							<reference ref="447494876"/>
 							<reference ref="347427218"/>
 							<reference ref="515495671"/>
 							<reference ref="735968128"/>
 							<reference ref="837003139"/>
+							<reference ref="831391253"/>
+							<reference ref="570248674"/>
+							<reference ref="589489596"/>
+							<reference ref="447494876"/>
+							<reference ref="445805704"/>
+							<reference ref="145300324"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -615,6 +661,16 @@
 						<reference key="object" ref="405631624"/>
 						<reference key="parent" ref="0"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">543</int>
+						<reference key="object" ref="831391253"/>
+						<reference key="parent" ref="119505424"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">544</int>
+						<reference key="object" ref="145300324"/>
+						<reference key="parent" ref="119505424"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -635,6 +691,8 @@
 				<string key="520.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="522.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="524.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="543.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="544.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="69.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="78.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="96.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -643,7 +701,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">539</int>
+			<int key="maxID">546</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -670,6 +728,8 @@
 						<string key="circleOne">UIImageView</string>
 						<string key="circleThree">UIImageView</string>
 						<string key="circleTwo">UIImageView</string>
+						<string key="jellyfish">UIImageView</string>
+						<string key="jellyfish2">UIImageView</string>
 						<string key="labelFive">UILabel</string>
 						<string key="labelFour">UILabel</string>
 						<string key="labelOne">UILabel</string>
@@ -696,6 +756,14 @@
 						</object>
 						<object class="IBToOneOutletInfo" key="circleTwo">
 							<string key="name">circleTwo</string>
+							<string key="candidateClassName">UIImageView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="jellyfish">
+							<string key="name">jellyfish</string>
+							<string key="candidateClassName">UIImageView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="jellyfish2">
+							<string key="name">jellyfish2</string>
 							<string key="candidateClassName">UIImageView</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="labelFive">
@@ -741,8 +809,9 @@
 			<string key="circle-green.png">{100, 100}</string>
 			<string key="circle-orange-highlighted.png">{100, 100}</string>
 			<string key="circle-pondwater.png">{600, 600}</string>
+			<string key="jellyfish.png">{698, 816}</string>
 			<string key="water.png">{320, 80}</string>
 		</dictionary>
-		<string key="IBCocoaTouchPluginVersion">1926</string>
+		<string key="IBCocoaTouchPluginVersion">1930</string>
 	</data>
 </archive>
