@@ -31,14 +31,16 @@
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [[UITableViewCell alloc] init];
-    NSString *time = [[item getAlertTimes] objectAtIndex:[indexPath row]];
+    NSString *time = [[item getAlertTimes] objectAtIndex:[indexPath row]];    
     cell.textLabel.text = time;
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+// Prevents times from being tapped
+- (NSIndexPath *)tableView:(UITableView *)tableView
+  willSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Push to the time edit view controller with the selected time as the time picker
+    return nil;
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {

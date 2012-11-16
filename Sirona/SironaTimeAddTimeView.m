@@ -17,7 +17,7 @@
     
     // Add the time to the array as a string in 24 hr format
     NSDateFormatter *timeFormat = [[NSDateFormatter alloc] init];
-    [timeFormat setDateFormat:@"HH:mm"];
+    [timeFormat setDateFormat:@"h:mm a"];
     NSString *dateString = [timeFormat stringFromDate:[datePicker date]];
     [alertTimes addObject:dateString];
     
@@ -30,6 +30,7 @@
 {
     
 }
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
