@@ -220,7 +220,7 @@
             [dateFormatter setDateFormat:@"HH:mm"];
             NSDate *dateFromString = [[NSDate alloc] init];
             dateFromString = [dateFormatter dateFromString:time];
-            dateFromString = [dateFromString dateByAddingTimeInterval:(86400 * ((dayNum+1) % 7))];
+            dateFromString = [dateFromString dateByAddingTimeInterval:(86400 * (dayNum+3))];
                         
             
             NSMutableString *alertBody = [[NSMutableString alloc] init];
