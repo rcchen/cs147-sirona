@@ -34,6 +34,7 @@
 
 - (NSArray *)allItems
 {
+    [allItems sortUsingSelector:@selector(compare:)];
     return allItems;
 }
 

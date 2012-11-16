@@ -75,7 +75,6 @@
     [[slcv cellSecondary] setText:[sli getCategory]];
     slcv.accessoryType = UITableViewCellAccessoryNone;
 
-
     //UITableViewCell *cell = [[self tableView] cellForRowAtIndexPath:indexPath];
 
     // If the medication was previously selected, set the checkmark
@@ -83,9 +82,6 @@
         slcv.accessoryType = UITableViewCellAccessoryCheckmark;
         NSLog(@"%@", [item getLibraryItem]);
     }
-    
-    /*if ([previous_cell isEqual: slcv])
-        slcv.accessoryType = UITableViewCellAccessoryCheckmark;*/
     
     return slcv;
 }
@@ -169,6 +165,7 @@
             [medicines addObject:sli];
         }
     }
+    [medicines sortUsingSelector:@selector(compare:)];
     
 }
 

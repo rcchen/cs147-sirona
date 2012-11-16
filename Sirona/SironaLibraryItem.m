@@ -55,6 +55,9 @@
     return mdataSideEffects;
 }
 
+- (NSComparisonResult)compare:(SironaLibraryItem *)otherObject {
+    return [self.getBrand localizedCaseInsensitiveCompare:otherObject.getBrand];
+}
 
 - (void)encodeWithCoder:(NSCoder *)encoder {
     //Encode properties, other class variables, etc
