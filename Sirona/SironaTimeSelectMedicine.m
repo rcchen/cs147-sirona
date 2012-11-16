@@ -73,7 +73,8 @@
     SironaTimeSelectMedicineCellView *slcv = [tableView dequeueReusableCellWithIdentifier:@"SironaTimeSelectMedicineCellView"];
     [[slcv cellMain] setText:[sli getBrand]];
     [[slcv cellSecondary] setText:[sli getCategory]];
-    
+    slcv.accessoryType = UITableViewCellAccessoryNone;
+
 
     //UITableViewCell *cell = [[self tableView] cellForRowAtIndexPath:indexPath];
 
