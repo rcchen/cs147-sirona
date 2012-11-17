@@ -29,6 +29,9 @@
 		33562265164DA91800A30BE5 /* circle-green-highlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 33562262164DA91800A30BE5 /* circle-green-highlighted.png */; };
 		33562266164DA91800A30BE5 /* circle-orange-highlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 33562263164DA91800A30BE5 /* circle-orange-highlighted.png */; };
 		3356226A164DADD700A30BE5 /* rio1.png in Resources */ = {isa = PBXBuildFile; fileRef = 33562269164DADD700A30BE5 /* rio1.png */; };
+		336DBDE71656DBA600F9C650 /* grass.png in Resources */ = {isa = PBXBuildFile; fileRef = 336DBDE61656DBA600F9C650 /* grass.png */; };
+		336DBDEA1656DC4800F9C650 /* starfish.png in Resources */ = {isa = PBXBuildFile; fileRef = 336DBDE91656DC4800F9C650 /* starfish.png */; };
+		336DBDEC1656DCCC00F9C650 /* goldfish.png in Resources */ = {isa = PBXBuildFile; fileRef = 336DBDEB1656DCCC00F9C650 /* goldfish.png */; };
 		33704AA11655ACF50020EC65 /* water.png in Resources */ = {isa = PBXBuildFile; fileRef = 33704AA01655ACF50020EC65 /* water.png */; };
 		33704AA41655B1160020EC65 /* timepicker-back.png in Resources */ = {isa = PBXBuildFile; fileRef = 33704AA31655B1160020EC65 /* timepicker-back.png */; };
 		337EFFA61655D5D20054A006 /* circle-tan.png in Resources */ = {isa = PBXBuildFile; fileRef = 337EFFA51655D5D20054A006 /* circle-tan.png */; };
@@ -132,6 +135,9 @@
 		33562262164DA91800A30BE5 /* circle-green-highlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "circle-green-highlighted.png"; sourceTree = "<group>"; };
 		33562263164DA91800A30BE5 /* circle-orange-highlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "circle-orange-highlighted.png"; sourceTree = "<group>"; };
 		33562269164DADD700A30BE5 /* rio1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rio1.png; sourceTree = "<group>"; };
+		336DBDE61656DBA600F9C650 /* grass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grass.png; sourceTree = "<group>"; };
+		336DBDE91656DC4800F9C650 /* starfish.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = starfish.png; sourceTree = "<group>"; };
+		336DBDEB1656DCCC00F9C650 /* goldfish.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = goldfish.png; sourceTree = "<group>"; };
 		33704AA01655ACF50020EC65 /* water.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = water.png; sourceTree = "<group>"; };
 		33704AA31655B1160020EC65 /* timepicker-back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "timepicker-back.png"; sourceTree = "<group>"; };
 		337EFFA51655D5D20054A006 /* circle-tan.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "circle-tan.png"; sourceTree = "<group>"; };
@@ -257,6 +263,9 @@
 		3312AEB816547A8100AFA0A8 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				336DBDEB1656DCCC00F9C650 /* goldfish.png */,
+				336DBDE91656DC4800F9C650 /* starfish.png */,
+				336DBDE61656DBA600F9C650 /* grass.png */,
 				33F3BF7D1656B0CC008F80D7 /* jellyfish.png */,
 				33704AA31655B1160020EC65 /* timepicker-back.png */,
 				33704AA01655ACF50020EC65 /* water.png */,
@@ -648,6 +657,9 @@
 				337EFFB0165613070054A006 /* Default.png in Resources */,
 				337EFFB2165613140054A006 /* Default@2x.png in Resources */,
 				33F3BF7E1656B0CC008F80D7 /* jellyfish.png in Resources */,
+				336DBDE71656DBA600F9C650 /* grass.png in Resources */,
+				336DBDEA1656DC4800F9C650 /* starfish.png in Resources */,
+				336DBDEC1656DCCC00F9C650 /* goldfish.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
