@@ -46,9 +46,6 @@
     // Set the color of the status bar to be black instead of green
     [application setStatusBarStyle:UIStatusBarStyleBlackOpaque];
     
-    // Set title for the libraryViewController to "Library"
-    [libraryViewController setTitle:@"Library"];
-    
     // Create the tab bar controller
     UITabBarController *tabBarController = [[UITabBarController alloc] init];
     

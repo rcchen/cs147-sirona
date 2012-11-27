@@ -29,14 +29,14 @@
         
         // Get the tab bar item and give it a label
         UITabBarItem *tbi = [self tabBarItem];
-        [tbi setTitle:@"Library"];
+        [tbi setTitle:@"My Medications"];
         
         // Now give it an image
-        UIImage *i = [UIImage imageNamed:@"96-book.png"];
+        UIImage *i = [UIImage imageNamed:@"pill.png"];
         [tbi setImage:i];
         
         UINavigationItem *n = [self navigationItem];
-        [n setTitle:NSLocalizedString(@"Library", @"Application title")];
+        [n setTitle:NSLocalizedString(@"My Medications", @"Application title")];
         
         medicines = [[NSMutableArray alloc] init];
 
@@ -75,32 +75,10 @@
     
 }
 
-
+// Get medications from local storage
 - (void)refreshDisplay
 {
-    
     [medicines removeAllObjects];
-    
-    // Get the data from the endpoint
-    NSURL *url = [NSURL URLWithString:@"http://cs147.adamantinelabs.com/get-medications.php"];
-    NSData *jsonData = [NSData dataWithContentsOfURL:url];
-    
-    // Serialize the returned data into a JSON array
-    NSError *jsonError;
-    NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:&jsonError];
-    
-    // Add something here to catch the error
-    
-    NSLog(@"Before: %u", [medicines count]);
-    
-    for (NSDictionary *item in jsonArray) {
-        
-        // Create a new Sirona Library Item
-        SironaLibraryItem *sli = [[SironaLibraryItem alloc] initWithMDataBrand:[item objectForKey:@"mdataBrand"] mdataCategory:[item objectForKey:@"mdataCategory"] mdataId:[item objectForKey:@"mdataId"] mdataName:[item objectForKey:@"mdataName"] mdataPrecautions:[item objectForKey:@"mdataPrecautions"] mdataSideEffects:[item objectForKey:@"mdataSideEffects"] mdataNotes:@""];
-        
-        [medicines addObject:sli];
-     
-    }
     
     NSLog(@"Before: %u", [medicines count]);
     
@@ -115,8 +93,6 @@
         }
     }
     
-    NSLog(@"Before: %u", [medicines count]);
-
     [medicines sortUsingComparator:^(id one, id two) {
         SironaLibraryItem *itemOne = (SironaLibraryItem *)one;
         SironaLibraryItem *itemTwo = (SironaLibraryItem *)two;
@@ -124,8 +100,6 @@
     }];
 
     NSLog(@"After: %u", [medicines count]);
-
-
 }
 
 - (void)viewDidAppear:(BOOL)animated

@@ -15,7 +15,6 @@
 		3312AEB7165477F400AFA0A8 /* SironaAlertNoneView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3312AEB6165477F400AFA0A8 /* SironaAlertNoneView.xib */; };
 		3312AEBA16547AA600AFA0A8 /* up-arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 3312AEB916547AA600AFA0A8 /* up-arrow.png */; };
 		3312AEBD1654881700AFA0A8 /* SironaAlertsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3312AEBC1654881700AFA0A8 /* SironaAlertsViewController.m */; };
-		3331D80B164CFF3400D9FB7E /* SironaLibraryRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3331D80A164CFF3400D9FB7E /* SironaLibraryRootViewController.m */; };
 		333D49C81654437F00C1CE93 /* SironaHomeViewB.xib in Resources */ = {isa = PBXBuildFile; fileRef = 333D49C71654437F00C1CE93 /* SironaHomeViewB.xib */; };
 		333D49CC165444D700C1CE93 /* SironaHomeViewControllerB.m in Sources */ = {isa = PBXBuildFile; fileRef = 333D49CB165444D700C1CE93 /* SironaHomeViewControllerB.m */; };
 		33548E5516524FD500BD1DFA /* SironaTimeCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33548E5416524FD500BD1DFA /* SironaTimeCellView.m */; };
@@ -98,6 +97,7 @@
 		33DD213E164C638C00B4E5F7 /* 78-stopwatch.png in Resources */ = {isa = PBXBuildFile; fileRef = 33DD213C164C638C00B4E5F7 /* 78-stopwatch.png */; };
 		33DD213F164C638C00B4E5F7 /* 78-stopwatch@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 33DD213D164C638C00B4E5F7 /* 78-stopwatch@2x.png */; };
 		33F3BF7E1656B0CC008F80D7 /* jellyfish.png in Resources */ = {isa = PBXBuildFile; fileRef = 33F3BF7D1656B0CC008F80D7 /* jellyfish.png */; };
+		710989181665675800533434 /* pill.png in Resources */ = {isa = PBXBuildFile; fileRef = 710989171665675800533434 /* pill.png */; };
 		7130FF121651E616003F2EB4 /* SironaTimeSelectMedicineCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7130FF111651E616003F2EB4 /* SironaTimeSelectMedicineCellView.xib */; };
 		7130FF151651E74A003F2EB4 /* SironaTimeSelectMedicineCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7130FF141651E749003F2EB4 /* SironaTimeSelectMedicineCellView.m */; };
 		7130FF1C165213B0003F2EB4 /* SironaTimeAddNewMedicine.m in Sources */ = {isa = PBXBuildFile; fileRef = 7130FF1B165213B0003F2EB4 /* SironaTimeAddNewMedicine.m */; };
@@ -116,8 +116,6 @@
 		3312AEB916547AA600AFA0A8 /* up-arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "up-arrow.png"; sourceTree = "<group>"; };
 		3312AEBB1654881600AFA0A8 /* SironaAlertsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SironaAlertsViewController.h; sourceTree = "<group>"; };
 		3312AEBC1654881700AFA0A8 /* SironaAlertsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SironaAlertsViewController.m; sourceTree = "<group>"; };
-		3331D809164CFF3400D9FB7E /* SironaLibraryRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SironaLibraryRootViewController.h; sourceTree = "<group>"; };
-		3331D80A164CFF3400D9FB7E /* SironaLibraryRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SironaLibraryRootViewController.m; sourceTree = "<group>"; };
 		333D49C71654437F00C1CE93 /* SironaHomeViewB.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SironaHomeViewB.xib; sourceTree = "<group>"; };
 		333D49CA165444D700C1CE93 /* SironaHomeViewControllerB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SironaHomeViewControllerB.h; sourceTree = "<group>"; };
 		333D49CB165444D700C1CE93 /* SironaHomeViewControllerB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SironaHomeViewControllerB.m; sourceTree = "<group>"; };
@@ -230,6 +228,7 @@
 		33DD213C164C638C00B4E5F7 /* 78-stopwatch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "78-stopwatch.png"; sourceTree = "<group>"; };
 		33DD213D164C638C00B4E5F7 /* 78-stopwatch@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "78-stopwatch@2x.png"; sourceTree = "<group>"; };
 		33F3BF7D1656B0CC008F80D7 /* jellyfish.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jellyfish.png; sourceTree = "<group>"; };
+		710989171665675800533434 /* pill.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pill.png; sourceTree = "<group>"; };
 		7130FF111651E616003F2EB4 /* SironaTimeSelectMedicineCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SironaTimeSelectMedicineCellView.xib; sourceTree = "<group>"; };
 		7130FF131651E749003F2EB4 /* SironaTimeSelectMedicineCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SironaTimeSelectMedicineCellView.h; sourceTree = "<group>"; };
 		7130FF141651E749003F2EB4 /* SironaTimeSelectMedicineCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SironaTimeSelectMedicineCellView.m; sourceTree = "<group>"; };
@@ -277,15 +276,6 @@
 			name = Images;
 			sourceTree = "<group>";
 		};
-		3331D806164CFEB900D9FB7E /* NavigationControllers */ = {
-			isa = PBXGroup;
-			children = (
-				3331D809164CFF3400D9FB7E /* SironaLibraryRootViewController.h */,
-				3331D80A164CFF3400D9FB7E /* SironaLibraryRootViewController.m */,
-			);
-			name = NavigationControllers;
-			sourceTree = "<group>";
-		};
 		3356225B164DA16100A30BE5 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -322,6 +312,7 @@
 		33562268164DA92700A30BE5 /* Icons */ = {
 			isa = PBXGroup;
 			children = (
+				710989171665675800533434 /* pill.png */,
 				33DD2127164C46DD00B4E5F7 /* 19-gear.png */,
 				33DD2128164C46DD00B4E5F7 /* 19-gear@2x.png */,
 				33DD211C164C370400B4E5F7 /* 10-medical.png */,
@@ -421,7 +412,6 @@
 				33CAFCD01651B06C00CFA474 /* Data Models */,
 				330C86C3164C78F800461063 /* Fonts */,
 				33DD2116164BBFC000B4E5F7 /* JSONKit */,
-				3331D806164CFEB900D9FB7E /* NavigationControllers */,
 				33DD2120164C397300B4E5F7 /* Objects */,
 				33DD2106164BA3CA00B4E5F7 /* Resources */,
 				33DD20E7164B960000B4E5F7 /* SironaAppDelegate.h */,
@@ -666,6 +656,7 @@
 				336DBDEC1656DCCC00F9C650 /* goldfish.png in Resources */,
 				338327EA1664A7830068D020 /* AppIcon_114.png in Resources */,
 				338327ED1664AB840068D020 /* AppIcon_57.png in Resources */,
+				710989181665675800533434 /* pill.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -686,7 +677,6 @@
 				33DD2126164C3AA700B4E5F7 /* SironaLibraryItem.m in Sources */,
 				33DD212D164C46E800B4E5F7 /* SironaSettingsViewController.m in Sources */,
 				33070760164C81B300DCC33B /* SironaLibraryDetailViewController.m in Sources */,
-				3331D80B164CFF3400D9FB7E /* SironaLibraryRootViewController.m in Sources */,
 				3356224F164D798700A30BE5 /* SironaAlertItem.m in Sources */,
 				33562253164D799100A30BE5 /* SironaAlertList.m in Sources */,
 				3356225E164DA17800A30BE5 /* SironaLibraryCellView.m in Sources */,
