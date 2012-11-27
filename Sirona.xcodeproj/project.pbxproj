@@ -39,7 +39,8 @@
 		337EFFAA1655D7610054A006 /* circle-pondwater.png in Resources */ = {isa = PBXBuildFile; fileRef = 337EFFA91655D7610054A006 /* circle-pondwater.png */; };
 		337EFFAE1655F9EE0054A006 /* UIView+Animation.m in Sources */ = {isa = PBXBuildFile; fileRef = 337EFFAD1655F9EE0054A006 /* UIView+Animation.m */; };
 		337EFFB0165613070054A006 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 337EFFAF165613070054A006 /* Default.png */; };
-		337EFFB2165613140054A006 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 337EFFB1165613140054A006 /* Default@2x.png */; };
+		338327EA1664A7830068D020 /* AppIcon_114.png in Resources */ = {isa = PBXBuildFile; fileRef = 338327E91664A7830068D020 /* AppIcon_114.png */; };
+		338327ED1664AB840068D020 /* AppIcon_57.png in Resources */ = {isa = PBXBuildFile; fileRef = 338327EC1664AB840068D020 /* AppIcon_57.png */; };
 		3385862B1650780B008B5A53 /* SironaTimeEditDaysView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3385862A1650780B008B5A53 /* SironaTimeEditDaysView.xib */; };
 		3385862F16507864008B5A53 /* SironaTimeEditDaysView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3385862E16507864008B5A53 /* SironaTimeEditDaysView.m */; };
 		3388028D16502D3D0031B123 /* SironaTimeEditViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3388028C16502D3D0031B123 /* SironaTimeEditViewCell.xib */; };
@@ -147,6 +148,8 @@
 		337EFFAD1655F9EE0054A006 /* UIView+Animation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Animation.m"; sourceTree = "<group>"; };
 		337EFFAF165613070054A006 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		337EFFB1165613140054A006 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		338327E91664A7830068D020 /* AppIcon_114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppIcon_114.png; sourceTree = "<group>"; };
+		338327EC1664AB840068D020 /* AppIcon_57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppIcon_57.png; sourceTree = "<group>"; };
 		3385862A1650780B008B5A53 /* SironaTimeEditDaysView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SironaTimeEditDaysView.xib; sourceTree = "<group>"; };
 		3385862D16507864008B5A53 /* SironaTimeEditDaysView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SironaTimeEditDaysView.h; sourceTree = "<group>"; };
 		3385862E16507864008B5A53 /* SironaTimeEditDaysView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SironaTimeEditDaysView.m; sourceTree = "<group>"; };
@@ -376,6 +379,8 @@
 		33DD20C9164B960000B4E5F7 = {
 			isa = PBXGroup;
 			children = (
+				338327EC1664AB840068D020 /* AppIcon_57.png */,
+				338327E91664A7830068D020 /* AppIcon_114.png */,
 				337EFFB1165613140054A006 /* Default@2x.png */,
 				337EFFAF165613070054A006 /* Default.png */,
 				33BBE4C216539C3E002449A2 /* libz.dylib */,
@@ -655,11 +660,12 @@
 				337EFFA81655D6150054A006 /* circle-fadblue.png in Resources */,
 				337EFFAA1655D7610054A006 /* circle-pondwater.png in Resources */,
 				337EFFB0165613070054A006 /* Default.png in Resources */,
-				337EFFB2165613140054A006 /* Default@2x.png in Resources */,
 				33F3BF7E1656B0CC008F80D7 /* jellyfish.png in Resources */,
 				336DBDE71656DBA600F9C650 /* grass.png in Resources */,
 				336DBDEA1656DC4800F9C650 /* starfish.png in Resources */,
 				336DBDEC1656DCCC00F9C650 /* goldfish.png in Resources */,
+				338327EA1664A7830068D020 /* AppIcon_114.png in Resources */,
+				338327ED1664AB840068D020 /* AppIcon_57.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -778,6 +784,7 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -785,8 +792,8 @@
 		33DD20F4164B960000B4E5F7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Sirona/Sirona-Prefix.pch";
 				INFOPLIST_FILE = "Sirona/Sirona-Info.plist";
@@ -798,6 +805,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
