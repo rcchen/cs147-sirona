@@ -30,6 +30,13 @@
     NSString *value = [possibleDays objectAtIndex:[indexPath row]];
     UITableViewCell *utvc = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"UITableViewCell"];
     [[utvc textLabel] setText:value];
+    
+    // Special case for the daily label
+    if ([indexPath row] == 0) {
+        [[utvc textLabel] setTextColor:[UIColor colorWithRed:51.0f/255.0f green:102.0f/255.0f blue:153.0f/255.0f alpha:1.0f]];
+        if ([[item getAlertDays] count] == 7) // If all days are selected
+            utvc.accessoryType = UITableViewCellAccessoryCheckmark;
+    }
     [utvc setUserInteractionEnabled:YES];
     
     // If the item already contains the day, set the checkmark
@@ -50,17 +57,48 @@
     // If it is not checked yet, check it and add it to the NSMutableArray
     if (cell.accessoryType == UITableViewCellAccessoryNone) {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
-        NSMutableArray *alertDays = [item getAlertDays];
-        [alertDays addObject:[[cell textLabel] text]];
-        [item setAlertDays:alertDays];
+        
+        // If daily is checked, then check all other days and add to alertDays
+        if ([indexPath row] == 0) {
+            UITableViewCell *otherCell;
+            for (otherCell in [tableView visibleCells]) {
+                if (otherCell.accessoryType == UITableViewCellAccessoryNone) {
+                    otherCell.accessoryType = UITableViewCellAccessoryCheckmark;
+                    NSMutableArray *alertDays = [item getAlertDays];
+                    [alertDays addObject:[[otherCell textLabel] text]];
+                    [item setAlertDays:alertDays];
+                }
+            }
+        } else {
+            NSMutableArray *alertDays = [item getAlertDays];
+            [alertDays addObject:[[cell textLabel] text]];
+            [item setAlertDays:alertDays];
+        }
     }
     
-    // If it is checked, uncheck it and remove from NSMutableArray
+    // If it is already checked, uncheck it and remove from NSMutableArray
     else {
         cell.accessoryType = UITableViewCellAccessoryNone;
         NSMutableArray *alertDays = [item getAlertDays];
         [alertDays removeObject:[[cell textLabel] text]];
+        
+        // If Daily is deselected
+        if ([indexPath row] == 0) {
+            UITableViewCell *otherCell;
+            for (otherCell in [tableView visibleCells]) {
+                otherCell.accessoryType = UITableViewCellAccessoryNone;
+            }
+            [alertDays removeAllObjects];
+        }
+        
+        // Make sure daily is deselected if not all days are selected
+        if ([alertDays count] < 7) {
+            [tableView cellForRowAtIndexPath:0].accessoryType = UITableViewCellAccessoryNone;
+            [tableView reloadData];
+        }
+        
         [item setAlertDays:alertDays];
+        
     }
     
     
@@ -107,7 +145,7 @@
 
     }
     
-    possibleDays = [[NSMutableArray alloc] initWithObjects:@"Sunday", @"Monday", @"Tuesday", @"Wednesday", @"Thursday", @"Friday", @"Saturday", nil];
+    possibleDays = [[NSMutableArray alloc] initWithObjects:@"Daily", @"Sunday", @"Monday", @"Tuesday", @"Wednesday", @"Thursday", @"Friday", @"Saturday", nil];
     
     return self;
 }
