@@ -23,8 +23,16 @@
 {
     
     NSString *name = [[textFields objectAtIndex:0] text];
-    if ([name length] == 0) // prevent null field
-        name = @"";
+    // Checks the name field, which cannot be blank. Shows an alert if it is.
+    if ([name length] == 0) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                        message:@"Medication name cannot be blank"
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+        return;
+    }
     
     NSString *category = [[textFields objectAtIndex:1] text];
     if ([category length] == 0)
@@ -84,6 +92,11 @@
     int count = [self.navigationController.viewControllers count];
     [self.navigationController popToViewController:[[self.navigationController viewControllers] objectAtIndex:count-3] animated:YES];
 }
+
+/*- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    [errorAlert dismissWithClickedButtonIndex:buttonIndex animated:YES];
+    NSLog(@"HI");
+}*/
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
