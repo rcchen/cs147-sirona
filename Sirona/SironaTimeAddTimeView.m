@@ -42,6 +42,8 @@
         }
     }
     
+    //alertList = [[NSMutableArray alloc] init];
+    
     // Add the item in
     [alertList addObject:item];
     
@@ -53,7 +55,6 @@
     
     // Notification will be managed by hitting done in the prior menu
     [self.navigationController popViewControllerAnimated:YES];
-
     
 }
 

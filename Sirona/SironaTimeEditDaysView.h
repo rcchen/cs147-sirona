@@ -17,6 +17,5 @@
 
 - (IBAction)finishEditingDays:(id)sender;
 - (void)setItem:(SironaAlertItem *)item;
-- (void)setAlertList:(NSMutableArray *)alertList;
 
 @end

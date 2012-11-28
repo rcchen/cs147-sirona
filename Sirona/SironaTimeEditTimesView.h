@@ -19,6 +19,5 @@
 
 - (void)setItem:(SironaAlertItem *)item;
 - (IBAction)addTime:(id)sender;
-- (void)setAlertList:(NSMutableArray *)alertList;
 
 @end

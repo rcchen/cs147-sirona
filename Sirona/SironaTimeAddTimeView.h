@@ -22,7 +22,6 @@
 
 // Setters
 - (void)setAlertTimes:(NSMutableArray *)alertTimes;
-- (void)setAlertList:(NSMutableArray *)alertList;
 // Button responses
 - (IBAction)addTime:(id)sender;
 

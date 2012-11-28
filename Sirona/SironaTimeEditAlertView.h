@@ -13,10 +13,8 @@
 @interface SironaTimeEditAlertView : UITableViewController
 
 @property (nonatomic, strong)SironaAlertItem *item;
-@property NSMutableArray *alertList;
 @property NSMutableArray *alertSettings;
 
-- (void)setAlertList:(NSMutableArray *)alertList;
 - (IBAction)saveAlert:(id)sender;
 
 @end

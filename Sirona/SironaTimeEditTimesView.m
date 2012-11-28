@@ -18,7 +18,6 @@
 {
     SironaTimeAddTimeView *statv = [[SironaTimeAddTimeView alloc] init];
     [statv setAlertTimes:[item getAlertTimes]];
-    [statv setAlertList:alertList];
     [statv setItem:item];
     [[self navigationController] pushViewController:statv animated:YES];
 }
@@ -75,8 +74,6 @@
     
     // Add the item in
     [alertList addObject:item];
-    
-    NSLog(@"AlertID: %@", [item getAlertId]);
     
     // Now save it to NSUserDefaults
     encodedAlertList = [NSKeyedArchiver archivedDataWithRootObject:alertList];

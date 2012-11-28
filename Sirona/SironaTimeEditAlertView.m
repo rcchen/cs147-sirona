@@ -16,13 +16,16 @@
 @implementation SironaTimeEditAlertView
 
 @synthesize item;
-@synthesize alertList;
 @synthesize alertSettings;
 
 // Returns the count of the number of rows in the table view
 - (NSInteger)tableView:(UITableView *)tableView
  numberOfRowsInSection:(NSInteger)section
 {
+    if (!item)
+        NSLog(@"item is null");
+    else
+        NSLog(@"alert id: %@", [item getAlertId]);
     return [alertSettings count];
 }
 
@@ -141,7 +144,6 @@
         // Set the current days to the days that are currently selected
         // Actually just make sure the entire SironaAlertItem pointer gets copied over
         [stedv setItem:item];
-        [stedv setAlertList:alertList];
         [[self navigationController] pushViewController:stedv animated:YES];
     }
     
@@ -149,7 +151,6 @@
     else if (selectedItem == @"Times") {
         SironaTimeEditTimesView *stetv = [[SironaTimeEditTimesView alloc] init];
         [stetv setItem:item];
-        [stetv setAlertList:alertList];
         [[self navigationController] pushViewController:stetv animated:YES];
     }
     
@@ -157,7 +158,6 @@
     else if (selectedItem == @"Medication") {
         SironaTimeSelectMedicine *stsm = [[SironaTimeSelectMedicine alloc] init];
         [stsm setItem:item];
-        [stsm setAlertList:alertList];
         [[self navigationController] pushViewController:stsm animated:YES];
     }
     
