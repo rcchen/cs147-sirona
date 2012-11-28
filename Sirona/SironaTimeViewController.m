@@ -109,7 +109,6 @@
     [newItem setAlertId];
     //NSLog(@"The new alert ID is: %@", [newItem getAlertId]);
     [stevc setItem:newItem];
-    [stevc setAlertList:alerts];
     [[self navigationController] pushViewController:stevc animated:YES];
 
 }

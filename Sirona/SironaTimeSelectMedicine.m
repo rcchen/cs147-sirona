@@ -34,7 +34,7 @@
     if (self) {
 
         UINavigationItem *n = [self navigationItem];
-        [n setTitle:NSLocalizedString(@"Medication", @"Application title")];
+        [n setTitle:NSLocalizedString(@"My Medications", @"Application title")];
         
     }
     
@@ -137,26 +137,6 @@
     
     [medicines removeAllObjects];
     
-    // Get the data from the endpoint
-    NSURL *url = [NSURL URLWithString:@"http://cs147.adamantinelabs.com/get-medications.php"];
-    NSData *jsonData = [NSData dataWithContentsOfURL:url];
-    
-    // Serialize the returned data into a JSON array
-    NSError *jsonError;
-    NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:&jsonError];
-    
-    // Add something here to catch the error
-    
-    
-    for (NSDictionary *med in jsonArray) {
-        
-        // Create a new Sirona Library Item
-        SironaLibraryItem *sli = [[SironaLibraryItem alloc] initWithMDataBrand:[med objectForKey:@"mdataBrand"] mdataCategory:[med objectForKey:@"mdataCategory"] mdataId:[med objectForKey:@"mdataId"] mdataName:[med objectForKey:@"mdataName"] mdataPrecautions:[med objectForKey:@"mdataPrecautions"] mdataSideEffects:[med objectForKey:@"mdataSideEffects"] mdataNotes:@""];
-        
-        [medicines addObject:sli];
-
-    }
-    
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
     NSData *encodedCustomMedList = [prefs objectForKey:@"customMedList"];
     
@@ -167,6 +147,7 @@
             [medicines addObject:sli];
         }
     }
+    
     [medicines sortUsingSelector:@selector(compare:)];
     
 }

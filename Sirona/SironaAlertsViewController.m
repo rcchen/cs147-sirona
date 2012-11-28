@@ -46,11 +46,25 @@
         // Set the button on the left to edit for the navigationItem
         [[self navigationItem] setLeftBarButtonItem:[self editButtonItem]];
         
+        [self initializeAlerts];
     }
     return self;
     
 }
 
+- (void)initializeAlerts
+{
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    NSData *encodedAlertList = [prefs objectForKey:@"alertList"];
+    if (encodedAlertList) {
+        NSMutableArray *prefAlerts = (NSMutableArray *)[NSKeyedUnarchiver unarchiveObjectWithData:encodedAlertList];
+        alerts = prefAlerts;
+    } else {
+        alerts = [[NSMutableArray alloc] init];
+        encodedAlertList = [NSKeyedArchiver archivedDataWithRootObject:alerts];
+        [prefs setObject:encodedAlertList forKey:@"alertList"];
+    }
+}
 
 - (void)viewDidLoad
 {
@@ -59,14 +73,6 @@
     
     UINib *nib = [UINib nibWithNibName:@"SironaTimeCellView" bundle:nil];
     [alertsTable registerNib:nib forCellReuseIdentifier:@"SironaTimeCellView"];
-    
-    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-    NSData *encodedAlertList = [prefs objectForKey:@"alertList"];
-    if (encodedAlertList) {
-        NSMutableArray *prefAlerts = (NSMutableArray *)[NSKeyedUnarchiver unarchiveObjectWithData:encodedAlertList];
-        alerts = prefAlerts;
-    }
-    
 }
 
 
@@ -74,13 +80,8 @@
 {
     
     [[UIApplication sharedApplication] cancelAllLocalNotifications];
-    
-    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-    NSData *encodedAlertList = [prefs objectForKey:@"alertList"];
-    if (encodedAlertList) {
-        NSMutableArray *prefAlerts = (NSMutableArray *)[NSKeyedUnarchiver unarchiveObjectWithData:encodedAlertList];
-        alerts = prefAlerts;
-    }
+
+    [self initializeAlerts];
     
     // Programatically add a tableView to the thing
     alertsTable = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
@@ -88,17 +89,16 @@
     self.alertsTable.delegate = self;
     [[self alertsTable] reloadData];
     [self.view addSubview:alertsTable];
-        
-    for (SironaAlertItem *alertItem in alerts) {
+    
+    /*for (SironaAlertItem *alertItem in alerts) {
         [self setAllAlarms:alertItem];
-    }
+    }*/
     
     for (UILocalNotification *old in [[UIApplication sharedApplication] scheduledLocalNotifications]) {
         NSLog(@"Alert for %@ at %@", [old.userInfo objectForKey:@"alertID"], [old fireDate]);
     }
     
     if (![alerts count]) {
-        
         // Handles the overlay
         UIViewController* c = [[UIViewController alloc] initWithNibName:@"SironaAlertNoneView" bundle:nil];
         UIView *overlayNone = [c view];
@@ -108,7 +108,6 @@
     }
 
 }
-
 
 - (void)viewWillDisappear:(BOOL)animated
 {
@@ -187,7 +186,6 @@
     SironaAlertItem *newItem = [[SironaAlertItem alloc] init];
     [newItem setAlertId];
     [stevc setItem:newItem];
-    [stevc setAlertList:alerts];
     [[self navigationController] pushViewController:stevc animated:YES];
     
 }
