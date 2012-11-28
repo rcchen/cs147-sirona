@@ -16,8 +16,13 @@
 		3312AEBA16547AA600AFA0A8 /* up-arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 3312AEB916547AA600AFA0A8 /* up-arrow.png */; };
 		3312AEBD1654881700AFA0A8 /* SironaAlertsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3312AEBC1654881700AFA0A8 /* SironaAlertsViewController.m */; };
 		3331D80B164CFF3400D9FB7E /* SironaLibraryRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3331D80A164CFF3400D9FB7E /* SironaLibraryRootViewController.m */; };
-		333D49C81654437F00C1CE93 /* SironaHomeViewB.xib in Resources */ = {isa = PBXBuildFile; fileRef = 333D49C71654437F00C1CE93 /* SironaHomeViewB.xib */; };
-		333D49CC165444D700C1CE93 /* SironaHomeViewControllerB.m in Sources */ = {isa = PBXBuildFile; fileRef = 333D49CB165444D700C1CE93 /* SironaHomeViewControllerB.m */; };
+		3345D0F01665B6F2003E060D /* SironaHomeNeueView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3345D0EF1665B6F2003E060D /* SironaHomeNeueView.m */; };
+		3345D0F21665B725003E060D /* SironaHomeNeueView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3345D0F11665B725003E060D /* SironaHomeNeueView.xib */; };
+		3345D0F51665BFC6003E060D /* 2012-11-27 19.18.02.png in Resources */ = {isa = PBXBuildFile; fileRef = 3345D0F41665BFC6003E060D /* 2012-11-27 19.18.02.png */; };
+		3345D0F71665C066003E060D /* demo1.png in Resources */ = {isa = PBXBuildFile; fileRef = 3345D0F61665C066003E060D /* demo1.png */; };
+		3345D0FA1665C4DA003E060D /* home-timecircle.png in Resources */ = {isa = PBXBuildFile; fileRef = 3345D0F91665C4DA003E060D /* home-timecircle.png */; };
+		3345D0FC1665D57D003E060D /* home-pillbottle.png in Resources */ = {isa = PBXBuildFile; fileRef = 3345D0FB1665D57D003E060D /* home-pillbottle.png */; };
+		3345D0FE1665D7E9003E060D /* home-repeat.png in Resources */ = {isa = PBXBuildFile; fileRef = 3345D0FD1665D7E9003E060D /* home-repeat.png */; };
 		33548E5516524FD500BD1DFA /* SironaTimeCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33548E5416524FD500BD1DFA /* SironaTimeCellView.m */; };
 		3356224F164D798700A30BE5 /* SironaAlertItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 3356224E164D798700A30BE5 /* SironaAlertItem.m */; };
 		33562253164D799100A30BE5 /* SironaAlertList.m in Sources */ = {isa = PBXBuildFile; fileRef = 33562252164D799100A30BE5 /* SironaAlertList.m */; };
@@ -118,9 +123,14 @@
 		3312AEBC1654881700AFA0A8 /* SironaAlertsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SironaAlertsViewController.m; sourceTree = "<group>"; };
 		3331D809164CFF3400D9FB7E /* SironaLibraryRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SironaLibraryRootViewController.h; sourceTree = "<group>"; };
 		3331D80A164CFF3400D9FB7E /* SironaLibraryRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SironaLibraryRootViewController.m; sourceTree = "<group>"; };
-		333D49C71654437F00C1CE93 /* SironaHomeViewB.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SironaHomeViewB.xib; sourceTree = "<group>"; };
-		333D49CA165444D700C1CE93 /* SironaHomeViewControllerB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SironaHomeViewControllerB.h; sourceTree = "<group>"; };
-		333D49CB165444D700C1CE93 /* SironaHomeViewControllerB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SironaHomeViewControllerB.m; sourceTree = "<group>"; };
+		3345D0EE1665B6F2003E060D /* SironaHomeNeueView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SironaHomeNeueView.h; sourceTree = "<group>"; };
+		3345D0EF1665B6F2003E060D /* SironaHomeNeueView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SironaHomeNeueView.m; sourceTree = "<group>"; };
+		3345D0F11665B725003E060D /* SironaHomeNeueView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SironaHomeNeueView.xib; sourceTree = "<group>"; };
+		3345D0F41665BFC6003E060D /* 2012-11-27 19.18.02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "2012-11-27 19.18.02.png"; sourceTree = "<group>"; };
+		3345D0F61665C066003E060D /* demo1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = demo1.png; sourceTree = "<group>"; };
+		3345D0F91665C4DA003E060D /* home-timecircle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home-timecircle.png"; sourceTree = "<group>"; };
+		3345D0FB1665D57D003E060D /* home-pillbottle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home-pillbottle.png"; sourceTree = "<group>"; };
+		3345D0FD1665D7E9003E060D /* home-repeat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home-repeat.png"; sourceTree = "<group>"; };
 		33548E5316524FD500BD1DFA /* SironaTimeCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SironaTimeCellView.h; sourceTree = "<group>"; };
 		33548E5416524FD500BD1DFA /* SironaTimeCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SironaTimeCellView.m; sourceTree = "<group>"; };
 		3356224D164D798700A30BE5 /* SironaAlertItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SironaAlertItem.h; sourceTree = "<group>"; };
@@ -284,6 +294,25 @@
 				3331D80A164CFF3400D9FB7E /* SironaLibraryRootViewController.m */,
 			);
 			name = NavigationControllers;
+			sourceTree = "<group>";
+		};
+		3345D0F31665BFBE003E060D /* TestImages */ = {
+			isa = PBXGroup;
+			children = (
+				3345D0F61665C066003E060D /* demo1.png */,
+				3345D0F41665BFC6003E060D /* 2012-11-27 19.18.02.png */,
+			);
+			name = TestImages;
+			sourceTree = "<group>";
+		};
+		3345D0F81665C4D0003E060D /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				3345D0FD1665D7E9003E060D /* home-repeat.png */,
+				3345D0FB1665D57D003E060D /* home-pillbottle.png */,
+				3345D0F91665C4DA003E060D /* home-timecircle.png */,
+			);
+			name = Home;
 			sourceTree = "<group>";
 		};
 		3356225B164DA16100A30BE5 /* Cells */ = {
@@ -452,8 +481,6 @@
 			children = (
 				33DD20F6164B963E00B4E5F7 /* SironaHomeViewController.h */,
 				33DD20F7164B963E00B4E5F7 /* SironaHomeViewController.m */,
-				333D49CA165444D700C1CE93 /* SironaHomeViewControllerB.h */,
-				333D49CB165444D700C1CE93 /* SironaHomeViewControllerB.m */,
 				3307075D164C81B300DCC33B /* SironaLibraryDetailViewController.h */,
 				3307075E164C81B300DCC33B /* SironaLibraryDetailViewController.m */,
 				33DD210B164BA72B00B4E5F7 /* SironaLibraryViewController.h */,
@@ -476,6 +503,8 @@
 				33DD2104164B9BFF00B4E5F7 /* SironaTimeViewController.m */,
 				3312AEBB1654881600AFA0A8 /* SironaAlertsViewController.h */,
 				3312AEBC1654881700AFA0A8 /* SironaAlertsViewController.m */,
+				3345D0EE1665B6F2003E060D /* SironaHomeNeueView.h */,
+				3345D0EF1665B6F2003E060D /* SironaHomeNeueView.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -492,8 +521,9 @@
 		33DD2100164B991A00B4E5F7 /* XIBs */ = {
 			isa = PBXGroup;
 			children = (
+				3312AEB6165477F400AFA0A8 /* SironaAlertNoneView.xib */,
+				3345D0F11665B725003E060D /* SironaHomeNeueView.xib */,
 				33DD2130164C5CCE00B4E5F7 /* SironaHomeView.xib */,
-				333D49C71654437F00C1CE93 /* SironaHomeViewB.xib */,
 				33562259164DA13900A30BE5 /* SironaLibraryCellView.xib */,
 				3307075F164C81B300DCC33B /* SironaLibraryDetailView.xib */,
 				33DD210E164BA81B00B4E5F7 /* SironaLibraryView.xib */,
@@ -510,7 +540,6 @@
 				33CAFCC51651AF0200CFA474 /* SironaTimeSelectMedicine.xib */,
 				7130FF111651E616003F2EB4 /* SironaTimeSelectMedicineCellView.xib */,
 				33DD2101164B993700B4E5F7 /* SironaTimeView.xib */,
-				3312AEB6165477F400AFA0A8 /* SironaAlertNoneView.xib */,
 			);
 			name = XIBs;
 			sourceTree = "<group>";
@@ -518,6 +547,8 @@
 		33DD2106164BA3CA00B4E5F7 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				3345D0F81665C4D0003E060D /* Home */,
+				3345D0F31665BFBE003E060D /* TestImages */,
 				3312AEB816547A8100AFA0A8 /* Images */,
 				33CEF42316518815006F3C92 /* Patterns */,
 				33562269164DADD700A30BE5 /* rio1.png */,
@@ -651,7 +682,6 @@
 				33A4C7B21652DD9900D7A263 /* SironaTimeAddNewMedicineNoteCell.xib in Resources */,
 				33BBE4BF16539C0F002449A2 /* README.md in Resources */,
 				33BBE4C016539C0F002449A2 /* release_notes.md in Resources */,
-				333D49C81654437F00C1CE93 /* SironaHomeViewB.xib in Resources */,
 				3312AEB7165477F400AFA0A8 /* SironaAlertNoneView.xib in Resources */,
 				3312AEBA16547AA600AFA0A8 /* up-arrow.png in Resources */,
 				33704AA11655ACF50020EC65 /* water.png in Resources */,
@@ -666,6 +696,12 @@
 				336DBDEC1656DCCC00F9C650 /* goldfish.png in Resources */,
 				338327EA1664A7830068D020 /* AppIcon_114.png in Resources */,
 				338327ED1664AB840068D020 /* AppIcon_57.png in Resources */,
+				3345D0F21665B725003E060D /* SironaHomeNeueView.xib in Resources */,
+				3345D0F51665BFC6003E060D /* 2012-11-27 19.18.02.png in Resources */,
+				3345D0F71665C066003E060D /* demo1.png in Resources */,
+				3345D0FA1665C4DA003E060D /* home-timecircle.png in Resources */,
+				3345D0FC1665D57D003E060D /* home-pillbottle.png in Resources */,
+				3345D0FE1665D7E9003E060D /* home-repeat.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -701,9 +737,9 @@
 				33548E5516524FD500BD1DFA /* SironaTimeCellView.m in Sources */,
 				33A4C7B01652D98B00D7A263 /* SironaTimeAddNewMedicineCell.m in Sources */,
 				33A4C7B51652DDE300D7A263 /* SironaTimeAddNewMedicineNoteCell.m in Sources */,
-				333D49CC165444D700C1CE93 /* SironaHomeViewControllerB.m in Sources */,
 				3312AEBD1654881700AFA0A8 /* SironaAlertsViewController.m in Sources */,
 				337EFFAE1655F9EE0054A006 /* UIView+Animation.m in Sources */,
+				3345D0F01665B6F2003E060D /* SironaHomeNeueView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
