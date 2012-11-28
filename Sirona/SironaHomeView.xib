@@ -33,25 +33,14 @@
 				<string key="IBProxiedObjectIdentifier">IBFirstResponder</string>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 			</object>
+			<object class="IBUITapGestureRecognizer" id="405631624"/>
+			<object class="IBUITapGestureRecognizer" id="158511440"/>
+			<object class="IBUITapGestureRecognizer" id="546847896"/>
+			<object class="IBUITapGestureRecognizer" id="478386370"/>
 			<object class="IBUIView" id="119505424">
 				<reference key="NSNextResponder"/>
 				<int key="NSvFlags">292</int>
 				<array class="NSMutableArray" key="NSSubviews">
-					<object class="IBUIImageView" id="994453046">
-						<reference key="NSNextResponder" ref="119505424"/>
-						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{182, 30}, {126, 121}}</string>
-						<reference key="NSSuperview" ref="119505424"/>
-						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="540354335"/>
-						<string key="NSReuseIdentifierKey">_NS:9</string>
-						<array key="IBUIGestureRecognizers" id="0"/>
-						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<object class="NSCustomResource" key="IBUIImage" id="257322825">
-							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">circle-pondwater.png</string>
-						</object>
-					</object>
 					<object class="IBUIImageView" id="735968128">
 						<reference key="NSNextResponder" ref="119505424"/>
 						<int key="NSvFlags">292</int>
@@ -60,14 +49,28 @@
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="447494876"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
-						<reference key="IBUIGestureRecognizers" ref="0"/>
-						<bool key="IBUIUserInteractionEnabled">NO</bool>
+						<array key="IBUIGestureRecognizers" id="0"/>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<reference key="IBUIImage" ref="257322825"/>
+						<object class="NSCustomResource" key="IBUIImage" id="363999613">
+							<string key="NSClassName">NSImage</string>
+							<string key="NSResourceName">circle-pondwater.png</string>
+						</object>
 						<object class="NSCustomResource" key="IBUIHighlightedImage">
 							<string key="NSClassName">NSImage</string>
 							<string key="NSResourceName">circle-orange-highlighted.png</string>
 						</object>
+					</object>
+					<object class="IBUIImageView" id="994453046">
+						<reference key="NSNextResponder" ref="119505424"/>
+						<int key="NSvFlags">292</int>
+						<string key="NSFrame">{{182, 30}, {126, 121}}</string>
+						<reference key="NSSuperview" ref="119505424"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="540354335"/>
+						<string key="NSReuseIdentifierKey">_NS:9</string>
+						<reference key="IBUIGestureRecognizers" ref="0"/>
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						<reference key="IBUIImage" ref="363999613"/>
 					</object>
 					<object class="IBUIImageView" id="570248674">
 						<reference key="NSNextResponder" ref="119505424"/>
@@ -312,7 +315,6 @@
 						<string key="NSFrame">{{244, 362}, {57, 50}}</string>
 						<reference key="NSSuperview" ref="119505424"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -366,10 +368,6 @@
 				</object>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 			</object>
-			<object class="IBUITapGestureRecognizer" id="478386370"/>
-			<object class="IBUITapGestureRecognizer" id="546847896"/>
-			<object class="IBUITapGestureRecognizer" id="158511440"/>
-			<object class="IBUITapGestureRecognizer" id="405631624"/>
 		</array>
 		<object class="IBObjectContainer" key="IBDocument.Objects">
 			<array class="NSMutableArray" key="connectionRecords">

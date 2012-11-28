@@ -8,10 +8,10 @@
 
 #import "SironaAppDelegate.h"
 #import "SironaHomeViewController.h"
+#import "SironaHomeViewControllerB.h"
 #import "SironaTimeViewController.h"
 #import "SironaLibraryViewController.h"
 #import "SironaSettingsViewController.h"
-#import "SironaHomeNeueView.h"
 #import "SironaAlertList.h"
 #import "SironaAlertsViewController.h"
 
@@ -28,7 +28,7 @@
     // Override point for customization after application launch.
     
     // First instantiate instances of all of the different UIViewControllers
-    SironaHomeNeueView *shvc = [[SironaHomeNeueView alloc] init];
+    SironaHomeViewController *shvc = [[SironaHomeViewController alloc] init];
     SironaAlertsViewController *savc = [[SironaAlertsViewController alloc] init];
     SironaLibraryViewController *slvc = [[SironaLibraryViewController alloc] init];
     
@@ -45,10 +45,6 @@
     
     // Set the color of the status bar to be black instead of green
     [application setStatusBarStyle:UIStatusBarStyleBlackOpaque];
-    
-    // Set title for the libraryViewController to "Library"
-    [homeViewController setTitle:@"Home"];
-    [libraryViewController setTitle:@"Library"];
     
     // Create the tab bar controller
     UITabBarController *tabBarController = [[UITabBarController alloc] init];
