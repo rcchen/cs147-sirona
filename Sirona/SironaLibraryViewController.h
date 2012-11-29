@@ -10,7 +10,6 @@
 
 #import <Foundation/Foundation.h>
 
-#import "SironaLibraryDetailViewController.h"
 #import "SironaLibraryCellView.h"
 
 @interface SironaLibraryViewController : UITableViewController

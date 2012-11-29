@@ -103,7 +103,7 @@
             SironaLibraryItem *med = [item getLibraryItem];
             NSMutableString *medLabel = [[NSMutableString alloc] init];
             if (med) {
-                [medLabel appendFormat:@"%@", [med getBrand]];
+                [medLabel appendFormat:@"%@", [med getName]];
             }
             
             [[utvc detailTextLabel] setText:medLabel];
@@ -166,15 +166,15 @@
 - (void)viewDidLoad {
     
     // Get the name of the brand of the library item
-    NSString *brand = [[item getLibraryItem] getBrand];
+    NSString *name = [[item getLibraryItem] getName];
     
     // If there is no brand, then set the title to new alert
-    if (!brand)
+    if (!name)
         self.title = @"New alert";
     
     // Otherwise use the brand name of the item as the title
     else
-        self.title = brand;
+        self.title = name;
     
 }
 
@@ -196,15 +196,15 @@
     [self.tableView reloadData];
     
     // Get the name of the brand of the library item
-    NSString *brand = [[item getLibraryItem] getBrand];
+    NSString *name = [[item getLibraryItem] getName];
     
     // If there is no brand, then set the title to new alert
-    if (!brand)
+    if (!name)
         self.title = @"New alert";
     
     // Otherwise use the brand name of the item as the title
     else
-        self.title = brand;
+        self.title = name;
 }
 
 

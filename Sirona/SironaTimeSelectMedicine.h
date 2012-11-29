@@ -9,7 +9,6 @@
 #import <Foundation/Foundation.h>
 
 #import "SironaAlertItem.h"
-#import "SironaLibraryDetailViewController.h"
 #import "SironaLibraryCellView.h"
 
 @interface SironaTimeSelectMedicine : UITableViewController

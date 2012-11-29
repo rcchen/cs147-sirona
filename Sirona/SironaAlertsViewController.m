@@ -141,8 +141,8 @@
     }
 
     SironaAlertItem *sai = [alerts objectAtIndex:[indexPath row]];
-    [[cell cellMain] setText:[[sai getLibraryItem] getBrand]];
-    [[cell cellSecondary] setText:[[sai getLibraryItem] getCategory]];
+    [[cell cellMain] setText:[[sai getLibraryItem] getName]];
+    [[cell cellSecondary] setText:[[sai getLibraryItem] getDosage]];
     
     NSMutableString *tertiaryText = [[NSMutableString alloc] init];
     if ([[sai getAlertDays] count] == 0)
@@ -225,7 +225,7 @@
             NSLog(@"Date: %@", dateFromString);
             
             NSMutableString *alertBody = [[NSMutableString alloc] init];
-            [alertBody appendFormat:@"Time to take your %@", [[alertItem getLibraryItem] getBrand]];
+            [alertBody appendFormat:@"Time to take your %@", [[alertItem getLibraryItem] getName]];
             
             // Create and set properties of the UILocalNotification
             UILocalNotification *notif = [[UILocalNotification alloc] init];

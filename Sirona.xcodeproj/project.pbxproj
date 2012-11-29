@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		33070760164C81B300DCC33B /* SironaLibraryDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3307075E164C81B300DCC33B /* SironaLibraryDetailViewController.m */; };
-		33070761164C81B300DCC33B /* SironaLibraryDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3307075F164C81B300DCC33B /* SironaLibraryDetailView.xib */; };
 		330C86BF164C726000461063 /* circle-orange.png in Resources */ = {isa = PBXBuildFile; fileRef = 330C86BC164C726000461063 /* circle-orange.png */; };
 		330C86C0164C726000461063 /* circle-green.png in Resources */ = {isa = PBXBuildFile; fileRef = 330C86BD164C726000461063 /* circle-green.png */; };
 		330C86C1164C726000461063 /* circle-blue.png in Resources */ = {isa = PBXBuildFile; fileRef = 330C86BE164C726000461063 /* circle-blue.png */; };
@@ -107,12 +105,10 @@
 		7130FF151651E74A003F2EB4 /* SironaTimeSelectMedicineCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7130FF141651E749003F2EB4 /* SironaTimeSelectMedicineCellView.m */; };
 		7130FF1C165213B0003F2EB4 /* SironaTimeAddNewMedicine.m in Sources */ = {isa = PBXBuildFile; fileRef = 7130FF1B165213B0003F2EB4 /* SironaTimeAddNewMedicine.m */; };
 		7130FF1F16521562003F2EB4 /* SironaTimeAddNewMedicine.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7130FF1E16521562003F2EB4 /* SironaTimeAddNewMedicine.xib */; };
+		7182CF121666E59F00EFCE3B /* SironaMedicationDetailedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7182CF111666E59E00EFCE3B /* SironaMedicationDetailedViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		3307075D164C81B300DCC33B /* SironaLibraryDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SironaLibraryDetailViewController.h; sourceTree = "<group>"; };
-		3307075E164C81B300DCC33B /* SironaLibraryDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SironaLibraryDetailViewController.m; sourceTree = "<group>"; };
-		3307075F164C81B300DCC33B /* SironaLibraryDetailView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SironaLibraryDetailView.xib; sourceTree = "<group>"; };
 		330C86BC164C726000461063 /* circle-orange.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "circle-orange.png"; sourceTree = "<group>"; };
 		330C86BD164C726000461063 /* circle-green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "circle-green.png"; sourceTree = "<group>"; };
 		330C86BE164C726000461063 /* circle-blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "circle-blue.png"; sourceTree = "<group>"; };
@@ -246,6 +242,8 @@
 		7130FF1A165213AF003F2EB4 /* SironaTimeAddNewMedicine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SironaTimeAddNewMedicine.h; sourceTree = "<group>"; };
 		7130FF1B165213B0003F2EB4 /* SironaTimeAddNewMedicine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SironaTimeAddNewMedicine.m; sourceTree = "<group>"; };
 		7130FF1E16521562003F2EB4 /* SironaTimeAddNewMedicine.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SironaTimeAddNewMedicine.xib; sourceTree = "<group>"; };
+		7182CF101666E59E00EFCE3B /* SironaMedicationDetailedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SironaMedicationDetailedViewController.h; sourceTree = "<group>"; };
+		7182CF111666E59E00EFCE3B /* SironaMedicationDetailedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SironaMedicationDetailedViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -481,8 +479,6 @@
 			children = (
 				33DD20F6164B963E00B4E5F7 /* SironaHomeViewController.h */,
 				33DD20F7164B963E00B4E5F7 /* SironaHomeViewController.m */,
-				3307075D164C81B300DCC33B /* SironaLibraryDetailViewController.h */,
-				3307075E164C81B300DCC33B /* SironaLibraryDetailViewController.m */,
 				33DD210B164BA72B00B4E5F7 /* SironaLibraryViewController.h */,
 				33DD210C164BA72B00B4E5F7 /* SironaLibraryViewController.m */,
 				33DD212B164C46E800B4E5F7 /* SironaSettingsViewController.h */,
@@ -505,6 +501,8 @@
 				3312AEBC1654881700AFA0A8 /* SironaAlertsViewController.m */,
 				3345D0EE1665B6F2003E060D /* SironaHomeNeueView.h */,
 				3345D0EF1665B6F2003E060D /* SironaHomeNeueView.m */,
+				7182CF101666E59E00EFCE3B /* SironaMedicationDetailedViewController.h */,
+				7182CF111666E59E00EFCE3B /* SironaMedicationDetailedViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -525,7 +523,6 @@
 				3345D0F11665B725003E060D /* SironaHomeNeueView.xib */,
 				33DD2130164C5CCE00B4E5F7 /* SironaHomeView.xib */,
 				33562259164DA13900A30BE5 /* SironaLibraryCellView.xib */,
-				3307075F164C81B300DCC33B /* SironaLibraryDetailView.xib */,
 				33DD210E164BA81B00B4E5F7 /* SironaLibraryView.xib */,
 				33DD212E164C49BF00B4E5F7 /* SironaSettingsView.xib */,
 				7130FF1E16521562003F2EB4 /* SironaTimeAddNewMedicine.xib */,
@@ -661,7 +658,6 @@
 				330C86BF164C726000461063 /* circle-orange.png in Resources */,
 				330C86C0164C726000461063 /* circle-green.png in Resources */,
 				330C86C1164C726000461063 /* circle-blue.png in Resources */,
-				33070761164C81B300DCC33B /* SironaLibraryDetailView.xib in Resources */,
 				33562258164D996700A30BE5 /* SironaTimeEditTimesView.xib in Resources */,
 				3356225A164DA13900A30BE5 /* SironaLibraryCellView.xib in Resources */,
 				33562260164DA59B00A30BE5 /* SironaTimeCellView.xib in Resources */,
@@ -721,7 +717,6 @@
 				33DD2123164C39F600B4E5F7 /* SironaLibraryList.m in Sources */,
 				33DD2126164C3AA700B4E5F7 /* SironaLibraryItem.m in Sources */,
 				33DD212D164C46E800B4E5F7 /* SironaSettingsViewController.m in Sources */,
-				33070760164C81B300DCC33B /* SironaLibraryDetailViewController.m in Sources */,
 				3331D80B164CFF3400D9FB7E /* SironaLibraryRootViewController.m in Sources */,
 				3356224F164D798700A30BE5 /* SironaAlertItem.m in Sources */,
 				33562253164D799100A30BE5 /* SironaAlertList.m in Sources */,
@@ -740,6 +735,7 @@
 				3312AEBD1654881700AFA0A8 /* SironaAlertsViewController.m in Sources */,
 				337EFFAE1655F9EE0054A006 /* UIView+Animation.m in Sources */,
 				3345D0F01665B6F2003E060D /* SironaHomeNeueView.m in Sources */,
+				7182CF121666E59F00EFCE3B /* SironaMedicationDetailedViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -71,14 +71,14 @@
 {
     SironaLibraryItem *sli = [medicines objectAtIndex:[indexPath row]];
     SironaTimeSelectMedicineCellView *slcv = [tableView dequeueReusableCellWithIdentifier:@"SironaTimeSelectMedicineCellView"];
-    [[slcv cellMain] setText:[sli getBrand]];
-    [[slcv cellSecondary] setText:[sli getCategory]];
+    [[slcv cellMain] setText:[sli getName]];
+    [[slcv cellSecondary] setText:[sli getDosage]];
     slcv.accessoryType = UITableViewCellAccessoryNone;
 
     //UITableViewCell *cell = [[self tableView] cellForRowAtIndexPath:indexPath];
 
     // If the medication was previously selected, set the checkmark
-    if ([[[item getLibraryItem] getBrand] isEqualToString: [sli getBrand]]) {
+    if ([[[item getLibraryItem] getId] isEqualToString: [sli getId]]) {
         slcv.accessoryType = UITableViewCellAccessoryCheckmark;
         NSLog(@"%@", [item getLibraryItem]);
     }

@@ -1,18 +1,18 @@
 //
-//  SironaTimeAddNewMedicine.m
+//  SironaMedicationDetailedViewController.m
 //  Sirona
 //
-//  Created by Catherine Lu on 11/12/12.
+//  Created by Catherine Lu on 11/28/12.
 //  Copyright (c) 2012 Roger Chen. All rights reserved.
 //
 
-#import "SironaTimeAddNewMedicine.h"
-#import "SironaTimeAddNewMedicineCell.h"
-#import "SironaTimeAddNewMedicineNoteCell.h"
-#import "SironaLibraryItem.h"
-#import "SironaLibraryList.h"
+#import "SironaMedicationDetailedViewController.h"
 
-@implementation SironaTimeAddNewMedicine
+#define FONT_SIZE 14.0f
+#define CELL_CONTENT_WIDTH 320.0f
+#define CELL_CONTENT_MARGIN 10.0f
+
+@implementation SironaMedicationDetailedViewController
 
 @synthesize medicineSections;
 @synthesize textFields;
@@ -34,7 +34,7 @@
         [alert show];
         return;
     }
-
+    
     NSMutableArray *userAnswers = [[NSMutableArray alloc] init];
     for (int i = 0; i < 13; i++)
         [userAnswers addObject:@""];
@@ -42,31 +42,31 @@
     for (int i = 0; i < [textFields count]; i++) {
         NSString *answer = [[textFields objectAtIndex:i] text];
         // If answer is blank somehow or if only filled with placeholder
-        if ([answer length] == 0 || (i != 12 && [(UITextField *)[textFields objectAtIndex:i] textColor] == [UIColor lightGrayColor]))
+        if ([answer length] == 0 || (i != [textFields count] - 1 && [(UITextField *)[textFields objectAtIndex:i] textColor] == [UIColor lightGrayColor]))
             answer = @"";
         [userAnswers replaceObjectAtIndex:i withObject:answer];
     }
     
-    // Save the information
-    SironaLibraryItem *sli = [[SironaLibraryItem alloc] initWithMDataName:[userAnswers objectAtIndex:0] mdataDosage:[userAnswers objectAtIndex:1] mdataRoute:[userAnswers objectAtIndex:2] mdataForm:[userAnswers objectAtIndex:3] mdataQuantity:[userAnswers objectAtIndex:4] mdataFor:[userAnswers objectAtIndex:5] mdataInstructions:[userAnswers objectAtIndex:6] mdataPrecautions:[userAnswers objectAtIndex:7] mdataSideEffects:[userAnswers objectAtIndex:8] mdataPharmacyPhone:[userAnswers objectAtIndex:9] mdataPharmacy:[userAnswers objectAtIndex:10] mdataDoctor:[userAnswers objectAtIndex:11] mdataNotes:[userAnswers objectAtIndex:12]];
-    
-    [item setLibraryItem:sli];
-    
-    // Now save the new medication to NSUserDefaults
+    // Save the new medication to NSUserDefaults
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
     NSData *encodedCustomMedList = [prefs objectForKey:@"customMedList"];
-    
-    NSMutableArray *customMeds;
-    
-    if (encodedCustomMedList) {
-        customMeds = (NSMutableArray *)[NSKeyedUnarchiver unarchiveObjectWithData:encodedCustomMedList];
-    } else {
-        customMeds = [[NSMutableArray alloc] init];
+    NSMutableArray *customMeds = (NSMutableArray *)[NSKeyedUnarchiver unarchiveObjectWithData:encodedCustomMedList];
+    // Removes the old item
+    for (SironaLibraryItem* i in customMeds) {
+        if ([[i getId] isEqualToString:[item getId]]) {
+            [customMeds removeObjectIdenticalTo:i];
+            break;
+        }
     }
-    [customMeds addObject:sli];
+        
+    // Create updated item
+    SironaLibraryItem* newItem = [[SironaLibraryItem alloc] initWithMDataName:[userAnswers objectAtIndex:0] mdataDosage:[userAnswers objectAtIndex:1] mdataRoute:[userAnswers objectAtIndex:2] mdataForm:[userAnswers objectAtIndex:3] mdataQuantity:[userAnswers objectAtIndex:4] mdataFor:[userAnswers objectAtIndex:5] mdataInstructions:[userAnswers objectAtIndex:6] mdataPrecautions:[userAnswers objectAtIndex:7] mdataSideEffects:[userAnswers objectAtIndex:8] mdataPharmacyPhone:[userAnswers objectAtIndex:9] mdataPharmacy:[userAnswers objectAtIndex:10] mdataDoctor:[userAnswers objectAtIndex:11] mdataNotes:[userAnswers objectAtIndex:12]];
     
+    // Update the med list
+    [customMeds addObject:newItem];
     encodedCustomMedList = [NSKeyedArchiver archivedDataWithRootObject:customMeds];
     [prefs setObject:encodedCustomMedList forKey:@"customMedList"];
+    
     
     // Set the updated alerts from NSUserDefaults
     NSData *encodedAlertList = [prefs objectForKey:@"alertList"];
@@ -75,27 +75,26 @@
         alertList = prefAlerts;
     }
     
-    // Remove the object if it exists already
-    for (SironaAlertItem *sai in alertList) {
-        NSLog(@"AlertID: %@, Item: %@", sai.getAlertId, item.getAlertId);
-        if ([[sai getAlertId] isEqualToString:[item getAlertId]]) {
-            NSLog(@"Removing duplicate object");
-            [alertList removeObject:sai];
-            break;
+    // Update alerts that use this medication
+    for (SironaAlertItem *sai in alertList) {        
+        if ([[[sai getLibraryItem] getId] isEqualToString:[item getId]]) {
+            NSLog(@"Updating alert");
+            [sai setLibraryItem:newItem];
         }
     }
-    
-    // Add the item in
-    [alertList addObject:item];
-    
-    NSLog(@"AlertID: %@", [item getAlertId]);
     
     // Now save it to NSUserDefaults
     encodedAlertList = [NSKeyedArchiver archivedDataWithRootObject:alertList];
     [prefs setObject:encodedAlertList forKey:@"alertList"];
     
-    int count = [self.navigationController.viewControllers count];
-    [self.navigationController popToViewController:[[self.navigationController viewControllers] objectAtIndex:count-3] animated:YES];
+    item = newItem;
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Saved"
+                                                    message:[NSString stringWithFormat:@"%@ has been saved", [item getName]]
+                                                   delegate:nil
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil];
+    [alert show];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -123,11 +122,60 @@
         
         // sets tag of the inputField equal to the global row across sections
         inputField.tag = [indexPath section] * 5 + [indexPath row];
-
+        
+        NSString *previousEntry;
+        switch (inputField.tag) {
+            case 0:
+                previousEntry = [item getName];
+                break;
+            case 1:
+                previousEntry = [item getDosage];
+                break;
+            case 2:
+                previousEntry = [item getRoute];
+                break;
+            case 3:
+                previousEntry = [item getForm];
+                break;
+            case 4:
+                previousEntry = [item getQuantity];
+                break;
+            case 5:
+                previousEntry = [item getFor];
+                break;
+            case 6:
+                previousEntry = [item getInstructions];
+                break;
+            case 7:
+                previousEntry = [item getPrecautions];
+                break;
+            case 8:
+                previousEntry = [item getSideEffects];
+                break;
+            case 9:
+                previousEntry = [item getPharmacyPhone];
+                break;
+            case 10:
+                previousEntry = [item getPharmacy];
+                break;
+            case 11:
+                previousEntry = [item getDoctor];
+                break;
+            default:
+                NSLog(@"Default");
+                break;
+        }
+        
+        if (previousEntry.length == 0) {
+            previousEntry = [placeholderText objectAtIndex:inputField.tag];
+            inputField.textColor = [UIColor lightGrayColor];
+            inputField.font = [UIFont italicSystemFontOfSize:14];
+        } else {
+            inputField.font = [UIFont fontWithName:@"Helvetica" size:14];
+        }
+        
         // sets the placeholder text initially
-        inputField.text = [placeholderText objectAtIndex:inputField.tag];
-        inputField.textColor = [UIColor lightGrayColor];
-        inputField.font = [UIFont italicSystemFontOfSize:14];
+        inputField.text = previousEntry;
         
         [textFields addObject:inputField];
         
@@ -137,6 +185,10 @@
         inputField.backgroundColor = [UIColor clearColor];
         [cell addSubview:inputField];
         inputField.font = [UIFont fontWithName:@"Helvetica" size:14];
+        inputField.tag = 12;
+        
+        if ([[item getNotes] length] > 0)
+            inputField.text = [item getNotes];
         
         [textFields addObject:inputField];
         
@@ -198,18 +250,32 @@
     } return 44.0f;
 }
 
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
+
+// THIS DOESN'T EVEN BRING UP THE RED DELETE BUTTON...
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        // TODO: implement this
+        
+        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:YES];
+    }
+    
+}
+
 - (id)init {
     if (self) {
         
         // Create a new bar button item that will send
         // addNewItem: to ItemsViewController
         UIBarButtonItem *bbi = [[UIBarButtonItem alloc]
-                                initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                                initWithBarButtonSystemItem:UIBarButtonSystemItemSave
                                 target:self
                                 action:@selector(saveMedicine:)];
         [[self navigationItem] setRightBarButtonItem:bbi];
         
-        self.title = @"Add Medicine";
+        self.title = [item getName];
         
     }
     
@@ -243,7 +309,7 @@
     
     UINib *nib2 = [UINib nibWithNibName:@"SironaTimeAddNewMedicineNoteCell" bundle:nil];
     [[self tableView] registerNib:nib2 forCellReuseIdentifier:@"SironaTimeAddNewMedicineNoteCell"];
-
+    
     UINib *nib3 = [UINib nibWithNibName:@"SironaTimeAddNewMedicineNoteCell" bundle:nil];
     [[self tableView] registerNib:nib3 forCellReuseIdentifier:@"SironaTimeAddNewMedicineNoteCell"];
 }

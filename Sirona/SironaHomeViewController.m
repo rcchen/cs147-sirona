@@ -150,10 +150,10 @@
     
     [self circleAppear];
     
-    labelTwo.text = [[[topFive objectAtIndex:0] getLibraryItem] getBrand];
-    labelFour.text = [[[topFive objectAtIndex:1] getLibraryItem] getBrand];
-    labelOne.text = [[[topFive objectAtIndex:3] getLibraryItem] getBrand];
-    labelFive.text = [[[topFive objectAtIndex:4] getLibraryItem] getBrand];
+    labelTwo.text = [[[topFive objectAtIndex:0] getLibraryItem] getName];
+    labelFour.text = [[[topFive objectAtIndex:1] getLibraryItem] getName];
+    labelOne.text = [[[topFive objectAtIndex:3] getLibraryItem] getName];
+    labelFive.text = [[[topFive objectAtIndex:4] getLibraryItem] getName];
     
     //[self animateCircles];
     bobbingTimer = [NSTimer scheduledTimerWithTimeInterval:4.2 target:self selector:@selector(animateUpAndDown) userInfo:nil repeats:YES];
@@ -285,7 +285,7 @@
     while ([bigFive count] < 5) {
         
         SironaAlertItem *item = [[SironaAlertItem alloc] init];
-        SironaLibraryItem *libItem = [[SironaLibraryItem alloc] initWithMDataBrand:@":)" mdataCategory:@"" mdataId:@"" mdataName:@"" mdataPrecautions:@"" mdataSideEffects:@"" mdataNotes:@""];
+        SironaLibraryItem *libItem = [[SironaLibraryItem alloc] init];
         [item setLibraryItem:libItem];
         [bigFive addObject:item];
         

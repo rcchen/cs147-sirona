@@ -1,16 +1,15 @@
 //
-//  SironaTimeAddNewMedicine.h
+//  SironaMedicationDetailedViewController.h
 //  Sirona
 //
-//  Created by Catherine Lu on 11/12/12.
+//  Created by Catherine Lu on 11/28/12.
 //  Copyright (c) 2012 Roger Chen. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
-
 #import "SironaAlertItem.h"
 
-@interface SironaTimeAddNewMedicine : UITableViewController <UITextFieldDelegate>
+@interface SironaMedicationDetailedViewController : UITableViewController
 {
     
 }
@@ -19,7 +18,7 @@
 @property NSArray *medicineSections;
 @property NSMutableArray *textFields;
 @property NSArray *placeholderText;
-@property (nonatomic, strong)SironaAlertItem *item;
+@property (nonatomic, strong)SironaLibraryItem *item;
 @property NSMutableArray *alertList;
 
 // Default setter
