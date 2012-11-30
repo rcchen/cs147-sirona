@@ -107,8 +107,19 @@
     
     // Push the add new medicine view controller
     SironaTimeAddNewMedicine *stanm = [[SironaTimeAddNewMedicine alloc] init];
-    //[stanm setMedicines:medicines];
+    // [stanm setMedicines:medicines];
     [[self navigationController] pushViewController:stanm animated:YES];
+    
+}
+
+- (void)viewDidLoad {
+    
+    [medTitle setText:@"Vitamins"];
+    [medDescription setText:@"Remember to take after each meal"];
+    [timeNumber setText:@"23"];
+    [timeUnits setText:@"minutes"];
+    [medDosage setText:@"2 pills"];
+    [medRepetitions setText:@"3 times"];
     
 }
 

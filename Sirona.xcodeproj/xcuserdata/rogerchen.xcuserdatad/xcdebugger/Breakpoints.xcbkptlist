@@ -47,16 +47,16 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Sirona/SironaHomeNeueView.h"
-         timestampString = "375777619.959536"
+         timestampString = "376003649.68347"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "21"
-         endingLineNumber = "21"
+         startingLineNumber = "27"
+         endingLineNumber = "27"
          landmarkName = "@interface SironaHomeNeueView"
          landmarkType = "2">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Sirona/SironaTimeAddNewMedicine.m"
