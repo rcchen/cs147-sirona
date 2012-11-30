@@ -8,6 +8,7 @@
 
 #import "SironaAppDelegate.h"
 #import "SironaHomeViewController.h"
+#import "SironaHomeOnboardingController.h"
 #import "SironaTimeViewController.h"
 #import "SironaLibraryViewController.h"
 #import "SironaSettingsViewController.h"
@@ -26,6 +27,10 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
     // Override point for customization after application launch.
+    
+
+    
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"hasSeenTutorial"];
     
     // First instantiate instances of all of the different UIViewControllers
     SironaHomeNeueView *shvc = [[SironaHomeNeueView alloc] init];

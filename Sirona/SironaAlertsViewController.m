@@ -104,7 +104,6 @@
         UIView *overlayNone = [c view];
         overlayNone.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.7];
         [self.view addSubview:overlayNone];
-        
     }
 
 }

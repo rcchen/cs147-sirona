@@ -55,6 +55,9 @@
 		33BBE4BF16539C0F002449A2 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 33BBE4BB16539C0F002449A2 /* README.md */; };
 		33BBE4C016539C0F002449A2 /* release_notes.md in Resources */ = {isa = PBXBuildFile; fileRef = 33BBE4BC16539C0F002449A2 /* release_notes.md */; };
 		33BBE4C316539C3E002449A2 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 33BBE4C216539C3E002449A2 /* libz.dylib */; };
+		33BF0E451666D04F009C7C04 /* main-middle.png in Resources */ = {isa = PBXBuildFile; fileRef = 33BF0E441666D04F009C7C04 /* main-middle.png */; };
+		33BF0E481666D083009C7C04 /* SironaHomeOnboardingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33BF0E471666D083009C7C04 /* SironaHomeOnboardingController.m */; };
+		33BF0E4A1666D11E009C7C04 /* SironaHomeOnboardingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 33BF0E491666D11E009C7C04 /* SironaHomeOnboardingView.xib */; };
 		33CAFCC61651AF0200CFA474 /* SironaTimeSelectMedicine.xib in Resources */ = {isa = PBXBuildFile; fileRef = 33CAFCC51651AF0200CFA474 /* SironaTimeSelectMedicine.xib */; };
 		33CAFCCD1651AF9A00CFA474 /* SironaTimeSelectMedicine.m in Sources */ = {isa = PBXBuildFile; fileRef = 33CAFCCC1651AF9A00CFA474 /* SironaTimeSelectMedicine.m */; };
 		33CAFCCF1651B05A00CFA474 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33CAFCCE1651B05A00CFA474 /* CoreData.framework */; };
@@ -171,6 +174,10 @@
 		33BBE4BC16539C0F002449A2 /* release_notes.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = release_notes.md; sourceTree = "<group>"; };
 		33BBE4BD16539C0F002449A2 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
 		33BBE4C216539C3E002449A2 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		33BF0E441666D04F009C7C04 /* main-middle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "main-middle.png"; sourceTree = "<group>"; };
+		33BF0E461666D083009C7C04 /* SironaHomeOnboardingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SironaHomeOnboardingController.h; sourceTree = "<group>"; };
+		33BF0E471666D083009C7C04 /* SironaHomeOnboardingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SironaHomeOnboardingController.m; sourceTree = "<group>"; };
+		33BF0E491666D11E009C7C04 /* SironaHomeOnboardingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SironaHomeOnboardingView.xib; sourceTree = "<group>"; };
 		33CAFCC51651AF0200CFA474 /* SironaTimeSelectMedicine.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SironaTimeSelectMedicine.xib; sourceTree = "<group>"; };
 		33CAFCCB1651AF9A00CFA474 /* SironaTimeSelectMedicine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SironaTimeSelectMedicine.h; sourceTree = "<group>"; };
 		33CAFCCC1651AF9A00CFA474 /* SironaTimeSelectMedicine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SironaTimeSelectMedicine.m; sourceTree = "<group>"; };
@@ -306,6 +313,7 @@
 		3345D0F81665C4D0003E060D /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				33BF0E421666CFB6009C7C04 /* Onboarding */,
 				3345D0FD1665D7E9003E060D /* home-repeat.png */,
 				3345D0FB1665D57D003E060D /* home-pillbottle.png */,
 				3345D0F91665C4DA003E060D /* home-timecircle.png */,
@@ -384,6 +392,14 @@
 			);
 			name = TestFlightSDK1.1;
 			path = Sirona/TestFlightSDK1.1;
+			sourceTree = "<group>";
+		};
+		33BF0E421666CFB6009C7C04 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				33BF0E441666D04F009C7C04 /* main-middle.png */,
+			);
+			name = Onboarding;
 			sourceTree = "<group>";
 		};
 		33CAFCD01651B06C00CFA474 /* Data Models */ = {
@@ -477,6 +493,12 @@
 		33DD20F5164B961800B4E5F7 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				3312AEBB1654881600AFA0A8 /* SironaAlertsViewController.h */,
+				3312AEBC1654881700AFA0A8 /* SironaAlertsViewController.m */,
+				3345D0EE1665B6F2003E060D /* SironaHomeNeueView.h */,
+				3345D0EF1665B6F2003E060D /* SironaHomeNeueView.m */,
+				33BF0E461666D083009C7C04 /* SironaHomeOnboardingController.h */,
+				33BF0E471666D083009C7C04 /* SironaHomeOnboardingController.m */,
 				33DD20F6164B963E00B4E5F7 /* SironaHomeViewController.h */,
 				33DD20F7164B963E00B4E5F7 /* SironaHomeViewController.m */,
 				33DD210B164BA72B00B4E5F7 /* SironaLibraryViewController.h */,
@@ -521,6 +543,7 @@
 			children = (
 				3312AEB6165477F400AFA0A8 /* SironaAlertNoneView.xib */,
 				3345D0F11665B725003E060D /* SironaHomeNeueView.xib */,
+				33BF0E491666D11E009C7C04 /* SironaHomeOnboardingView.xib */,
 				33DD2130164C5CCE00B4E5F7 /* SironaHomeView.xib */,
 				33562259164DA13900A30BE5 /* SironaLibraryCellView.xib */,
 				33DD210E164BA81B00B4E5F7 /* SironaLibraryView.xib */,
@@ -698,6 +721,8 @@
 				3345D0FA1665C4DA003E060D /* home-timecircle.png in Resources */,
 				3345D0FC1665D57D003E060D /* home-pillbottle.png in Resources */,
 				3345D0FE1665D7E9003E060D /* home-repeat.png in Resources */,
+				33BF0E451666D04F009C7C04 /* main-middle.png in Resources */,
+				33BF0E4A1666D11E009C7C04 /* SironaHomeOnboardingView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -735,6 +760,7 @@
 				3312AEBD1654881700AFA0A8 /* SironaAlertsViewController.m in Sources */,
 				337EFFAE1655F9EE0054A006 /* UIView+Animation.m in Sources */,
 				3345D0F01665B6F2003E060D /* SironaHomeNeueView.m in Sources */,
+				33BF0E481666D083009C7C04 /* SironaHomeOnboardingController.m in Sources */,
 				7182CF121666E59F00EFCE3B /* SironaMedicationDetailedViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

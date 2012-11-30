@@ -21,6 +21,11 @@
 @synthesize item;
 @synthesize alertList;
 
+- (void)setMedicines:(NSMutableArray *)medicines
+{
+    medicineSections = medicines;
+}
+
 - (IBAction)saveMedicine:(id)sender
 {
     
@@ -39,6 +44,8 @@
     NSMutableArray *userAnswers = [[NSMutableArray alloc] init];
     for (int i = 0; i < 13; i++)
         [userAnswers addObject:@""];
+    
+    NSLog(@"Got here");
     
     for (int i = 0; i < [textFields count]; i++) {
         NSString *answer = [[textFields objectAtIndex:i] text];
