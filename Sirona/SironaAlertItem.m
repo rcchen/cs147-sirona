@@ -64,7 +64,7 @@
 }
 
 - (NSComparisonResult)compare:(SironaAlertItem *)otherObject {
-    return self.getLibraryItem.getBrand.length - otherObject.getLibraryItem.getBrand.length;
+    return self.getLibraryItem.getName.length - otherObject.getLibraryItem.getName.length;
 }
 
 - (void)encodeWithCoder:(NSCoder *)encoder {

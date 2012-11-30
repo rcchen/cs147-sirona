@@ -6,7 +6,7 @@
 //  Copyright (c) 2012 Roger Chen. All rights reserved.
 //
 
-#import "SironaLibraryDetailViewController.h"
+#import "SironaMedicationDetailedViewController.h"
 #import "SironaLibraryViewController.h"
 #import "SironaLibraryList.h"
 #import "SironaLibraryItem.h"
@@ -29,14 +29,14 @@
         
         // Get the tab bar item and give it a label
         UITabBarItem *tbi = [self tabBarItem];
-        [tbi setTitle:@"My Medications"];
+        [tbi setTitle:@"My Meds"];
         
         // Now give it an image
         UIImage *i = [UIImage imageNamed:@"pill.png"];
         [tbi setImage:i];
         
         UINavigationItem *n = [self navigationItem];
-        [n setTitle:NSLocalizedString(@"My Medications", @"Application title")];
+        [n setTitle:NSLocalizedString(@"My Meds", @"Application title")];
         
         medicines = [[NSMutableArray alloc] init];
 
@@ -59,19 +59,18 @@
 {
     SironaLibraryItem *sli = [medicines objectAtIndex:[indexPath row]];
     SironaLibraryCellView *slcv = [tableView dequeueReusableCellWithIdentifier:@"SironaLibraryCellView"];
-    [[slcv cellMain] setText:[sli getBrand]];
-    [[slcv cellSecondary] setText:[sli getCategory]];
+    [[slcv cellMain] setText:[sli getName]];
+    [[slcv cellSecondary] setText:[sli getDosage]];
     return slcv;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-    SironaLibraryDetailViewController *sldvc = [[SironaLibraryDetailViewController alloc] init];
+    SironaMedicationDetailedViewController *smdvc = [[SironaMedicationDetailedViewController alloc] init];
     SironaLibraryItem *selectedItem = [medicines objectAtIndex:[indexPath row]];
-    [sldvc setItem:selectedItem];
+    [smdvc setItem:selectedItem];
     
-    [[self navigationController] pushViewController:sldvc animated:YES];
+    [[self navigationController] pushViewController:smdvc animated:YES];
     
 }
 
@@ -96,10 +95,12 @@
     [medicines sortUsingComparator:^(id one, id two) {
         SironaLibraryItem *itemOne = (SironaLibraryItem *)one;
         SironaLibraryItem *itemTwo = (SironaLibraryItem *)two;
-        return [[itemOne getBrand] caseInsensitiveCompare:[itemTwo getBrand]];
+        return [[itemOne getName] caseInsensitiveCompare:[itemTwo getName]];
     }];
 
     NSLog(@"After: %u", [medicines count]);
+    
+    [self.tableView reloadData];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -117,6 +118,7 @@
     [super viewDidLoad];
     UINib *nib = [UINib nibWithNibName:@"SironaLibraryCellView" bundle:nil];
     [[self tableView] registerNib:nib forCellReuseIdentifier:@"SironaLibraryCellView"];
+    [self refreshDisplay];
 }
 
 - (id)initWithStyle:(UITableViewStyle)style {
