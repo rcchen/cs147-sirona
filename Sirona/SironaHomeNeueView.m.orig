@@ -94,6 +94,10 @@
     
     // Push the add new medicine view controller
     SironaTimeAddNewMedicine *stanm = [[SironaTimeAddNewMedicine alloc] init];
+<<<<<<< HEAD
+    // [stanm setMedicines:medicines];
+=======
+>>>>>>> 82f31d12eaf62a038e51aa54a702126a887e747a
     [[self navigationController] pushViewController:stanm animated:YES];
     
 }
