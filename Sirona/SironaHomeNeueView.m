@@ -8,6 +8,9 @@
 
 #import "SironaHomeNeueView.h"
 
+#import "SironaTimeEditAlertView.h"
+#import "SironaTimeAddNewMedicine.h"
+
 @implementation SironaHomeNeueView
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -30,7 +33,7 @@
         [n setTitle:NSLocalizedString(@"Home", @"Application title")];
         
         // boolean key for seeing the tutorial
-        if(![[NSUserDefaults standardUserDefaults] boolForKey:@"hasSeenTutorial"]) {
+        /*if(![[NSUserDefaults standardUserDefaults] boolForKey:@"hasSeenTutorial"]) {
             
             // do something
             NSLog(@"Haven't seen the tutorial yet");
@@ -43,7 +46,7 @@
             
             [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"hasSeenTutorial"];
             
-        }
+        }*/
         
         //[[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"hasSeenTutorial"];
 
@@ -77,11 +80,35 @@
     
     NSLog(@"Pressed the add alert button");
     
+    SironaTimeEditAlertView *stevc = [[SironaTimeEditAlertView alloc] init];
+    SironaAlertItem *newItem = [[SironaAlertItem alloc] init];
+    [newItem setAlertId];
+    [stevc setItem:newItem];
+    [[self navigationController] pushViewController:stevc animated:YES];
+    
 }
 
 - (IBAction)onAddMed:(id)sender {
     
     NSLog(@"Pressed the add medication button");
+    
+    NSMutableArray *medicines = [[NSMutableArray alloc] init];
+    
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    NSData *encodedCustomMedList = [prefs objectForKey:@"customMedList"];
+    
+    // If there are custom meds, they will show up in the list
+    if (encodedCustomMedList) {
+        NSMutableArray *customMeds = (NSMutableArray *)[NSKeyedUnarchiver unarchiveObjectWithData:encodedCustomMedList];
+        for (SironaLibraryItem *sli in customMeds) {
+            [medicines addObject:sli];
+        }
+    }
+    
+    // Push the add new medicine view controller
+    SironaTimeAddNewMedicine *stanm = [[SironaTimeAddNewMedicine alloc] init];
+    //[stanm setMedicines:medicines];
+    [[self navigationController] pushViewController:stanm animated:YES];
     
 }
 

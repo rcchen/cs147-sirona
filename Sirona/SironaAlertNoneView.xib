@@ -41,6 +41,7 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{17, 37}, {280, 29}}</string>
 						<reference key="NSSuperview" ref="175407308"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="343279546"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
@@ -77,6 +78,8 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{237, 8}, {58, 44}}</string>
 						<reference key="NSSuperview" ref="175407308"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -88,6 +91,7 @@
 				</array>
 				<string key="NSFrameSize">{320, 480}</string>
 				<reference key="NSSuperview"/>
+				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="730648933"/>
 				<string key="NSReuseIdentifierKey">_NS:9</string>
 				<object class="IBUIScreenMetrics" key="IBUISimulatedDestinationMetrics">
@@ -185,7 +189,7 @@
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<object class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
 			<string key="NS.key.0">up-arrow.png</string>
-			<string key="NS.object.0">{16, 16}</string>
+			<string key="NS.object.0">{67, 62}</string>
 		</object>
 		<string key="IBCocoaTouchPluginVersion">1930</string>
 	</data>
