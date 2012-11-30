@@ -115,6 +115,12 @@
 - (void)viewDidUnload {
     
     timeCircle = nil;
+    medTitle = nil;
+    medDescription = nil;
+    timeNumber = nil;
+    timeUnits = nil;
+    medDosage = nil;
+    medRepetitions = nil;
     [super viewDidUnload];
     
 }

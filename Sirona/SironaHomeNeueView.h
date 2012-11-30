@@ -11,6 +11,12 @@
 @interface SironaHomeNeueView : UIViewController
 {
     __weak IBOutlet UIImageView *timeCircle;
+    __weak IBOutlet UILabel *medTitle;
+    __weak IBOutlet UILabel *medDescription;
+    __weak IBOutlet UILabel *timeNumber;
+    __weak IBOutlet UILabel *timeUnits;
+    __weak IBOutlet UILabel *medDosage;
+    __weak IBOutlet UILabel *medRepetitions;
 }
 
 - (IBAction)onTimePress:(id)sender;
