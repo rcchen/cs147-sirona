@@ -17,6 +17,7 @@
 @synthesize medicineSections;
 @synthesize textFields;
 @synthesize placeholderText;
+@synthesize inputtedText;
 @synthesize item;
 @synthesize alertList;
 
@@ -123,49 +124,53 @@
         // sets tag of the inputField equal to the global row across sections
         inputField.tag = [indexPath section] * 5 + [indexPath row];
         
-        NSString *previousEntry;
-        switch (inputField.tag) {
-            case 0:
-                previousEntry = [item getName];
-                break;
-            case 1:
-                previousEntry = [item getDosage];
-                break;
-            case 2:
-                previousEntry = [item getRoute];
-                break;
-            case 3:
-                previousEntry = [item getForm];
-                break;
-            case 4:
-                previousEntry = [item getQuantity];
-                break;
-            case 5:
-                previousEntry = [item getFor];
-                break;
-            case 6:
-                previousEntry = [item getInstructions];
-                break;
-            case 7:
-                previousEntry = [item getPrecautions];
-                break;
-            case 8:
-                previousEntry = [item getSideEffects];
-                break;
-            case 9:
-                previousEntry = [item getPharmacyPhone];
-                break;
-            case 10:
-                previousEntry = [item getPharmacy];
-                break;
-            case 11:
-                previousEntry = [item getDoctor];
-                break;
-            default:
-                NSLog(@"Default");
-                break;
-        }
         
+        NSString *previousEntry;
+        if ([[inputtedText objectAtIndex:inputField.tag] length] > 0) {
+            previousEntry = [inputtedText objectAtIndex:inputField.tag];
+        } else {
+            switch (inputField.tag) {
+                case 0:
+                    previousEntry = [item getName];
+                    break;
+                case 1:
+                    previousEntry = [item getDosage];
+                    break;
+                case 2:
+                    previousEntry = [item getRoute];
+                    break;
+                case 3:
+                    previousEntry = [item getForm];
+                    break;
+                case 4:
+                    previousEntry = [item getQuantity];
+                    break;
+                case 5:
+                    previousEntry = [item getFor];
+                    break;
+                case 6:
+                    previousEntry = [item getInstructions];
+                    break;
+                case 7:
+                    previousEntry = [item getPrecautions];
+                    break;
+                case 8:
+                    previousEntry = [item getSideEffects];
+                    break;
+                case 9:
+                    previousEntry = [item getPharmacyPhone];
+                    break;
+                case 10:
+                    previousEntry = [item getPharmacy];
+                    break;
+                case 11:
+                    previousEntry = [item getDoctor];
+                    break;
+                default:
+                    NSLog(@"Default");
+                    break;
+            }
+        }
         if (previousEntry.length == 0) {
             previousEntry = [placeholderText objectAtIndex:inputField.tag];
             inputField.textColor = [UIColor lightGrayColor];
@@ -177,7 +182,7 @@
         // sets the placeholder text initially
         inputField.text = previousEntry;
         
-        [textFields addObject:inputField];
+        [textFields replaceObjectAtIndex:inputField.tag withObject:inputField];
         
         cell.textLabel.text = [[medicineSections objectAtIndex:[indexPath section]] objectAtIndex:[indexPath row]];
     } else { // Notes section
@@ -186,11 +191,14 @@
         [cell addSubview:inputField];
         inputField.font = [UIFont fontWithName:@"Helvetica" size:14];
         inputField.tag = 12;
-        
-        if ([[item getNotes] length] > 0)
+        [inputField setDelegate:self];
+
+        if ([[inputtedText objectAtIndex:12] length] > 0)
+            inputField.text = [inputtedText objectAtIndex:12];
+        else
             inputField.text = [item getNotes];
         
-        [textFields addObject:inputField];
+        [textFields replaceObjectAtIndex:12 withObject:inputField];
         
         // Sets tag equal to index of the last entry
         //inputField.tag = [placeholderText count] - 1;
@@ -217,9 +225,18 @@
         textField.text = [placeholderText objectAtIndex:textField.tag];
         textField.textColor = [UIColor lightGrayColor];
         textField.font = [UIFont italicSystemFontOfSize:14];
+    } else {
+        [inputtedText replaceObjectAtIndex:textField.tag withObject:textField.text];
     }
+    [textFields replaceObjectAtIndex:textField.tag withObject:textField];
 }
 
+- (void)textViewDidEndEditing:(UITextView *)textView
+{
+    if ([textView.text length] > 0)
+        [inputtedText replaceObjectAtIndex:12 withObject:textView.text];
+    [textFields replaceObjectAtIndex:textView.tag withObject:textView];
+}
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
@@ -286,8 +303,14 @@
     medicineSections = [[NSArray alloc] initWithObjects:sectionOne, sectionTwo, sectionThree, nil];
     
     textFields = [[NSMutableArray alloc] init];
+    for (int i = 0; i < 13; i++)
+        [textFields addObject:[[UITextField alloc] init]];
     
     placeholderText = [[NSArray alloc] initWithObjects:@"name of the medication", @"e.g. 1 pill", @"e.g. oral, topical, etc.", @"e.g. pill, syrup, spray, etc.", @"current total quantity", @"who the med is for", @"e.g. take with food", @"e.g. avoid alcohol", @"e.g. dizziness, nausea, etc.", @"XXX-XXX-XXXX", @"the refill pharmacy", @"the prescribing doctor", nil];
+    
+    inputtedText = [[NSMutableArray alloc] init];
+    for (int i = 0; i < 13; i++)
+        [inputtedText addObject:@""];
     
     self.editing = NO;
     

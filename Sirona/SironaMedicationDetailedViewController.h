@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "SironaAlertItem.h"
 
-@interface SironaMedicationDetailedViewController : UITableViewController
+@interface SironaMedicationDetailedViewController : UITableViewController <UITextFieldDelegate, UITextViewDelegate>
 {
     
 }
@@ -18,6 +18,7 @@
 @property NSArray *medicineSections;
 @property NSMutableArray *textFields;
 @property NSArray *placeholderText;
+@property NSMutableArray *inputtedText;
 @property (nonatomic, strong)SironaLibraryItem *item;
 @property NSMutableArray *alertList;
 

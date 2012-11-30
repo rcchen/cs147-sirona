@@ -1,4 +1,4 @@
-//
+    //
 //  SironaTimeAddNewMedicine.m
 //  Sirona
 //
@@ -17,6 +17,7 @@
 @synthesize medicineSections;
 @synthesize textFields;
 @synthesize placeholderText;
+@synthesize inputtedText;
 @synthesize item;
 @synthesize alertList;
 
@@ -125,20 +126,25 @@
         inputField.tag = [indexPath section] * 5 + [indexPath row];
 
         // sets the placeholder text initially
-        inputField.text = [placeholderText objectAtIndex:inputField.tag];
-        inputField.textColor = [UIColor lightGrayColor];
-        inputField.font = [UIFont italicSystemFontOfSize:14];
-        
-        [textFields addObject:inputField];
+        if ([[inputtedText objectAtIndex:inputField.tag] length] == 0) {
+            inputField.text = [placeholderText objectAtIndex:inputField.tag];
+            inputField.textColor = [UIColor lightGrayColor];
+            inputField.font = [UIFont italicSystemFontOfSize:14];
+        } else {
+            inputField.text = [inputtedText objectAtIndex:inputField.tag];
+            inputField.font = [UIFont fontWithName:@"Helvetica" size:14];
+        }
+        [textFields replaceObjectAtIndex:inputField.tag withObject:inputField];
         
         cell.textLabel.text = [[medicineSections objectAtIndex:[indexPath section]] objectAtIndex:[indexPath row]];
     } else { // Notes section
         UITextView *inputField = [[UITextView alloc] initWithFrame:CGRectMake(15, 5, 280, 260)];
         inputField.backgroundColor = [UIColor clearColor];
         [cell addSubview:inputField];
+        inputField.text = [inputtedText objectAtIndex:12];
         inputField.font = [UIFont fontWithName:@"Helvetica" size:14];
-        
-        [textFields addObject:inputField];
+        inputField.delegate  = self;
+        [textFields replaceObjectAtIndex:12 withObject:inputField];
         
         // Sets tag equal to index of the last entry
         //inputField.tag = [placeholderText count] - 1;
@@ -165,7 +171,15 @@
         textField.text = [placeholderText objectAtIndex:textField.tag];
         textField.textColor = [UIColor lightGrayColor];
         textField.font = [UIFont italicSystemFontOfSize:14];
+    } else {
+        [inputtedText replaceObjectAtIndex:textField.tag withObject:textField.text];
     }
+}
+
+- (void)textViewDidEndEditing:(UITextView *)textView
+{
+    if ([textView.text length] > 0)
+        [inputtedText replaceObjectAtIndex:12 withObject:textView.text];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -220,8 +234,14 @@
     medicineSections = [[NSArray alloc] initWithObjects:sectionOne, sectionTwo, sectionThree, nil];
     
     textFields = [[NSMutableArray alloc] init];
+    for (int i = 0; i < 13; i++)
+         [textFields addObject:[[UITextField alloc] init]];
     
     placeholderText = [[NSArray alloc] initWithObjects:@"name of the medication", @"e.g. 1 pill", @"e.g. oral, topical, etc.", @"e.g. pill, syrup, spray, etc.", @"current total quantity", @"who the med is for", @"e.g. take with food", @"e.g. avoid alcohol", @"e.g. dizziness, nausea, etc.", @"XXX-XXX-XXXX", @"the refill pharmacy", @"the prescribing doctor", nil];
+    
+    inputtedText = [[NSMutableArray alloc] init];
+    for (int i = 0; i < 13; i++)
+        [inputtedText addObject:@""];
     
     self.editing = NO;
     

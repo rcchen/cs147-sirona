@@ -10,7 +10,7 @@
 
 #import "SironaAlertItem.h"
 
-@interface SironaTimeAddNewMedicine : UITableViewController <UITextFieldDelegate>
+@interface SironaTimeAddNewMedicine : UITableViewController <UITextFieldDelegate, UITextViewDelegate>
 {
     
 }
@@ -19,6 +19,7 @@
 @property NSArray *medicineSections;
 @property NSMutableArray *textFields;
 @property NSArray *placeholderText;
+@property NSMutableArray *inputtedText;
 @property (nonatomic, strong)SironaAlertItem *item;
 @property NSMutableArray *alertList;
 
