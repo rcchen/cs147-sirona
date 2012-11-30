@@ -57,9 +57,7 @@
     
     // Save the information
     SironaLibraryItem *sli = [[SironaLibraryItem alloc] initWithMDataName:[userAnswers objectAtIndex:0] mdataDosage:[userAnswers objectAtIndex:1] mdataRoute:[userAnswers objectAtIndex:2] mdataForm:[userAnswers objectAtIndex:3] mdataQuantity:[userAnswers objectAtIndex:4] mdataFor:[userAnswers objectAtIndex:5] mdataInstructions:[userAnswers objectAtIndex:6] mdataPrecautions:[userAnswers objectAtIndex:7] mdataSideEffects:[userAnswers objectAtIndex:8] mdataPharmacyPhone:[userAnswers objectAtIndex:9] mdataPharmacy:[userAnswers objectAtIndex:10] mdataDoctor:[userAnswers objectAtIndex:11] mdataNotes:[userAnswers objectAtIndex:12]];
-    
-    [item setLibraryItem:sli];
-    
+        
     // Now save the new medication to NSUserDefaults
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
     NSData *encodedCustomMedList = [prefs objectForKey:@"customMedList"];
@@ -76,34 +74,37 @@
     encodedCustomMedList = [NSKeyedArchiver archivedDataWithRootObject:customMeds];
     [prefs setObject:encodedCustomMedList forKey:@"customMedList"];
     
-    // Set the updated alerts from NSUserDefaults
-    NSData *encodedAlertList = [prefs objectForKey:@"alertList"];
-    if (encodedAlertList) {
-        NSMutableArray *prefAlerts = (NSMutableArray *)[NSKeyedUnarchiver unarchiveObjectWithData:encodedAlertList];
-        alertList = prefAlerts;
-    }
-    
-    // Remove the object if it exists already
-    for (SironaAlertItem *sai in alertList) {
-        NSLog(@"AlertID: %@, Item: %@", sai.getAlertId, item.getAlertId);
-        if ([[sai getAlertId] isEqualToString:[item getAlertId]]) {
-            NSLog(@"Removing duplicate object");
-            [alertList removeObject:sai];
-            break;
+    if (item) {
+        [item setLibraryItem:sli];
+        // Set the updated alerts from NSUserDefaults
+        NSData *encodedAlertList = [prefs objectForKey:@"alertList"];
+        if (encodedAlertList) {
+            NSMutableArray *prefAlerts = (NSMutableArray *)[NSKeyedUnarchiver unarchiveObjectWithData:encodedAlertList];
+            alertList = prefAlerts;
         }
+        
+        // Remove the object if it exists already
+        for (SironaAlertItem *sai in alertList) {
+            NSLog(@"AlertID: %@, Item: %@", sai.getAlertId, item.getAlertId);
+            if ([[sai getAlertId] isEqualToString:[item getAlertId]]) {
+                NSLog(@"Removing duplicate object");
+                [alertList removeObject:sai];
+                break;
+            }
+        }
+        
+        // Add the item in
+        [alertList addObject:item];
+        
+        NSLog(@"AlertID: %@", [item getAlertId]);
+        
+        // Now save it to NSUserDefaults
+        encodedAlertList = [NSKeyedArchiver archivedDataWithRootObject:alertList];
+        [prefs setObject:encodedAlertList forKey:@"alertList"];
+        int count = [self.navigationController.viewControllers count];
+        [self.navigationController popToViewController:[[self.navigationController viewControllers] objectAtIndex:count-3] animated:YES];
     }
-    
-    // Add the item in
-    [alertList addObject:item];
-    
-    NSLog(@"AlertID: %@", [item getAlertId]);
-    
-    // Now save it to NSUserDefaults
-    encodedAlertList = [NSKeyedArchiver archivedDataWithRootObject:alertList];
-    [prefs setObject:encodedAlertList forKey:@"alertList"];
-    
-    int count = [self.navigationController.viewControllers count];
-    [self.navigationController popToViewController:[[self.navigationController viewControllers] objectAtIndex:count-3] animated:YES];
+    [self.navigationController popViewControllerAnimated:YES]; 
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
