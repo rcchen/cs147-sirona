@@ -32,7 +32,7 @@
         [tbi setTitle:@"My Meds"];
         
         // Now give it an image
-        UIImage *i = [UIImage imageNamed:@"pill.png"];
+        UIImage *i = [UIImage imageNamed:@"94-pill.png"];
         [tbi setImage:i];
         
         UINavigationItem *n = [self navigationItem];
