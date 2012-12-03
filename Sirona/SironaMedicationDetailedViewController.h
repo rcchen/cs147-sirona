@@ -23,6 +23,6 @@
 @property NSMutableArray *alertList;
 
 // Default setter
-- (void)setMedicines:(NSMutableArray *)medicines;
+//- (void)setMedicines:(NSMutableArray *)medicines;
 
 @end

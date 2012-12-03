@@ -99,13 +99,18 @@
 }
 
 - (void)viewDidLoad {
-    
+
+    NSUserDefaults *prefs =[NSUserDefaults standardUserDefaults];
+    NSLog(@"%@", [[NSUserDefaults standardUserDefaults] dictionaryRepresentation]);
+
     [medTitle setText:@"Vitamins"];
     [medDescription setText:@"Remember to take after each meal"];
     [timeNumber setText:@"23"];
     [timeUnits setText:@"minutes"];
     [medDosage setText:@"2 pills"];
     [medRepetitions setText:@"3 times"];
+    
+
     
 }
 

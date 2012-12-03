@@ -18,6 +18,27 @@
 @synthesize item;
 @synthesize alertSettings;
 
+- (IBAction)saveAlert:(id)sender
+{
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    NSData *encodedAlertList = [prefs objectForKey:@"alertList"];
+    //NSLog(@"NSData: %@", encodedAlertList);
+    NSMutableArray *alerts = [[NSMutableArray alloc] init];
+    if (encodedAlertList) {
+        NSLog(@"Encoded alert list found");
+        NSMutableArray *prefAlerts = (NSMutableArray *)[NSKeyedUnarchiver unarchiveObjectWithData:encodedAlertList];
+        //NSLog(@"PrefAlerts: %@", prefAlerts);
+        alerts = prefAlerts;
+    } else {
+        NSLog(@"No alert list found");
+        alerts = [[NSMutableArray alloc] init];
+        [alerts addObject:item];
+        encodedAlertList = [NSKeyedArchiver archivedDataWithRootObject:alerts];
+        [prefs setObject:encodedAlertList forKey:@"alertList"];
+    } [self.navigationController popViewControllerAnimated:true];
+    //NSLog(@"AlertList: %@", alerts);
+}
+
 // Returns the count of the number of rows in the table view
 - (NSInteger)tableView:(UITableView *)tableView
  numberOfRowsInSection:(NSInteger)section
@@ -184,8 +205,20 @@
         
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     
-    // Initialize the objects that show up in the TableView
-    alertSettings = [[NSMutableArray alloc] initWithObjects:@"Medication", @"Repeat", @"Times", nil];
+    
+    if (self) {
+        
+        // Initialize the objects that show up in the TableView
+        alertSettings = [[NSMutableArray alloc] initWithObjects:@"Medication", @"Repeat", @"Times", nil];
+        
+        UIBarButtonItem *saveButton = [[UIBarButtonItem alloc]
+                                       initWithTitle:@"Save"
+                                       style:UIBarButtonItemStyleBordered
+                                       target:self
+                                       action:@selector(saveAlert:)];
+        self.navigationItem.rightBarButtonItem = saveButton;
+        
+    }
     
     return self;
     

@@ -239,7 +239,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    UINib *nib = [UINib nibWithNibName:@"SironaTimeCellView" bundle:nil];
+    //UINib *nib = [UINib nibWithNibName:@"SironaTimeCellView" bundle:nil];
     //[[self tableView] registerNib:nib forCellReuseIdentifier:@"SironaTimeCellView"];
 }
 

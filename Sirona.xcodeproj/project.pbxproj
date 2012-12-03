@@ -21,6 +21,11 @@
 		3345D0FA1665C4DA003E060D /* home-timecircle.png in Resources */ = {isa = PBXBuildFile; fileRef = 3345D0F91665C4DA003E060D /* home-timecircle.png */; };
 		3345D0FC1665D57D003E060D /* home-pillbottle.png in Resources */ = {isa = PBXBuildFile; fileRef = 3345D0FB1665D57D003E060D /* home-pillbottle.png */; };
 		3345D0FE1665D7E9003E060D /* home-repeat.png in Resources */ = {isa = PBXBuildFile; fileRef = 3345D0FD1665D7E9003E060D /* home-repeat.png */; };
+		334AA155166C703F009FADB6 /* main-addalert.png in Resources */ = {isa = PBXBuildFile; fileRef = 334AA150166C703F009FADB6 /* main-addalert.png */; };
+		334AA156166C703F009FADB6 /* main-addmed.png in Resources */ = {isa = PBXBuildFile; fileRef = 334AA151166C703F009FADB6 /* main-addmed.png */; };
+		334AA157166C703F009FADB6 /* main-dose.png in Resources */ = {isa = PBXBuildFile; fileRef = 334AA152166C703F009FADB6 /* main-dose.png */; };
+		334AA158166C703F009FADB6 /* main-middle.png in Resources */ = {isa = PBXBuildFile; fileRef = 334AA153166C703F009FADB6 /* main-middle.png */; };
+		334AA159166C703F009FADB6 /* main-repeat.png in Resources */ = {isa = PBXBuildFile; fileRef = 334AA154166C703F009FADB6 /* main-repeat.png */; };
 		33548E5516524FD500BD1DFA /* SironaTimeCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33548E5416524FD500BD1DFA /* SironaTimeCellView.m */; };
 		3356224F164D798700A30BE5 /* SironaAlertItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 3356224E164D798700A30BE5 /* SironaAlertItem.m */; };
 		33562253164D799100A30BE5 /* SironaAlertList.m in Sources */ = {isa = PBXBuildFile; fileRef = 33562252164D799100A30BE5 /* SironaAlertList.m */; };
@@ -55,7 +60,6 @@
 		33BBE4BF16539C0F002449A2 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 33BBE4BB16539C0F002449A2 /* README.md */; };
 		33BBE4C016539C0F002449A2 /* release_notes.md in Resources */ = {isa = PBXBuildFile; fileRef = 33BBE4BC16539C0F002449A2 /* release_notes.md */; };
 		33BBE4C316539C3E002449A2 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 33BBE4C216539C3E002449A2 /* libz.dylib */; };
-		33BF0E451666D04F009C7C04 /* main-middle.png in Resources */ = {isa = PBXBuildFile; fileRef = 33BF0E441666D04F009C7C04 /* main-middle.png */; };
 		33BF0E481666D083009C7C04 /* SironaHomeOnboardingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33BF0E471666D083009C7C04 /* SironaHomeOnboardingController.m */; };
 		33BF0E4A1666D11E009C7C04 /* SironaHomeOnboardingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 33BF0E491666D11E009C7C04 /* SironaHomeOnboardingView.xib */; };
 		33CAFCC61651AF0200CFA474 /* SironaTimeSelectMedicine.xib in Resources */ = {isa = PBXBuildFile; fileRef = 33CAFCC51651AF0200CFA474 /* SironaTimeSelectMedicine.xib */; };
@@ -130,6 +134,11 @@
 		3345D0F91665C4DA003E060D /* home-timecircle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home-timecircle.png"; sourceTree = "<group>"; };
 		3345D0FB1665D57D003E060D /* home-pillbottle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home-pillbottle.png"; sourceTree = "<group>"; };
 		3345D0FD1665D7E9003E060D /* home-repeat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home-repeat.png"; sourceTree = "<group>"; };
+		334AA150166C703F009FADB6 /* main-addalert.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "main-addalert.png"; sourceTree = "<group>"; };
+		334AA151166C703F009FADB6 /* main-addmed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "main-addmed.png"; sourceTree = "<group>"; };
+		334AA152166C703F009FADB6 /* main-dose.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "main-dose.png"; sourceTree = "<group>"; };
+		334AA153166C703F009FADB6 /* main-middle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "main-middle.png"; sourceTree = "<group>"; };
+		334AA154166C703F009FADB6 /* main-repeat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "main-repeat.png"; sourceTree = "<group>"; };
 		33548E5316524FD500BD1DFA /* SironaTimeCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SironaTimeCellView.h; sourceTree = "<group>"; };
 		33548E5416524FD500BD1DFA /* SironaTimeCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SironaTimeCellView.m; sourceTree = "<group>"; };
 		3356224D164D798700A30BE5 /* SironaAlertItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SironaAlertItem.h; sourceTree = "<group>"; };
@@ -174,7 +183,6 @@
 		33BBE4BC16539C0F002449A2 /* release_notes.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = release_notes.md; sourceTree = "<group>"; };
 		33BBE4BD16539C0F002449A2 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
 		33BBE4C216539C3E002449A2 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
-		33BF0E441666D04F009C7C04 /* main-middle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "main-middle.png"; sourceTree = "<group>"; };
 		33BF0E461666D083009C7C04 /* SironaHomeOnboardingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SironaHomeOnboardingController.h; sourceTree = "<group>"; };
 		33BF0E471666D083009C7C04 /* SironaHomeOnboardingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SironaHomeOnboardingController.m; sourceTree = "<group>"; };
 		33BF0E491666D11E009C7C04 /* SironaHomeOnboardingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SironaHomeOnboardingView.xib; sourceTree = "<group>"; };
@@ -397,7 +405,11 @@
 		33BF0E421666CFB6009C7C04 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
-				33BF0E441666D04F009C7C04 /* main-middle.png */,
+				334AA150166C703F009FADB6 /* main-addalert.png */,
+				334AA151166C703F009FADB6 /* main-addmed.png */,
+				334AA152166C703F009FADB6 /* main-dose.png */,
+				334AA153166C703F009FADB6 /* main-middle.png */,
+				334AA154166C703F009FADB6 /* main-repeat.png */,
 			);
 			name = Onboarding;
 			sourceTree = "<group>";
@@ -503,6 +515,8 @@
 				33DD20F7164B963E00B4E5F7 /* SironaHomeViewController.m */,
 				33DD210B164BA72B00B4E5F7 /* SironaLibraryViewController.h */,
 				33DD210C164BA72B00B4E5F7 /* SironaLibraryViewController.m */,
+				7182CF101666E59E00EFCE3B /* SironaMedicationDetailedViewController.h */,
+				7182CF111666E59E00EFCE3B /* SironaMedicationDetailedViewController.m */,
 				33DD212B164C46E800B4E5F7 /* SironaSettingsViewController.h */,
 				33DD212C164C46E800B4E5F7 /* SironaSettingsViewController.m */,
 				7130FF1A165213AF003F2EB4 /* SironaTimeAddNewMedicine.h */,
@@ -523,8 +537,6 @@
 				3312AEBC1654881700AFA0A8 /* SironaAlertsViewController.m */,
 				3345D0EE1665B6F2003E060D /* SironaHomeNeueView.h */,
 				3345D0EF1665B6F2003E060D /* SironaHomeNeueView.m */,
-				7182CF101666E59E00EFCE3B /* SironaMedicationDetailedViewController.h */,
-				7182CF111666E59E00EFCE3B /* SironaMedicationDetailedViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -721,8 +733,12 @@
 				3345D0FA1665C4DA003E060D /* home-timecircle.png in Resources */,
 				3345D0FC1665D57D003E060D /* home-pillbottle.png in Resources */,
 				3345D0FE1665D7E9003E060D /* home-repeat.png in Resources */,
-				33BF0E451666D04F009C7C04 /* main-middle.png in Resources */,
 				33BF0E4A1666D11E009C7C04 /* SironaHomeOnboardingView.xib in Resources */,
+				334AA155166C703F009FADB6 /* main-addalert.png in Resources */,
+				334AA156166C703F009FADB6 /* main-addmed.png in Resources */,
+				334AA157166C703F009FADB6 /* main-dose.png in Resources */,
+				334AA158166C703F009FADB6 /* main-middle.png in Resources */,
+				334AA159166C703F009FADB6 /* main-repeat.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

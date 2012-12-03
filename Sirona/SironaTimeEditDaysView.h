@@ -15,7 +15,7 @@
 @property SironaAlertItem *item;
 @property NSMutableArray *alertList;
 
-- (IBAction)finishEditingDays:(id)sender;
+// - (IBAction)finishEditingDays:(id)sender;
 - (void)setItem:(SironaAlertItem *)item;
 
 @end
