@@ -10,6 +10,7 @@
 
 #import "SironaTimeEditAlertView.h"
 #import "SironaTimeAddNewMedicine.h"
+#import "SironaHomeOnboardingController.h"
 
 @implementation SironaHomeNeueView
 
@@ -32,7 +33,10 @@
         UINavigationItem *n = [self navigationItem];
         [n setTitle:NSLocalizedString(@"Home", @"Application title")];
         
-        // boolean key for seeing the tutorial
+        // Boolean key for seeing the tutorial
+        
+        
+        
         /*if(![[NSUserDefaults standardUserDefaults] boolForKey:@"hasSeenTutorial"]) {
             
             // do something
@@ -98,11 +102,22 @@
     
 }
 
+- (void)displayFirstMessage
+{
+    
+    SironaHomeOnboardingController *shoc = [[SironaHomeOnboardingController alloc] init];
+    [[self navigationController] presentModalViewController:shoc animated:YES];
+    
+}
+
 - (void)viewDidLoad {
 
-    NSUserDefaults *prefs =[NSUserDefaults standardUserDefaults];
-    NSLog(@"%@", [[NSUserDefaults standardUserDefaults] dictionaryRepresentation]);
+    // NSUserDefaults *prefs =[NSUserDefaults standardUserDefaults];
+    // NSLog(@"%@", [[NSUserDefaults standardUserDefaults] dictionaryRepresentation]);
+    
 
+
+    
     [medTitle setText:@"Vitamins"];
     [medDescription setText:@"Remember to take after each meal"];
     [timeNumber setText:@"23"];
@@ -111,6 +126,19 @@
     [medRepetitions setText:@"3 times"];
     
 
+    
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    bool firstTime = [prefs integerForKey:@"firstLaunch"];
+    
+    if (firstTime) {
+        [self displayFirstMessage];
+        [prefs setBool:YES forKey:@"firstLaunch"];
+    }
     
 }
 

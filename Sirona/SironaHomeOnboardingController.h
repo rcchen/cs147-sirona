@@ -10,7 +10,17 @@
 
 @interface SironaHomeOnboardingController : UIViewController
 {
-    
+    __weak IBOutlet UIImageView *imageMiddle;
+    __weak IBOutlet UIImageView *imageDose;
+    __weak IBOutlet UIImageView *imageRepeat;
+    __weak IBOutlet UIImageView *imageAddAlert;
+    __weak IBOutlet UIImageView *imageAddMed;
 }
+
+- (IBAction)middlePress:(id)sender;
+- (IBAction)dosePress:(id)sender;
+- (IBAction)repeatPress:(id)sender;
+- (IBAction)addalertPress:(id)sender;
+- (IBAction)addmedPress:(id)sender;
 
 @end
