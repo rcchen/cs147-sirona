@@ -61,7 +61,7 @@
 		33BBE4C016539C0F002449A2 /* release_notes.md in Resources */ = {isa = PBXBuildFile; fileRef = 33BBE4BC16539C0F002449A2 /* release_notes.md */; };
 		33BBE4C316539C3E002449A2 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 33BBE4C216539C3E002449A2 /* libz.dylib */; };
 		33BF0E481666D083009C7C04 /* SironaHomeOnboardingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33BF0E471666D083009C7C04 /* SironaHomeOnboardingController.m */; };
-		33BF0E4A1666D11E009C7C04 /* SironaHomeOnboardingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 33BF0E491666D11E009C7C04 /* SironaHomeOnboardingView.xib */; };
+		33C6E275166DF80900AB8A0E /* SironaHomeOnboardingController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 33C6E274166DF80900AB8A0E /* SironaHomeOnboardingController.xib */; };
 		33CAFCC61651AF0200CFA474 /* SironaTimeSelectMedicine.xib in Resources */ = {isa = PBXBuildFile; fileRef = 33CAFCC51651AF0200CFA474 /* SironaTimeSelectMedicine.xib */; };
 		33CAFCCD1651AF9A00CFA474 /* SironaTimeSelectMedicine.m in Sources */ = {isa = PBXBuildFile; fileRef = 33CAFCCC1651AF9A00CFA474 /* SironaTimeSelectMedicine.m */; };
 		33CAFCCF1651B05A00CFA474 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33CAFCCE1651B05A00CFA474 /* CoreData.framework */; };
@@ -185,7 +185,7 @@
 		33BBE4C216539C3E002449A2 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		33BF0E461666D083009C7C04 /* SironaHomeOnboardingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SironaHomeOnboardingController.h; sourceTree = "<group>"; };
 		33BF0E471666D083009C7C04 /* SironaHomeOnboardingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SironaHomeOnboardingController.m; sourceTree = "<group>"; };
-		33BF0E491666D11E009C7C04 /* SironaHomeOnboardingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SironaHomeOnboardingView.xib; sourceTree = "<group>"; };
+		33C6E274166DF80900AB8A0E /* SironaHomeOnboardingController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SironaHomeOnboardingController.xib; sourceTree = "<group>"; };
 		33CAFCC51651AF0200CFA474 /* SironaTimeSelectMedicine.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SironaTimeSelectMedicine.xib; sourceTree = "<group>"; };
 		33CAFCCB1651AF9A00CFA474 /* SironaTimeSelectMedicine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SironaTimeSelectMedicine.h; sourceTree = "<group>"; };
 		33CAFCCC1651AF9A00CFA474 /* SironaTimeSelectMedicine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SironaTimeSelectMedicine.m; sourceTree = "<group>"; };
@@ -555,7 +555,7 @@
 			children = (
 				3312AEB6165477F400AFA0A8 /* SironaAlertNoneView.xib */,
 				3345D0F11665B725003E060D /* SironaHomeNeueView.xib */,
-				33BF0E491666D11E009C7C04 /* SironaHomeOnboardingView.xib */,
+				33C6E274166DF80900AB8A0E /* SironaHomeOnboardingController.xib */,
 				33DD2130164C5CCE00B4E5F7 /* SironaHomeView.xib */,
 				33562259164DA13900A30BE5 /* SironaLibraryCellView.xib */,
 				33DD210E164BA81B00B4E5F7 /* SironaLibraryView.xib */,
@@ -733,12 +733,12 @@
 				3345D0FA1665C4DA003E060D /* home-timecircle.png in Resources */,
 				3345D0FC1665D57D003E060D /* home-pillbottle.png in Resources */,
 				3345D0FE1665D7E9003E060D /* home-repeat.png in Resources */,
-				33BF0E4A1666D11E009C7C04 /* SironaHomeOnboardingView.xib in Resources */,
 				334AA155166C703F009FADB6 /* main-addalert.png in Resources */,
 				334AA156166C703F009FADB6 /* main-addmed.png in Resources */,
 				334AA157166C703F009FADB6 /* main-dose.png in Resources */,
 				334AA158166C703F009FADB6 /* main-middle.png in Resources */,
 				334AA159166C703F009FADB6 /* main-repeat.png in Resources */,
+				33C6E275166DF80900AB8A0E /* SironaHomeOnboardingController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

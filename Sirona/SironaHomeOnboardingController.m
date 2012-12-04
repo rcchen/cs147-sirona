@@ -15,8 +15,6 @@
     
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     
-    NSLog(@"Initialized %@", nibNameOrNil);
-    
     if (self) {
         
         // Do some custom stuff
@@ -62,7 +60,8 @@
 
 - (IBAction)addmedPress:(id)sender {
     
-    [[self navigationController] dismissModalViewControllerAnimated:YES];
+    NSLog(@"At the end of sequence, get rid of it now");
+    [[self presentingViewController] dismissModalViewControllerAnimated:YES];
 
 }
 

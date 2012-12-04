@@ -135,7 +135,7 @@
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
     bool firstTime = [prefs integerForKey:@"firstLaunch"];
     
-    if (firstTime) {
+    if (!firstTime) {
         [self displayFirstMessage];
         [prefs setBool:YES forKey:@"firstLaunch"];
     }
