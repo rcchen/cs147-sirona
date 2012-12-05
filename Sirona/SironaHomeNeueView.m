@@ -112,19 +112,33 @@
 
 - (void)viewDidLoad {
 
-    // NSUserDefaults *prefs =[NSUserDefaults standardUserDefaults];
-    // NSLog(@"%@", [[NSUserDefaults standardUserDefaults] dictionaryRepresentation]);
+    NSUserDefaults *prefs =[NSUserDefaults standardUserDefaults];
     
+    NSData *encodedAlertList = [prefs objectForKey:@"alertList"];
+    if (encodedAlertList) {
+        NSMutableArray *prefAlerts = (NSMutableArray *)[NSKeyedUnarchiver unarchiveObjectWithData:encodedAlertList];
+        if ([prefAlerts count] == 0) {
+            [medTitle setText:@"Welcome to Sirona"];
+            [medDescription setText:@"Add an alert to begin"];
+            [timeNumber setText:@"0"];
+            [timeUnits setText:@"minutes"];
+            [medDosage setText:@"0 pills"];
+            [medRepetitions setText:@"0 times"];
+        } else {
+            
+            // Do the right stuff
+        
+        }
+    }
 
-
-    
+    /*
     [medTitle setText:@"Vitamins"];
     [medDescription setText:@"Remember to take after each meal"];
     [timeNumber setText:@"23"];
     [timeUnits setText:@"minutes"];
     [medDosage setText:@"2 pills"];
     [medRepetitions setText:@"3 times"];
-    
+    */
 
     
 }
