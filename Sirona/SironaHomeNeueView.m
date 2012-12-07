@@ -110,7 +110,36 @@
     
 }
 
+- (void)getNextAlert {
+    
+    NSArray *events = [[UIApplication sharedApplication] scheduledLocalNotifications];
+    
+    for (UILocalNotification *localNotif in events) {
+        
+        NSDate *today = [NSDate date];
+        
+        NSCalendar *gregorian = [[NSCalendar alloc]
+                                 initWithCalendarIdentifier:NSGregorianCalendar];
+        
+        NSUInteger unitFlags = NSMonthCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit;
+        
+        NSDateComponents *components = [gregorian components:unitFlags
+                                                    fromDate:localNotif.fireDate
+                                                      toDate:today options:0];
+        NSInteger months = [components month];
+        NSInteger days = [components day];
+        NSInteger hours = [components hour];
+        NSInteger minutes = [components minute];
+        
+        NSLog(@"%d %d %d %d", months, days, hours, minutes);
+        
+    }
+    
+}
+
 - (void)viewDidLoad {
+    
+    [self getNextAlert];
 
     NSUserDefaults *prefs =[NSUserDefaults standardUserDefaults];
     
@@ -126,7 +155,11 @@
             [medRepetitions setText:@"0 times"];
         } else {
             
-            // Do the right stuff
+            SironaAlertItem *first = [prefAlerts objectAtIndex:0];
+            [medTitle setText:[[first getLibraryItem] getName]];
+            [medDescription setText:[[first getLibraryItem] getInstructions]];
+            [medDosage setText:[[first getLibraryItem] getDosage]];
+            [medRepetitions setText:[NSString stringWithFormat:@"%d", [[first getAlertTimes] count]]];
         
         }
     }
