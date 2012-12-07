@@ -90,9 +90,9 @@
     [[self alertsTable] reloadData];
     [self.view addSubview:alertsTable];
     
-    /*for (SironaAlertItem *alertItem in alerts) {
+    for (SironaAlertItem *alertItem in alerts) {
         [self setAllAlarms:alertItem];
-    }*/
+    }
     
     for (UILocalNotification *old in [[UIApplication sharedApplication] scheduledLocalNotifications]) {
         NSLog(@"Alert for %@ at %@", [old.userInfo objectForKey:@"alertID"], [old fireDate]);
