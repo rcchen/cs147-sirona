@@ -61,6 +61,8 @@
     
 }
 
+static NSDate *theDate;
+
 // Returns the alert ID with the next fire date, or nil if there are none
 - (NSString*)getNextAlert {
     
@@ -101,10 +103,10 @@
             // Closest alert time found! Now need to find corresponding local notif
             for (UILocalNotification* localNotif in [[UIApplication sharedApplication] scheduledLocalNotifications]) {
                 if ([[localNotif fireDate] compare:date] == NSOrderedSame) {
+                    theDate = [localNotif fireDate];
                     return [localNotif.userInfo objectForKey:@"alertID"];
                 }
             }
-            
         } else {
             [beginningDates addObject:date];
         }
@@ -114,12 +116,14 @@
         // Closest alert time is simply the last of beginningDates. Now need to find corresponding local notif
         for (UILocalNotification* localNotif in [[UIApplication sharedApplication] scheduledLocalNotifications]) {
             if ([[localNotif fireDate] compare:[beginningDates objectAtIndex:[beginningDates count] - 1]] == NSOrderedSame) {
+                theDate = [localNotif fireDate];
                 return [localNotif.userInfo objectForKey:@"alertID"];
             }
         }
     }
     
     return nil;
+    
 }
 
 - (IBAction)onTimePress:(id)sender {
@@ -172,33 +176,6 @@
     
 }
 
-- (void)getNextAlert {
-    
-    NSArray *events = [[UIApplication sharedApplication] scheduledLocalNotifications];
-    
-    for (UILocalNotification *localNotif in events) {
-        
-        NSDate *today = [NSDate date];
-        
-        NSCalendar *gregorian = [[NSCalendar alloc]
-                                 initWithCalendarIdentifier:NSGregorianCalendar];
-        
-        NSUInteger unitFlags = NSMonthCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit;
-        
-        NSDateComponents *components = [gregorian components:unitFlags
-                                                    fromDate:localNotif.fireDate
-                                                      toDate:today options:0];
-        NSInteger months = [components month];
-        NSInteger days = [components day];
-        NSInteger hours = [components hour];
-        NSInteger minutes = [components minute];
-        
-        NSLog(@"%d %d %d %d", months, days, hours, minutes);
-        
-    }
-    
-}
-
 - (void)viewDidLoad {
     
     [self getNextAlert];
@@ -248,12 +225,24 @@
         [self displayFirstMessage];
         [prefs setBool:YES forKey:@"firstLaunch"];
     } else {
+        
+        NSData *encodedAlertList = [prefs objectForKey:@"alertList"];
+        if (encodedAlertList) {
+            NSMutableArray *prefAlerts = (NSMutableArray *)[NSKeyedUnarchiver unarchiveObjectWithData:encodedAlertList];
+            if ([prefAlerts count] == 0) {
+                [medTitle setText:@"Welcome to Sirona"];
+                [medDescription setText:@"Add an alert to begin"];
+                [timeNumber setText:@"0"];
+                [timeUnits setText:@"minutes"];
+                [medDosage setText:@"0 pills"];
+                [medRepetitions setText:@"0 times"];
+            }
+        }
+        
         // Finish implementing this. Currently the result is not being used.
         NSString *alertId = [self getNextAlert];
         SironaAlertItem *alert = nil;
         
-        NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-        NSData *encodedAlertList = [prefs objectForKey:@"alertList"];
         NSArray *alerts;
         if (encodedAlertList)
             alerts = (NSMutableArray *)[NSKeyedUnarchiver unarchiveObjectWithData:encodedAlertList];
@@ -264,13 +253,41 @@
             }
         }
         
-        if (!alert)
+        if (!alert) {
             NSLog(@"Alert was not found. This shouldn't happen");
-        
-        NSLog(@"Alert found. Name of med: %@", [[alert getLibraryItem] getName]);
-        
-        // Do stuff with the alert
-        
+        } else {
+            NSLog(@"Alert found. Name of med: %@", [[alert getLibraryItem] getName]);
+            SironaLibraryItem *item = [alert getLibraryItem];
+            [medTitle setText:[item getName]];
+            [medDosage setText:[item getDosage]];
+            NSString *times = [NSString stringWithFormat:@"%d times", [[alert getAlertTimes] count]];
+            [medRepetitions setText:times];
+            [medDescription setText:[item getNotes]];
+            
+            NSTimeInterval timeInterval = [theDate timeIntervalSinceNow];
+            while (timeInterval < 0) {
+                timeInterval += 604800;
+            }
+            
+            if (timeInterval > 86400) {
+                int answer = floor(timeInterval / 86400);
+                [timeNumber setText:[NSString stringWithFormat:@"%d", answer]];
+                [timeUnits setText:@"days"];
+            } else if (timeInterval > 3600) {
+                int answer = floor(timeInterval / 3600);
+                [timeNumber setText:[NSString stringWithFormat:@"%d", answer]];
+                [timeUnits setText:@"hours"];
+            } else if (timeInterval > 60) {
+                int answer = floor(timeInterval / 60);
+                [timeNumber setText:[NSString stringWithFormat:@"%d", answer]];
+                [timeUnits setText:@"minutes"];
+            }
+            
+            //NSLog(@"Time since %@: %f", theDate, timeInterval);
+            
+            //[timeNumber setText:@"0"];
+            //[timeUnits setText:@"minutes"];
+        }
     }
     
 }
