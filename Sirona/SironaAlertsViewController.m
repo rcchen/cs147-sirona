@@ -43,13 +43,19 @@
         // Set this bar button item as the right item in the navigationItem
         [[self navigationItem] setRightBarButtonItem:bbi];
         
-        // Set the button on the left to edit for the navigationItem
-        [[self navigationItem] setLeftBarButtonItem:[self editButtonItem]];
+        // Add edit button to the left
+        self.navigationItem.leftBarButtonItem = self.editButtonItem;
         
         [self initializeAlerts];
     }
     return self;
     
+}
+
+// sets the editing that occurs when Edit is pressed
+- (void) setEditing:(BOOL)editing animated:(BOOL)animated {
+    [super setEditing: editing animated: animated];
+    [alertsTable setEditing:editing animated:animated];
 }
 
 - (void)initializeAlerts
@@ -73,6 +79,7 @@
     
     UINib *nib = [UINib nibWithNibName:@"SironaTimeCellView" bundle:nil];
     [alertsTable registerNib:nib forCellReuseIdentifier:@"SironaTimeCellView"];
+
 }
 
 
@@ -87,6 +94,8 @@
     alertsTable = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
     self.alertsTable.dataSource = self;
     self.alertsTable.delegate = self;
+    self.alertsTable.allowsSelection = NO;
+    self.alertsTable.allowsSelectionDuringEditing = YES;
     [[self alertsTable] reloadData];
     [self.view addSubview:alertsTable];
     
@@ -151,6 +160,9 @@
             [tertiaryText appendFormat:@"%@ ", [day substringToIndex:3]];
         } [[cell cellTertiary] setText:tertiaryText];
     }
+    
+    cell.accessoryType = UITableViewCellAccessoryNone;
+    cell.editingAccessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
     return cell;
     
