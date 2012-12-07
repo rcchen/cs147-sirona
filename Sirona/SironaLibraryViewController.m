@@ -11,6 +11,7 @@
 #import "SironaLibraryList.h"
 #import "SironaLibraryItem.h"
 #import "SironaLibraryCellView.h"
+#import "SironaTimeAddNewMedicine.h"
 
 @implementation SironaLibraryViewController
 
@@ -18,7 +19,8 @@
 
 - (IBAction)addNewItem:(id)sender
 {
-    
+    SironaTimeAddNewMedicine *stanm = [[SironaTimeAddNewMedicine alloc] init];
+    [[self navigationController] pushViewController:stanm animated:YES];
 }
 
 - (id)init
@@ -39,6 +41,15 @@
         [n setTitle:NSLocalizedString(@"My Meds", @"Application title")];
         
         medicines = [[NSMutableArray alloc] init];
+        
+        // Add button to add a new medicine
+        UIBarButtonItem *bbi = [[UIBarButtonItem alloc]
+                                initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
+                                target:self
+                                action:@selector(addNewItem:)];
+        
+        // Set this bar button item as the right item in the navigationItem
+        [[self navigationItem] setRightBarButtonItem:bbi];
 
     }
     
