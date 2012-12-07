@@ -12,6 +12,8 @@
 #import "SironaTimeAddNewMedicine.h"
 #import "SironaHomeOnboardingController.h"
 
+#import "stdlib.h"
+
 @implementation SironaHomeNeueView
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -35,8 +37,6 @@
         
         // Boolean key for seeing the tutorial
         
-        
-        
         /*if(![[NSUserDefaults standardUserDefaults] boolForKey:@"hasSeenTutorial"]) {
             
             // do something
@@ -54,10 +54,72 @@
         
         //[[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"hasSeenTutorial"];
 
+
     }
     
     return self;
     
+}
+
+// Returns the alert ID with the next fire date, or nil if there are none
+- (NSString*)getNextAlert {
+    
+    // Creates mutable array of sorted fire dates
+    NSMutableArray* sortedTimes = [[NSMutableArray alloc] init];
+    for (UILocalNotification* localNotif in [[UIApplication sharedApplication] scheduledLocalNotifications])
+        [sortedTimes addObject:[localNotif fireDate]];
+    [sortedTimes sortUsingSelector:@selector(compare:)];
+    
+    NSDate* now = [[NSDate alloc] init];  // current date
+    NSCalendar* calendar = [NSCalendar currentCalendar];
+    NSDateComponents* nowComponentsDay = [calendar components:NSDayCalendarUnit fromDate:now];
+    int currentDay = [nowComponentsDay day]; //gives you day
+    
+    // Remove the month/day/year information from NSDate, so that only time is compared
+    unsigned int flags = NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit;
+    //NSCalendar* calendar = [NSCalendar currentCalendar];
+    
+    NSDateComponents* nowComponents = [calendar components:flags fromDate:now];
+    NSDate* nowTimeOnly = [calendar dateFromComponents:nowComponents];
+    
+    NSMutableArray *beginningDates = [[NSMutableArray alloc] init];
+    
+    for (NSDate* date in sortedTimes) {
+        // Find the day of date
+        NSDateComponents* dateComponentsDay = [calendar components:NSDayCalendarUnit fromDate:date];
+        int dateDay = [dateComponentsDay day];
+        if (dateDay < currentDay) {
+            [beginningDates addObject:date];
+            continue;
+        }
+        
+        // Get only the time of date
+        NSDateComponents *dateComponents = [calendar components:flags fromDate:date];
+        NSDate* dateTimeOnly = [calendar dateFromComponents:dateComponents];
+        
+        if ([nowTimeOnly compare:dateTimeOnly] == NSOrderedAscending) {
+            // Closest alert time found! Now need to find corresponding local notif
+            for (UILocalNotification* localNotif in [[UIApplication sharedApplication] scheduledLocalNotifications]) {
+                if ([[localNotif fireDate] compare:date] == NSOrderedSame) {
+                    return [localNotif.userInfo objectForKey:@"alertID"];
+                }
+            }
+            
+        } else {
+            [beginningDates addObject:date];
+        }
+    }
+    
+    if ([beginningDates count]) {
+        // Closest alert time is simply the last of beginningDates. Now need to find corresponding local notif
+        for (UILocalNotification* localNotif in [[UIApplication sharedApplication] scheduledLocalNotifications]) {
+            if ([[localNotif fireDate] compare:[beginningDates objectAtIndex:[beginningDates count] - 1]] == NSOrderedSame) {
+                return [localNotif.userInfo objectForKey:@"alertID"];
+            }
+        }
+    }
+    
+    return nil;
 }
 
 - (IBAction)onTimePress:(id)sender {
@@ -152,6 +214,30 @@
     if (!firstTime) {
         [self displayFirstMessage];
         [prefs setBool:YES forKey:@"firstLaunch"];
+    } else {
+        // Finish implementing this. Currently the result is not being used.
+        NSString *alertId = [self getNextAlert];
+        SironaAlertItem *alert = nil;
+        
+        NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+        NSData *encodedAlertList = [prefs objectForKey:@"alertList"];
+        NSArray *alerts;
+        if (encodedAlertList)
+            alerts = (NSMutableArray *)[NSKeyedUnarchiver unarchiveObjectWithData:encodedAlertList];
+        for (SironaAlertItem *a in alerts) {
+            if ([[a getAlertId] isEqualToString:alertId]) {
+                alert = a;
+                break;
+            }
+        }
+        
+        if (!alert)
+            NSLog(@"Alert was not found. This shouldn't happen");
+        
+        NSLog(@"Alert found. Name of med: %@", [[alert getLibraryItem] getName]);
+        
+        // Do stuff with the alert
+        
     }
     
 }
