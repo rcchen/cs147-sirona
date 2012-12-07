@@ -50,7 +50,12 @@
         
         // Set this bar button item as the right item in the navigationItem
         [[self navigationItem] setRightBarButtonItem:bbi];
+        
+        // Add edit button to the left
+        self.navigationItem.leftBarButtonItem = self.editButtonItem;
 
+        self.tableView.allowsSelection = NO;
+        self.tableView.allowsSelectionDuringEditing = YES;
     }
     
     [self refreshDisplay];
@@ -84,6 +89,41 @@
     [[self navigationController] pushViewController:smdvc animated:YES];
     
 }
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        // Check to make sure no alerts are using the medication
+        NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+        NSData *encodedAlertList = [prefs objectForKey:@"alertList"];
+        
+        // If there are alerts, make sure none use the medicine we want to delete
+        if (encodedAlertList) {
+            NSMutableArray *prefAlerts = (NSMutableArray *)[NSKeyedUnarchiver unarchiveObjectWithData:encodedAlertList];
+            for (SironaAlertItem* alert in prefAlerts) {
+                if ([[[alert getLibraryItem] getId] isEqualToString:[[medicines objectAtIndex:[indexPath row]] getId]]) {
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Cannot delete"
+                                                                    message:@"Medication is used in an alarm"
+                                                                   delegate:nil
+                                                          cancelButtonTitle:@"OK"
+                                                          otherButtonTitles:nil];
+                    [alert show];
+                    return;
+                }
+            }
+        }
+        
+        [medicines removeObjectAtIndex:[indexPath row]];
+        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:YES];
+    }
+    
+}
+
+
+// sets the editing that occurs when Edit is pressed
+/*- (void) setEditing:(BOOL)editing animated:(BOOL)animated {
+    [self setEditing:editing animated:animated];
+}*/
 
 // Get medications from local storage
 - (void)refreshDisplay
@@ -138,6 +178,21 @@
     if (self = [super initWithStyle:style]) {
     }
     return self;
+}
+
+// When user leaves the screen, saves the updated medicines list
+- (void)viewWillDisappear:(BOOL)animated
+{
+    // Save encoded data to NSUserDefaults in case there were alerts that were deleted
+    [self saveEncodedData];
+}
+
+- (void)saveEncodedData
+{
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    NSData *encodedAlertList = [NSKeyedArchiver archivedDataWithRootObject:medicines];
+    [prefs setObject:encodedAlertList forKey:@"customMedList"];
+    
 }
 
 @end

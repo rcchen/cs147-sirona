@@ -12,7 +12,7 @@
 
 #import "SironaLibraryCellView.h"
 
-@interface SironaLibraryViewController : UITableViewController
+@interface SironaLibraryViewController : UITableViewController <UITableViewDelegate>
 {
     IBOutlet UITableView *medicineTable;
 }
