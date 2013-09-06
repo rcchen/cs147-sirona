@@ -28,7 +28,7 @@
     NSString *value = [settings objectAtIndex:[indexPath row]];
     UITableViewCell *utvc = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"UITableViewCell"];
     [[utvc textLabel] setText:value];
-    if (value == @"Sound") {
+    if ([value isEqual: @"Sound"]) {
         UISwitch *switchview = [[UISwitch alloc] initWithFrame:CGRectZero];
         utvc.accessoryView = switchview;
     }

@@ -41,7 +41,32 @@
 }
 
 - (void)setAlertDays:(NSMutableArray*)days {
-    alertDays = days;
+    
+    // Sort the alert days from Sunday to Saturday
+    NSMutableArray *newAlertDays = [[NSMutableArray alloc] init];
+    if ([alertDays containsObject:@"Sunday"]) {
+        [newAlertDays addObject:@"Sunday"];
+    }
+    if ([alertDays containsObject:@"Monday"]) {
+        [newAlertDays addObject:@"Monday"];
+    }
+    if ([alertDays containsObject:@"Tuesday"]) {
+        [newAlertDays addObject:@"Tuesday"];
+    }
+    if ([alertDays containsObject:@"Wednesday"]) {
+        [newAlertDays addObject:@"Wednesday"];
+    }
+    if ([alertDays containsObject:@"Thursday"]) {
+        [newAlertDays addObject:@"Thursday"];
+    }
+    if ([alertDays containsObject:@"Friday"]) {
+        [newAlertDays addObject:@"Friday"];
+    }
+    if ([alertDays containsObject:@"Saturday"]) {
+        [newAlertDays addObject:@"Saturday"];
+    }
+    
+    alertDays = newAlertDays;
 }
 
 - (void)setAlertTimes:(NSMutableArray*)times {
