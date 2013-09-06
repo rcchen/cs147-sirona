@@ -20,6 +20,37 @@
 
 - (IBAction)saveAlert:(id)sender
 {
+    if (![item getLibraryItem]) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error Saving"
+                                                        message:@"Please specify the medication"
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+        return;
+    }
+    
+    if ([[item getAlertDays] count] == 0) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error Saving"
+                                                        message:@"Please specify what days to repeat the alarm"
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+        return;
+    }
+    
+    if ([[item getAlertTimes] count] == 0) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error Saving"
+                                                        message:@"Please specify the alarm times"
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+        return;
+    }
+    
+    
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
     NSData *encodedAlertList = [prefs objectForKey:@"alertList"];
     //NSLog(@"NSData: %@", encodedAlertList);
@@ -56,7 +87,7 @@
     
     NSString *value = [alertSettings objectAtIndex:[indexPath row]];
     UITableViewCell *utvc;
-    if (value == @"Snooze") {
+    if ([value isEqual: @"Snooze"]) {
         utvc = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"UITableViewCell"];
         [[utvc textLabel] setText:value];
         UISwitch *switchview = [[UISwitch alloc] initWithFrame:CGRectZero];
@@ -71,7 +102,7 @@
         [[utvc textLabel] setText:value];
         
         // Sets the text on the right side of the Repeat cell
-        if (value == @"Repeat") {
+        if ([value isEqual: @"Repeat"]) {
             
             NSMutableArray *days = [item getAlertDays];
             NSMutableString *daysLabel = [[NSMutableString alloc] init];
@@ -97,20 +128,10 @@
                     [daysLabel appendString:@"Weekdays"];
                 
                 // Otherwise do the default print with prefixes
-                else {
-                    
-                    // Create an array of possible days
-                    // TODO: Replace with static const
-                    NSMutableArray *possibleDays = [[NSMutableArray alloc] initWithObjects:@"Sunday", @"Monday", @"Tuesday", @"Wednesday", @"Thursday", @"Friday", @"Saturday", nil];
-                    
-                    // This is to make sure that days show up in the right order
-                    for (int i = 0; i < [possibleDays count]; i++) {
-                        NSString *day = [possibleDays objectAtIndex:i];
-                        if ([days containsObject:day]) {
-                            [daysLabel appendFormat:@"%@ ", [day substringToIndex:3]];
-                        }
+                else {                    
+                    for (int i = 0; i < [days count]; i++) {
+                        [daysLabel appendFormat:@"%@ ", [[days objectAtIndex:i] substringToIndex:3]];
                     }
-                    
                 }
                 
             }
@@ -120,7 +141,7 @@
         }
         
         // Sets the text on the right side of the Medication cell
-        if (value == @"Medication") {
+        if ([value isEqual: @"Medication"]) {
             SironaLibraryItem *med = [item getLibraryItem];
             NSMutableString *medLabel = [[NSMutableString alloc] init];
             if (med) {
@@ -132,7 +153,7 @@
         
         
         // Sets the text on the right side of the Times cell
-        if (value == @"Times") {
+        if ([value isEqual: @"Times"]) {
             
             NSMutableArray *times = [item getAlertTimes];
             NSMutableString *timesLabel = [[NSMutableString alloc] init];
@@ -160,7 +181,7 @@
     NSString *selectedItem = [alertSettings objectAtIndex:[indexPath row]];
     
     // Covers the selection of Repeat to push SironaTimeEditDaysView
-    if (selectedItem == @"Repeat") {
+    if ([selectedItem isEqual: @"Repeat"]) {
         SironaTimeEditDaysView *stedv = [[SironaTimeEditDaysView alloc] init];
         // Set the current days to the days that are currently selected
         // Actually just make sure the entire SironaAlertItem pointer gets copied over
@@ -169,14 +190,14 @@
     }
     
     // Covers the selection of Times to push SironaTimeEditTimesView
-    else if (selectedItem == @"Times") {
+    else if ([selectedItem isEqual: @"Times"]) {
         SironaTimeEditTimesView *stetv = [[SironaTimeEditTimesView alloc] init];
         [stetv setItem:item];
         [[self navigationController] pushViewController:stetv animated:YES];
     }
     
     // Covers the selection of Medication to push SironaTimeSelectMedicineView
-    else if (selectedItem == @"Medication") {
+    else if ([selectedItem isEqual: @"Medication"]) {
         SironaTimeSelectMedicine *stsm = [[SironaTimeSelectMedicine alloc] init];
         [stsm setItem:item];
         [[self navigationController] pushViewController:stsm animated:YES];
