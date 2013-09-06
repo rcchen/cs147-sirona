@@ -17,11 +17,8 @@
 - (IBAction)addTime:(id)sender
 {
     
-    // Add the time to the array as a string in 24 hr format
-    NSDateFormatter *timeFormat = [[NSDateFormatter alloc] init];
-    [timeFormat setDateFormat:@"h:mm a"];
-    NSString *dateString = [timeFormat stringFromDate:[datePicker date]];
-    [alertTimes addObject:dateString];
+    // Add the time to the array as an NSDate
+    [alertTimes addObject:[datePicker date]];
     [item setAlertTimes:alertTimes];
     
     // Set the alerts from NSUserDefaults

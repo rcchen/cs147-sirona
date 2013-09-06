@@ -61,69 +61,21 @@
     
 }
 
-static NSDate *theDate;
-
 // Returns the alert ID with the next fire date, or nil if there are none
-- (NSString*)getNextAlert {
+- (BOOL)getNextAlert:(NSString **)alertId withNotif:(UILocalNotification **)notif {
     
-    // Creates mutable array of sorted fire dates
-    NSMutableArray* sortedTimes = [[NSMutableArray alloc] init];
-    for (UILocalNotification* localNotif in [[UIApplication sharedApplication] scheduledLocalNotifications])
-        [sortedTimes addObject:[localNotif fireDate]];
-    [sortedTimes sortUsingSelector:@selector(compare:)];
-    
-    NSDate* now = [[NSDate alloc] init];  // current date
-    NSCalendar* calendar = [NSCalendar currentCalendar];
-    NSDateComponents* nowComponentsDay = [calendar components:NSDayCalendarUnit fromDate:now];
-    int currentDay = [nowComponentsDay day]; //gives you day
-    
-    // Remove the month/day/year information from NSDate, so that only time is compared
-    unsigned int flags = NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit;
-    //NSCalendar* calendar = [NSCalendar currentCalendar];
-    
-    NSDateComponents* nowComponents = [calendar components:flags fromDate:now];
-    NSDate* nowTimeOnly = [calendar dateFromComponents:nowComponents];
-    
-    NSMutableArray *beginningDates = [[NSMutableArray alloc] init];
-    
-    for (NSDate* date in sortedTimes) {
-        // Find the day of date
-        NSDateComponents* dateComponentsDay = [calendar components:NSDayCalendarUnit fromDate:date];
-        int dateDay = [dateComponentsDay day];
-        if (dateDay < currentDay) {
-            [beginningDates addObject:date];
-            continue;
-        }
-        
-        // Get only the time of date
-        NSDateComponents *dateComponents = [calendar components:flags fromDate:date];
-        NSDate* dateTimeOnly = [calendar dateFromComponents:dateComponents];
-        
-        if ([nowTimeOnly compare:dateTimeOnly] == NSOrderedAscending) {
-            // Closest alert time found! Now need to find corresponding local notif
-            for (UILocalNotification* localNotif in [[UIApplication sharedApplication] scheduledLocalNotifications]) {
-                if ([[localNotif fireDate] compare:date] == NSOrderedSame) {
-                    theDate = [localNotif fireDate];
-                    return [localNotif.userInfo objectForKey:@"alertID"];
-                }
-            }
-        } else {
-            [beginningDates addObject:date];
+    UILocalNotification *earliest = nil;
+    for (UILocalNotification* localNotif in [[UIApplication sharedApplication] scheduledLocalNotifications]) {
+        if (earliest == nil || [[localNotif fireDate] compare:[earliest fireDate]] == NSOrderedAscending) {
+            earliest = localNotif;
         }
     }
     
-    if ([beginningDates count]) {
-        // Closest alert time is simply the last of beginningDates. Now need to find corresponding local notif
-        for (UILocalNotification* localNotif in [[UIApplication sharedApplication] scheduledLocalNotifications]) {
-            if ([[localNotif fireDate] compare:[beginningDates objectAtIndex:[beginningDates count] - 1]] == NSOrderedSame) {
-                theDate = [localNotif fireDate];
-                return [localNotif.userInfo objectForKey:@"alertID"];
-            }
-        }
-    }
+    if (earliest == nil) return FALSE;
     
-    return nil;
-    
+    *alertId = [earliest.userInfo valueForKey:@"alertID"];
+    *notif = earliest;
+    return TRUE;
 }
 
 - (IBAction)onTimePress:(id)sender {
@@ -178,8 +130,6 @@ static NSDate *theDate;
 
 - (void)viewDidLoad {
     
-    [self getNextAlert];
-
     NSUserDefaults *prefs =[NSUserDefaults standardUserDefaults];
     
     NSData *encodedAlertList = [prefs objectForKey:@"alertList"];
@@ -193,8 +143,18 @@ static NSDate *theDate;
             [medDosage setText:@"0 pills"];
             [medRepetitions setText:@"0 times"];
         } else {
+            NSString *nextAlertId;
+            UILocalNotification *notif;
+            if (![self getNextAlert:&nextAlertId withNotif:&notif]) {
+                NSLog(@"Failed to get next alert");
+                return;
+            }
+            SironaAlertItem *first = nil;
+            for (SironaAlertItem* item in prefAlerts) {
+                if ([[item getAlertId] isEqualToString:nextAlertId])
+                   first = item;
+            }
             
-            SironaAlertItem *first = [prefAlerts objectAtIndex:0];
             [medTitle setText:[[first getLibraryItem] getName]];
             [medDescription setText:[[first getLibraryItem] getInstructions]];
             [medDosage setText:[[first getLibraryItem] getDosage]];
@@ -227,8 +187,9 @@ static NSDate *theDate;
     } else {
         
         NSData *encodedAlertList = [prefs objectForKey:@"alertList"];
+        NSMutableArray *prefAlerts = nil;
         if (encodedAlertList) {
-            NSMutableArray *prefAlerts = (NSMutableArray *)[NSKeyedUnarchiver unarchiveObjectWithData:encodedAlertList];
+            prefAlerts = (NSMutableArray *)[NSKeyedUnarchiver unarchiveObjectWithData:encodedAlertList];
             if ([prefAlerts count] == 0) {
                 [medTitle setText:@"Welcome to Sirona"];
                 [medDescription setText:@"Add an alert to begin"];
@@ -236,21 +197,20 @@ static NSDate *theDate;
                 [timeUnits setText:@"minutes"];
                 [medDosage setText:@"0 pills"];
                 [medRepetitions setText:@"0 times"];
+                return;
             }
         }
         
-        // Finish implementing this. Currently the result is not being used.
-        NSString *alertId = [self getNextAlert];
+        NSString *nextAlertId;
+        UILocalNotification *notif;
+        if (![self getNextAlert:&nextAlertId withNotif:&notif]) {
+            NSLog(@"Failed to get next alert");
+            return;
+        }
         SironaAlertItem *alert = nil;
-        
-        NSArray *alerts;
-        if (encodedAlertList)
-            alerts = (NSMutableArray *)[NSKeyedUnarchiver unarchiveObjectWithData:encodedAlertList];
-        for (SironaAlertItem *a in alerts) {
-            if ([[a getAlertId] isEqualToString:alertId]) {
-                alert = a;
-                break;
-            }
+        for (SironaAlertItem* item in prefAlerts) {
+            if ([[item getAlertId] isEqualToString:nextAlertId])
+                alert = item;
         }
         
         if (!alert) {
@@ -264,21 +224,21 @@ static NSDate *theDate;
             [medRepetitions setText:times];
             [medDescription setText:[item getNotes]];
             
-            NSTimeInterval timeInterval = [theDate timeIntervalSinceNow];
-            while (timeInterval < 0) {
-                timeInterval += 604800;
+            NSTimeInterval timeInterval = [[notif fireDate] timeIntervalSinceNow];
+            if (timeInterval < 0) {
+                timeInterval = 0;
             }
             
             if (timeInterval > 86400) {
-                int answer = floor(timeInterval / 86400);
+                int answer = floor(timeInterval / 86400.0);
                 [timeNumber setText:[NSString stringWithFormat:@"%d", answer]];
                 [timeUnits setText:@"days"];
             } else if (timeInterval > 3600) {
-                int answer = floor(timeInterval / 3600);
+                int answer = floor(timeInterval / 3600.0);
                 [timeNumber setText:[NSString stringWithFormat:@"%d", answer]];
                 [timeUnits setText:@"hours"];
             } else if (timeInterval > 60) {
-                int answer = floor(timeInterval / 60);
+                int answer = floor(timeInterval / 60.0);
                 [timeNumber setText:[NSString stringWithFormat:@"%d", answer]];
                 [timeUnits setText:@"minutes"];
             }

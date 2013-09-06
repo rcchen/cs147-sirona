@@ -33,8 +33,12 @@
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [[UITableViewCell alloc] init];
-    NSString *time = [[item getAlertTimes] objectAtIndex:[indexPath row]];    
-    cell.textLabel.text = time;
+    
+    NSDate *time = [[item getAlertTimes] objectAtIndex:[indexPath row]];
+    NSDateFormatter *timeFormat = [[NSDateFormatter alloc] init];
+    [timeFormat setDateFormat:@"h:mm a"];
+    NSString *timeString = [timeFormat stringFromDate:time];
+    cell.textLabel.text = timeString;
     return cell;
 }
 

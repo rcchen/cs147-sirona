@@ -218,22 +218,27 @@
     // Then add all of the alerts back in
     NSArray *daysOfWeek = [[NSArray alloc] initWithObjects:@"Sunday", @"Monday", @"Tuesday", @"Wednesday", @"Thursday", @"Friday", @"Saturday", nil];
     
-    for (NSString *time in [alertItem getAlertTimes]) {
+    for (NSDate *time in [alertItem getAlertTimes]) {
         
         for (NSString *day in [alertItem getAlertDays]) {
-
-            int dayNum = [daysOfWeek indexOfObject:day];
-
-            NSLog(@"Time: %@", time);
             
-            // Create a date for the notification
             NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-            [dateFormatter setDateFormat:@"h:mm a"];
-            NSDate *dateFromString = [[NSDate alloc] init];
-            dateFromString = [dateFormatter dateFromString:time];
-            dateFromString = [dateFromString dateByAddingTimeInterval:(86400 * (dayNum+3))];
+            [dateFormatter setDateFormat:@"EEEE"];
+            // Writes out entire day e.g. Friday
+            NSString *todaysDay = [dateFormatter stringFromDate:[NSDate date]];
+            
+            NSDate *nextFireDate = [NSDate date];
+            int dayDifference = [daysOfWeek indexOfObject:todaysDay] - [daysOfWeek indexOfObject:day];
+            
+            nextFireDate = [nextFireDate dateByAddingTimeInterval:60*60*24*dayDifference];
                         
-            NSLog(@"Date: %@", dateFromString);
+             // If nextFireDate is earlier in time than current, add additional week
+            if ([nextFireDate compare: [NSDate date]] == NSOrderedAscending) {
+                // TODO: Take a look at this.
+                nextFireDate = [nextFireDate dateByAddingTimeInterval:60*60*24*7];
+            }
+
+            NSLog(@"Time: %@", nextFireDate);
             
             NSMutableString *alertBody = [[NSMutableString alloc] init];
             [alertBody appendFormat:@"Time to take your %@", [[alertItem getLibraryItem] getName]];
@@ -243,15 +248,15 @@
             notif.repeatInterval = NSWeekCalendarUnit;
             notif.alertBody = alertBody;
             notif.timeZone = [NSTimeZone defaultTimeZone];
-            notif.fireDate = dateFromString;
+            notif.fireDate = nextFireDate;
             notif.alertAction = @"View";
             notif.soundName = UILocalNotificationDefaultSoundName;
             notif.applicationIconBadgeNumber += 1;
             
             // Use this code to store the ID in the userInfo dictionary
-            NSArray *alertID = [[NSArray alloc] initWithObjects:[alertItem getAlertId], nil];
-            NSArray *alertKey = [[NSArray alloc] initWithObjects:@"alertID", nil];
-            notif.userInfo = [[NSDictionary alloc] initWithObjects:alertID forKeys:alertKey];
+            NSLog(@"have it here? id: %@", [alertItem getAlertId]);
+            NSDictionary *dict = [[NSDictionary alloc] initWithObjectsAndKeys:[alertItem getAlertId], @"alertID", nil];
+            notif.userInfo = dict;
             
             [[UIApplication sharedApplication] scheduleLocalNotification:notif];
             

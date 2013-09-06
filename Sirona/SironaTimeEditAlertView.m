@@ -66,7 +66,8 @@
         [alerts addObject:item];
         encodedAlertList = [NSKeyedArchiver archivedDataWithRootObject:alerts];
         [prefs setObject:encodedAlertList forKey:@"alertList"];
-    } [self.navigationController popViewControllerAnimated:true];
+    }
+    [self.navigationController popViewControllerAnimated:true];
     //NSLog(@"AlertList: %@", alerts);
 }
 
