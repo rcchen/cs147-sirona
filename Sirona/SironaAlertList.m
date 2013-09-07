@@ -66,7 +66,7 @@
 
 - (void)removeUnsaved
 {
-    NSMutableArray *discardedItems = [NSMutableArray array];
+    /*NSMutableArray *discardedItems = [NSMutableArray array];
     for (SironaAlertItem *sai in allAlerts) {
         if (![sai isSaved]) {
             [discardedItems addObject:sai];
@@ -74,7 +74,7 @@
     }
     [allAlerts removeObjectsInArray:discardedItems];
     
-    [self savePrefs];
+    [self savePrefs];*/
 }
 
 - (void)savePrefs
