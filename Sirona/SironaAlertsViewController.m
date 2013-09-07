@@ -65,6 +65,17 @@
     if (encodedAlertList) {
         NSMutableArray *prefAlerts = (NSMutableArray *)[NSKeyedUnarchiver unarchiveObjectWithData:encodedAlertList];
         alerts = prefAlerts;
+        // Take out alerts that were not saved by the user
+        for (SironaAlertItem *alertItem in alerts) {
+            if (![alertItem isSaved]) {
+                [alertItem setSaved];  // TODO: Look into why it always gets here.
+                NSLog(@"nopes: %@", [alertItem getAlertId]);
+                [alerts removeObject:alertItem];
+            }
+        }
+        // Resave prefs
+        encodedAlertList = [NSKeyedArchiver archivedDataWithRootObject:alerts];
+        [prefs setObject:encodedAlertList forKey:@"alertList"];
     } else {
         alerts = [[NSMutableArray alloc] init];
         encodedAlertList = [NSKeyedArchiver archivedDataWithRootObject:alerts];
@@ -218,27 +229,31 @@
     // Then add all of the alerts back in
     NSArray *daysOfWeek = [[NSArray alloc] initWithObjects:@"Sunday", @"Monday", @"Tuesday", @"Wednesday", @"Thursday", @"Friday", @"Saturday", nil];
     
+    // Create nextFireDate which has the time from time but the correct
+    // day of the week from day.
     for (NSDate *time in [alertItem getAlertTimes]) {
         
         for (NSString *day in [alertItem getAlertDays]) {
             
+            // First create an NSDate with the correct day/month/year
             NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
             [dateFormatter setDateFormat:@"EEEE"];
             // Writes out entire day e.g. Friday
-            NSString *todaysDay = [dateFormatter stringFromDate:[NSDate date]];
+            NSDate *date = [NSDate date];
+            NSString *todaysDay = [dateFormatter stringFromDate:date];
             
-            NSDate *nextFireDate = [NSDate date];
-            int dayDifference = [daysOfWeek indexOfObject:todaysDay] - [daysOfWeek indexOfObject:day];
+            int dayDifference = [daysOfWeek indexOfObject:day] - [daysOfWeek indexOfObject:todaysDay];
+            if (dayDifference < 0) dayDifference += 7;
+            date = [date dateByAddingTimeInterval:60*60*24*dayDifference];
             
-            nextFireDate = [nextFireDate dateByAddingTimeInterval:60*60*24*dayDifference];
-                        
-             // If nextFireDate is earlier in time than current, add additional week
-            if ([nextFireDate compare: [NSDate date]] == NSOrderedAscending) {
-                // TODO: Take a look at this.
-                nextFireDate = [nextFireDate dateByAddingTimeInterval:60*60*24*7];
-            }
-
-            NSLog(@"Time: %@", nextFireDate);
+            // Now combine the date portion from date with the time portion from time
+            unsigned unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit |  NSDayCalendarUnit;
+            NSDateComponents *comps = [[NSCalendar currentCalendar] components:unitFlags fromDate:date];
+            NSDate *nextFireDate = [[NSCalendar currentCalendar] dateFromComponents:comps];
+            
+            unitFlags = NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit;
+            comps = [[NSCalendar currentCalendar] components:unitFlags fromDate:time];
+            nextFireDate = [[NSCalendar currentCalendar] dateByAddingComponents:comps toDate:nextFireDate options:0];
             
             NSMutableString *alertBody = [[NSMutableString alloc] init];
             [alertBody appendFormat:@"Time to take your %@", [[alertItem getLibraryItem] getName]];
@@ -254,7 +269,6 @@
             notif.applicationIconBadgeNumber += 1;
             
             // Use this code to store the ID in the userInfo dictionary
-            NSLog(@"have it here? id: %@", [alertItem getAlertId]);
             NSDictionary *dict = [[NSDictionary alloc] initWithObjectsAndKeys:[alertItem getAlertId], @"alertID", nil];
             notif.userInfo = dict;
             

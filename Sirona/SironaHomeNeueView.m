@@ -138,7 +138,7 @@
         if ([prefAlerts count] == 0) {
             [medTitle setText:@"Welcome to Sirona"];
             [medDescription setText:@"Add an alert to begin"];
-            [timeNumber setText:@"0"];
+            [timeNumber setText:@"?"];
             [timeUnits setText:@"minutes"];
             [medDosage setText:@"0 pills"];
             [medRepetitions setText:@"0 times"];
@@ -157,20 +157,13 @@
             
             [medTitle setText:[[first getLibraryItem] getName]];
             [medDescription setText:[[first getLibraryItem] getInstructions]];
+            NSString *dosage = [[first getLibraryItem] getDosage];
+            if ([dosage length] == 0) dosage = @"?";
             [medDosage setText:[[first getLibraryItem] getDosage]];
             [medRepetitions setText:[NSString stringWithFormat:@"%d", [[first getAlertTimes] count]]];
         
         }
     }
-
-    /*
-    [medTitle setText:@"Vitamins"];
-    [medDescription setText:@"Remember to take after each meal"];
-    [timeNumber setText:@"23"];
-    [timeUnits setText:@"minutes"];
-    [medDosage setText:@"2 pills"];
-    [medRepetitions setText:@"3 times"];
-    */
 
     
 }
@@ -193,7 +186,7 @@
             if ([prefAlerts count] == 0) {
                 [medTitle setText:@"Welcome to Sirona"];
                 [medDescription setText:@"Add an alert to begin"];
-                [timeNumber setText:@"0"];
+                [timeNumber setText:@"?"];
                 [timeUnits setText:@"minutes"];
                 [medDosage setText:@"0 pills"];
                 [medRepetitions setText:@"0 times"];
@@ -220,7 +213,9 @@
             SironaLibraryItem *item = [alert getLibraryItem];
             [medTitle setText:[item getName]];
             [medDosage setText:[item getDosage]];
-            NSString *times = [NSString stringWithFormat:@"%d times", [[alert getAlertTimes] count]];
+            int alertTimesCount = [[alert getAlertTimes] count];
+            NSString *timeEnd = (alertTimesCount == 1) ? @"time" : @"times";
+            NSString *times = [NSString stringWithFormat:@"%d %@", alertTimesCount, timeEnd];
             [medRepetitions setText:times];
             [medDescription setText:[item getNotes]];
             
@@ -229,24 +224,21 @@
                 timeInterval = 0;
             }
             
-            if (timeInterval > 86400) {
-                int answer = floor(timeInterval / 86400.0);
-                [timeNumber setText:[NSString stringWithFormat:@"%d", answer]];
-                [timeUnits setText:@"days"];
-            } else if (timeInterval > 3600) {
-                int answer = floor(timeInterval / 3600.0);
-                [timeNumber setText:[NSString stringWithFormat:@"%d", answer]];
-                [timeUnits setText:@"hours"];
-            } else if (timeInterval > 60) {
-                int answer = floor(timeInterval / 60.0);
-                [timeNumber setText:[NSString stringWithFormat:@"%d", answer]];
-                [timeUnits setText:@"minutes"];
+            int answer = timeInterval / 60.0 + 0.5;
+            NSString *interval = (answer == 1) ? @"minute" : @"minutes";
+            if (answer >= 60) {
+                answer = timeInterval / 3600.0 + 0.5;
+                interval = (answer == 1) ? @"hour" : @"hours";
+                if (answer >= 24) {
+                    answer = timeInterval / 86400.0 + 0.5;
+                    interval = (answer == 1) ? @"day" : @"days";
+                }
             }
+            [timeNumber setText:[NSString stringWithFormat:@"%d", answer]];
+            [timeUnits setText:interval];
             
             //NSLog(@"Time since %@: %f", theDate, timeInterval);
             
-            //[timeNumber setText:@"0"];
-            //[timeUnits setText:@"minutes"];
         }
     }
     

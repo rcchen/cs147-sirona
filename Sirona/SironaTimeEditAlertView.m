@@ -50,35 +50,39 @@
         return;
     }
     
+    [item setSaved];  // Now this item is properly saved.
+    NSLog(@"Saved item: %@", [item getAlertId]);
     
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
     NSData *encodedAlertList = [prefs objectForKey:@"alertList"];
     //NSLog(@"NSData: %@", encodedAlertList);
-    NSMutableArray *alerts = [[NSMutableArray alloc] init];
+    NSMutableArray *alerts;
     if (encodedAlertList) {
         NSLog(@"Encoded alert list found");
         NSMutableArray *prefAlerts = (NSMutableArray *)[NSKeyedUnarchiver unarchiveObjectWithData:encodedAlertList];
         //NSLog(@"PrefAlerts: %@", prefAlerts);
         alerts = prefAlerts;
+        for (SironaAlertItem *sai in alerts) {
+            NSLog(@"The alert ID: %@", [sai getAlertId]);
+            if ([[sai getAlertId] isEqualToString:[item getAlertId]]) {
+                NSLog(@"Removed duplicate alert: %@! Matched: %@", [sai getAlertId], [item getAlertId]);
+                [alerts removeObject:sai];
+            }
+        }
+        [alerts addObject:item];
     } else {
-        NSLog(@"No alert list found");
         alerts = [[NSMutableArray alloc] init];
         [alerts addObject:item];
-        encodedAlertList = [NSKeyedArchiver archivedDataWithRootObject:alerts];
-        [prefs setObject:encodedAlertList forKey:@"alertList"];
     }
+    encodedAlertList = [NSKeyedArchiver archivedDataWithRootObject:alerts];
+    [prefs setObject:encodedAlertList forKey:@"alertList"];
     [self.navigationController popViewControllerAnimated:true];
-    //NSLog(@"AlertList: %@", alerts);
 }
 
 // Returns the count of the number of rows in the table view
 - (NSInteger)tableView:(UITableView *)tableView
  numberOfRowsInSection:(NSInteger)section
 {
-    if (!item)
-        NSLog(@"item is null");
-    else
-        NSLog(@"alert id: %@", [item getAlertId]);
     return [alertSettings count];
 }
 

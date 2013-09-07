@@ -17,6 +17,7 @@
         alertDays = [[NSMutableArray alloc] init];
         alertTimes = [[NSMutableArray alloc] init];
         alertID = [[NSString alloc] init];
+        saved = NO;
     }
     
     // Return pointer to the object
@@ -109,6 +110,15 @@
         alertID = [decoder decodeObjectForKey:@"alertID"];
     }
     return self;
+}
+
+- (void)setSaved {
+    saved = YES;
+    NSLog(@"SAVED");
+}
+
+- (BOOL)isSaved {
+    return saved;
 }
 
 @end

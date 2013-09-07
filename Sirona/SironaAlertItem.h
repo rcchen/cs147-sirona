@@ -15,6 +15,7 @@
     NSMutableArray *alertDays;
     NSMutableArray *alertTimes;
     NSString *alertID;
+    BOOL saved;
 }
 
 - (SironaLibraryItem *)getLibraryItem;
@@ -25,5 +26,7 @@
 - (void)setAlertDays:(NSMutableArray*)days;
 - (void)setAlertTimes:(NSMutableArray*)times;
 - (void)setAlertId;
+- (void)setSaved;
+- (BOOL)isSaved;
 
 @end
