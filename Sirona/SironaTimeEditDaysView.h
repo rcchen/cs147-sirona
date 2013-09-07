@@ -8,12 +8,13 @@
 
 #import <Foundation/Foundation.h>
 #import "SironaAlertItem.h"
+#import "SironaAlertList.h"
 
 @interface SironaTimeEditDaysView : UITableViewController
 
 @property NSMutableArray *possibleDays;
 @property SironaAlertItem *item;
-@property NSMutableArray *alertList;
+@property SironaAlertList *alertList;
 
 // - (IBAction)finishEditingDays:(id)sender;
 - (void)setItem:(SironaAlertItem *)item;

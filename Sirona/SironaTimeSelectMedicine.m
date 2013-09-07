@@ -39,6 +39,7 @@
     }
     
     medicines = [[NSMutableArray alloc] init];
+    alertList = [[SironaAlertList alloc] init];
     
     // Create a new bar button item that will send
     // addNewItem: to ItemsViewController
@@ -50,7 +51,6 @@
     
     // Set this bar button item as the right item in the navigationItem
     [[self navigationItem] setRightBarButtonItem:bbi];
-    
     
     [self refreshDisplay];
     
@@ -96,32 +96,10 @@
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
         [item setLibraryItem:[medicines objectAtIndex:[indexPath row]]];
         
-        // Set the alerts from NSUserDefaults
-        NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-        NSData *encodedAlertList = [prefs objectForKey:@"alertList"];
-        if (encodedAlertList) {
-            NSMutableArray *prefAlerts = (NSMutableArray *)[NSKeyedUnarchiver unarchiveObjectWithData:encodedAlertList];
-            alertList = prefAlerts;
-        }
-        
-        // Remove the object if it exists already
-        for (SironaAlertItem *sai in alertList) {
-            NSLog(@"AlertID: %@, Item: %@", sai.getAlertId, item.getAlertId);
-            if ([[sai getAlertId] isEqualToString:[item getAlertId]]) {
-                NSLog(@"Removing duplicate object");
-                [alertList removeObject:sai];
-                break;
-            }
-        }
-        
         // Add the item in
-        [alertList addObject:item];
+        [alertList addAlert:item];
         
         NSLog(@"AlertID: %@", [item getAlertId]);
-        
-        // Now save it to NSUserDefaults
-        encodedAlertList = [NSKeyedArchiver archivedDataWithRootObject:alertList];
-        [prefs setObject:encodedAlertList forKey:@"alertList"];
         
         [[self navigationController] popViewControllerAnimated:YES];
 
@@ -172,7 +150,6 @@
 
 - (IBAction)setMedicine:(id)sender
 {
-    
     SironaTimeAddNewMedicine *stanm = [[SironaTimeAddNewMedicine alloc] init];
     [stanm setItem:item];
     [stanm setAlertList:alertList];

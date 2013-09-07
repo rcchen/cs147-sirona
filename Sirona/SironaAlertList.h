@@ -15,10 +15,12 @@
     NSMutableArray *allAlerts;
 }
 
-+ (SironaAlertList *)sharedAlerts;
-
-- (NSMutableArray *)allAlerts;
-- (void)createAlert:(SironaAlertItem *)alert;
+- (NSArray *)allAlerts;
+- (void)addAlert:(SironaAlertItem *)alert;
 - (void)deleteAlert:(SironaAlertItem *)alert;
+- (void)removeUnsaved;
+- (int)count;
+- (SironaAlertItem *)objectAtIndex:(NSUInteger)index;
+- (void)removeObjectAtIndex:(NSUInteger)index;
 
 @end

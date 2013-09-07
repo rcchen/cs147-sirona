@@ -17,6 +17,33 @@
 
 @synthesize item;
 @synthesize alertSettings;
+@synthesize alertList;
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    
+    
+    if (self) {
+        
+        // Initialize the objects that show up in the TableView
+        alertSettings = [[NSMutableArray alloc] initWithObjects:@"Medication", @"Repeat", @"Times", nil];
+        
+        UIBarButtonItem *saveButton = [[UIBarButtonItem alloc]
+                                       initWithTitle:@"Save"
+                                       style:UIBarButtonItemStyleBordered
+                                       target:self
+                                       action:@selector(saveAlert:)];
+        self.navigationItem.rightBarButtonItem = saveButton;
+        
+        alertList = [[SironaAlertList alloc] init];
+        
+    }
+    
+    return self;
+    
+}
 
 - (IBAction)saveAlert:(id)sender
 {
@@ -53,29 +80,8 @@
     [item setSaved];  // Now this item is properly saved.
     NSLog(@"Saved item: %@", [item getAlertId]);
     
-    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-    NSData *encodedAlertList = [prefs objectForKey:@"alertList"];
-    //NSLog(@"NSData: %@", encodedAlertList);
-    NSMutableArray *alerts;
-    if (encodedAlertList) {
-        NSLog(@"Encoded alert list found");
-        NSMutableArray *prefAlerts = (NSMutableArray *)[NSKeyedUnarchiver unarchiveObjectWithData:encodedAlertList];
-        //NSLog(@"PrefAlerts: %@", prefAlerts);
-        alerts = prefAlerts;
-        for (SironaAlertItem *sai in alerts) {
-            NSLog(@"The alert ID: %@", [sai getAlertId]);
-            if ([[sai getAlertId] isEqualToString:[item getAlertId]]) {
-                NSLog(@"Removed duplicate alert: %@! Matched: %@", [sai getAlertId], [item getAlertId]);
-                [alerts removeObject:sai];
-            }
-        }
-        [alerts addObject:item];
-    } else {
-        alerts = [[NSMutableArray alloc] init];
-        [alerts addObject:item];
-    }
-    encodedAlertList = [NSKeyedArchiver archivedDataWithRootObject:alerts];
-    [prefs setObject:encodedAlertList forKey:@"alertList"];
+    [alertList addAlert:item];
+    
     [self.navigationController popViewControllerAnimated:true];
 }
 
@@ -222,31 +228,6 @@
     // Otherwise use the brand name of the item as the title
     else
         self.title = name;
-    
-}
-
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-        
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    
-    
-    if (self) {
-        
-        // Initialize the objects that show up in the TableView
-        alertSettings = [[NSMutableArray alloc] initWithObjects:@"Medication", @"Repeat", @"Times", nil];
-        
-        UIBarButtonItem *saveButton = [[UIBarButtonItem alloc]
-                                       initWithTitle:@"Save"
-                                       style:UIBarButtonItemStyleBordered
-                                       target:self
-                                       action:@selector(saveAlert:)];
-        self.navigationItem.rightBarButtonItem = saveButton;
-        
-    }
-    
-    return self;
     
 }
 

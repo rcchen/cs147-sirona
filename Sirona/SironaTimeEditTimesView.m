@@ -14,6 +14,29 @@
 @synthesize item;
 @synthesize alertList;
 
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    
+    if (self) {
+        
+        self.title = @"Times";
+        
+        // Bar button for "Add"
+        UIBarButtonItem *bbi = [[UIBarButtonItem alloc]
+                                initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
+                                target:self
+                                action:@selector(addTime:)];
+        [[self navigationItem] setRightBarButtonItem:bbi];
+        alertList = [[SironaAlertList alloc] init];
+        
+    }
+    
+    return self;
+    
+}
+
 - (IBAction)addTime:(id)sender
 {
     SironaTimeAddTimeView *statv = [[SironaTimeAddTimeView alloc] init];
@@ -58,30 +81,8 @@
 {
     [[item getAlertTimes] removeObject:time];
     
-    // Set the alerts from NSUserDefaults
-    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-    NSData *encodedAlertList = [prefs objectForKey:@"alertList"];
-    if (encodedAlertList) {
-        NSMutableArray *prefAlerts = (NSMutableArray *)[NSKeyedUnarchiver unarchiveObjectWithData:encodedAlertList];
-        alertList = prefAlerts;
-    }
-    
-    // Remove the object if it exists already
-    for (SironaAlertItem *sai in alertList) {
-        NSLog(@"AlertID: %@, Item: %@", sai.getAlertId, item.getAlertId);
-        if ([[sai getAlertId] isEqualToString:[item getAlertId]]) {
-            NSLog(@"Removing duplicate object");
-            [alertList removeObject:sai];
-            break;
-        }
-    }
-    
     // Add the item in
-    [alertList addObject:item];
-    
-    // Now save it to NSUserDefaults
-    encodedAlertList = [NSKeyedArchiver archivedDataWithRootObject:alertList];
-    [prefs setObject:encodedAlertList forKey:@"alertList"];
+    [alertList addAlert:item];
     
     [self.tableView reloadData];
     
@@ -92,28 +93,6 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         [self removeTime:[[item getAlertTimes] objectAtIndex:[indexPath row]]];
     }
-}
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    
-    if (self) {
-        
-        self.title = @"Times";
-        
-        // Bar button for "Add"
-        UIBarButtonItem *bbi = [[UIBarButtonItem alloc]
-                                initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
-                                target:self
-                                action:@selector(addTime:)];
-        [[self navigationItem] setRightBarButtonItem:bbi];
-        
-    }
-    
-    return self;
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated {

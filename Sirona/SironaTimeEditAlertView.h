@@ -14,6 +14,7 @@
 
 @property (nonatomic, strong)SironaAlertItem *item;
 @property NSMutableArray *alertSettings;
+@property SironaAlertList *alertList;
 
 - (IBAction)saveAlert:(id)sender;
 

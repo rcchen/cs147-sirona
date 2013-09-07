@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 #import "SironaAlertItem.h"
+#import "SironaAlertList.h"
 #import "SironaLibraryCellView.h"
 
 @interface SironaTimeSelectMedicine : UITableViewController
@@ -19,11 +20,11 @@
 @property NSMutableArray *medicines;
 @property SironaAlertItem *item;
 @property UITableViewCell *previous_cell;
-@property NSMutableArray *alertList;
+@property SironaAlertList *alertList;
 
 - (void)setItem:(SironaAlertItem *)item;
 - (void)refreshDisplay;
 - (IBAction)addNewItem:(id)sender;
-- (void)setAlertList:(NSMutableArray *)alertList;
+- (void)setAlertList:(SironaAlertList *)alertList;
 
 @end

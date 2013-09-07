@@ -101,33 +101,10 @@
         
     }
     
-    
-    // Set the alerts from NSUserDefaults
-    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-    NSData *encodedAlertList = [prefs objectForKey:@"alertList"];
-    if (encodedAlertList) {
-        NSMutableArray *prefAlerts = (NSMutableArray *)[NSKeyedUnarchiver unarchiveObjectWithData:encodedAlertList];
-        alertList = prefAlerts;
-    }
-    
-    // Remove the object if it exists already
-    for (SironaAlertItem *sai in alertList) {
-        NSLog(@"AlertID: %@, Item: %@", sai.getAlertId, item.getAlertId);
-        if ([[sai getAlertId] isEqualToString:[item getAlertId]]) {
-            NSLog(@"Removing duplicate object");
-            [alertList removeObject:sai];
-            break;
-        }
-    }
-    
     // Add the item in
-    [alertList addObject:item];
+    [alertList addAlert:item];
     
     NSLog(@"AlertID: %@", [item getAlertId]);
-    
-    // Now save it to NSUserDefaults
-    encodedAlertList = [NSKeyedArchiver archivedDataWithRootObject:alertList];
-    [prefs setObject:encodedAlertList forKey:@"alertList"];
     
     // Deselect the row when the operation is completed
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -142,7 +119,8 @@
         // Custom initialization
         
         self.title = @"Repeat";
-
+        
+        alertList = [[SironaAlertList alloc] init];
     }
     
     possibleDays = [[NSMutableArray alloc] initWithObjects:@"Daily", @"Sunday", @"Monday", @"Tuesday", @"Wednesday", @"Thursday", @"Friday", @"Saturday", nil];

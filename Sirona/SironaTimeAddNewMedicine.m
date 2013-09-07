@@ -45,8 +45,6 @@
     for (int i = 0; i < 13; i++)
         [userAnswers addObject:@""];
     
-    NSLog(@"Got here");
-    
     for (int i = 0; i < [textFields count]; i++) {
         NSString *answer = [[textFields objectAtIndex:i] text];
         // If answer is blank somehow or if only filled with placeholder
@@ -76,31 +74,10 @@
     
     if (item) {
         [item setLibraryItem:sli];
-        // Set the updated alerts from NSUserDefaults
-        NSData *encodedAlertList = [prefs objectForKey:@"alertList"];
-        if (encodedAlertList) {
-            NSMutableArray *prefAlerts = (NSMutableArray *)[NSKeyedUnarchiver unarchiveObjectWithData:encodedAlertList];
-            alertList = prefAlerts;
-        }
-        
-        // Remove the object if it exists already
-        for (SironaAlertItem *sai in alertList) {
-            NSLog(@"AlertID: %@, Item: %@", sai.getAlertId, item.getAlertId);
-            if ([[sai getAlertId] isEqualToString:[item getAlertId]]) {
-                NSLog(@"Removing duplicate object");
-                [alertList removeObject:sai];
-                break;
-            }
-        }
         
         // Add the item in
-        [alertList addObject:item];
-        
-        NSLog(@"AlertID: %@", [item getAlertId]);
-        
-        // Now save it to NSUserDefaults
-        encodedAlertList = [NSKeyedArchiver archivedDataWithRootObject:alertList];
-        [prefs setObject:encodedAlertList forKey:@"alertList"];
+        [alertList addAlert:item];
+                
         int count = [self.navigationController.viewControllers count];
         [self.navigationController popToViewController:[[self.navigationController viewControllers] objectAtIndex:count-3] animated:YES];
     }

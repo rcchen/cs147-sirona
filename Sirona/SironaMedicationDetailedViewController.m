@@ -68,25 +68,13 @@
     encodedCustomMedList = [NSKeyedArchiver archivedDataWithRootObject:customMeds];
     [prefs setObject:encodedCustomMedList forKey:@"customMedList"];
     
-    
-    // Set the updated alerts from NSUserDefaults
-    NSData *encodedAlertList = [prefs objectForKey:@"alertList"];
-    if (encodedAlertList) {
-        NSMutableArray *prefAlerts = (NSMutableArray *)[NSKeyedUnarchiver unarchiveObjectWithData:encodedAlertList];
-        alertList = prefAlerts;
-    }
-    
     // Update alerts that use this medication
-    for (SironaAlertItem *sai in alertList) {        
+    for (SironaAlertItem *sai in [alertList allAlerts]) {
         if ([[[sai getLibraryItem] getId] isEqualToString:[item getId]]) {
             NSLog(@"Updating alert");
             [sai setLibraryItem:newItem];
         }
     }
-    
-    // Now save it to NSUserDefaults
-    encodedAlertList = [NSKeyedArchiver archivedDataWithRootObject:alertList];
-    [prefs setObject:encodedAlertList forKey:@"alertList"];
     
     item = newItem;
     
@@ -293,6 +281,8 @@
         [[self navigationItem] setRightBarButtonItem:bbi];
         
         self.title = [item getName];
+        
+        alertList = [[SironaAlertList alloc] init];
         
     }
     

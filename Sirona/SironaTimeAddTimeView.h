@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "SironaAlertItem.h"
+#import "SironaAlertList.h"
 
 @interface SironaTimeAddTimeView : UIViewController
 {
@@ -18,7 +19,7 @@
 // Some properties that we want to access
 @property NSMutableArray *alertTimes;
 @property SironaAlertItem *item;
-@property NSMutableArray *alertList;
+@property SironaAlertList *alertList;
 
 // Setters
 - (void)setAlertTimes:(NSMutableArray *)alertTimes;

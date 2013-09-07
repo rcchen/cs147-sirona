@@ -15,7 +15,7 @@
     IBOutlet UIView *noneView;
 }
 
-@property NSMutableArray *alerts;
+@property SironaAlertList *alertList;
 
 - (IBAction)addNewItem:(id)sender;
 

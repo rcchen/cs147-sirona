@@ -13,15 +13,12 @@
 
 @implementation SironaTimeViewController
 
-@synthesize alerts;
+@synthesize alertList;
 
 - (id)init
 {
     
     self = [super init];
-    
-    // Call the superclass's designated initializer
-    //self = [super initWithStyle:UITableViewStyleGrouped];
     
     if (self) {
         
@@ -33,10 +30,8 @@
         UIImage *i = [UIImage imageNamed:@"10-medical.png"];
         [tbi setImage:i];
     
-        // Pull in the alerts from NSUserDefaults
-        alerts = [[NSMutableArray alloc] init];
-        //NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-        //alerts = [prefs objectForKey:@"userAlerts"];
+        // Pull in the alertlist from NSUserDefaults
+        alertList = [[SironaAlertList alloc] init];
         
         UINavigationItem *n = [self navigationItem];
         [n setTitle:NSLocalizedString(@"Alerts", @"Application title")];
@@ -65,7 +60,7 @@
 - (NSInteger)tableView:(UITableView *)tableView
  numberOfRowsInSection:(NSInteger)section
 {
-    return [alerts count];
+    return [alertList count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
@@ -73,7 +68,7 @@
 {
 
     SironaTimeCellView *cell = [tableView dequeueReusableCellWithIdentifier:@"SironaTimeCellView"];
-    SironaAlertItem *sai = [alerts objectAtIndex:[indexPath row]];
+    SironaAlertItem *sai = [alertList objectAtIndex:[indexPath row]];
     
     [[cell cellMain] setText:[[sai getLibraryItem] getName]];
     [[cell cellSecondary] setText:[[sai getLibraryItem] getDosage]];
@@ -95,7 +90,7 @@
 {
     
     SironaTimeEditAlertView *stevc = [[SironaTimeEditAlertView alloc] init];
-    SironaAlertItem *selectedItem = [alerts objectAtIndex:[indexPath row]];
+    SironaAlertItem *selectedItem = [alertList objectAtIndex:[indexPath row]];
     [stevc setItem:selectedItem];
     [[self navigationController] pushViewController:stevc animated:YES];
     
@@ -118,16 +113,7 @@
     
     [[UIApplication sharedApplication] cancelAllLocalNotifications];
     
-    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-    NSData *encodedAlertList = [prefs objectForKey:@"alertList"];
-    if (encodedAlertList) {
-        NSMutableArray *prefAlerts = (NSMutableArray *)[NSKeyedUnarchiver unarchiveObjectWithData:encodedAlertList];
-        alerts = prefAlerts;
-    }
-        
-    NSLog(@"Alert count: %u", [alerts count]);
-    
-    for (SironaAlertItem *alertItem in alerts) {
+    for (SironaAlertItem *alertItem in [alertList allAlerts]) {
         [self setAllAlarms:alertItem];
     }
     
@@ -137,7 +123,7 @@
     
     //[[self tableView] reloadData];
     
-    if (![alerts count]) {
+    if (![alertList count]) {
 
         NSArray *nibs = [[NSBundle mainBundle] loadNibNamed:@"SironaAlertNoneView" owner:self options:nil];
         [self.navigationController.view addSubview:[nibs objectAtIndex:0]];
@@ -210,27 +196,16 @@
     
 }
 
-// Saves the encoded data into NSUserDefaults
-- (void)saveEncodedData
-{
-    
-    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-    NSData *encodedAlertList = [NSKeyedArchiver archivedDataWithRootObject:alerts];
-    [prefs setObject:encodedAlertList forKey:@"alertList"];
-    
-}
-
 - (void)viewWillDisappear:(BOOL)animated
 {
-    // Save encoded data to NSUserDefaults in case there were alerts that were deleted
-    [self saveEncodedData];
+
 }
 
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        [alerts removeObjectAtIndex:[indexPath row]];
+        [alertList removeObjectAtIndex:[indexPath row]];
         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:YES];
     }
     
@@ -239,39 +214,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    //UINib *nib = [UINib nibWithNibName:@"SironaTimeCellView" bundle:nil];
-    //[[self tableView] registerNib:nib forCellReuseIdentifier:@"SironaTimeCellView"];
 }
 
-
-/*
-- (IBAction)scheduleAlarm:(id)sender
-{
-
-    UILocalNotification *localNotif = [[UILocalNotification alloc] init];
-    if (localNotif == nil)
-        return;
-    
-    // Grab the picker time, floor func to reset seconds to 0
-    NSDate *pickerDate = [self.datePicker date];
-    NSTimeInterval time = floor([pickerDate timeIntervalSinceReferenceDate] / 60.0) * 60.0;
-    pickerDate = [NSDate dateWithTimeIntervalSinceReferenceDate:time];
-    
-    // Set the local notification
-    localNotif.fireDate = pickerDate;
-    localNotif.timeZone = [NSTimeZone defaultTimeZone];
-    
-    NSLog(@"Scheduled for %@", pickerDate);
-    
-    // It's an alert of some sort that we want to schedule
-    localNotif.alertBody = @"Yay an alert!";
-    localNotif.alertAction = @"View";
-    localNotif.applicationIconBadgeNumber = 1;
-    
-    [[UIApplication sharedApplication] scheduleLocalNotification:localNotif];
-    
-}
-*/
 
 - (void)viewDidUnload {
     noneView = nil;

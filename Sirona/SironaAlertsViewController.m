@@ -14,7 +14,7 @@
 @implementation SironaAlertsViewController
 
 @synthesize alertsTable;
-@synthesize alerts;
+@synthesize alertList;
 
 - (id) init
 {
@@ -60,27 +60,8 @@
 
 - (void)initializeAlerts
 {
-    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-    NSData *encodedAlertList = [prefs objectForKey:@"alertList"];
-    if (encodedAlertList) {
-        NSMutableArray *prefAlerts = (NSMutableArray *)[NSKeyedUnarchiver unarchiveObjectWithData:encodedAlertList];
-        alerts = prefAlerts;
-        // Take out alerts that were not saved by the user
-        for (SironaAlertItem *alertItem in alerts) {
-            if (![alertItem isSaved]) {
-                [alertItem setSaved];  // TODO: Look into why it always gets here.
-                NSLog(@"nopes: %@", [alertItem getAlertId]);
-                [alerts removeObject:alertItem];
-            }
-        }
-        // Resave prefs
-        encodedAlertList = [NSKeyedArchiver archivedDataWithRootObject:alerts];
-        [prefs setObject:encodedAlertList forKey:@"alertList"];
-    } else {
-        alerts = [[NSMutableArray alloc] init];
-        encodedAlertList = [NSKeyedArchiver archivedDataWithRootObject:alerts];
-        [prefs setObject:encodedAlertList forKey:@"alertList"];
-    }
+    alertList = [[SironaAlertList alloc] init];
+    [alertList removeUnsaved];
 }
 
 - (void)viewDidLoad
@@ -110,7 +91,7 @@
     [[self alertsTable] reloadData];
     [self.view addSubview:alertsTable];
     
-    for (SironaAlertItem *alertItem in alerts) {
+    for (SironaAlertItem *alertItem in [alertList allAlerts]) {
         [self setAllAlarms:alertItem];
     }
     
@@ -118,7 +99,7 @@
         NSLog(@"Alert for %@ at %@", [old.userInfo objectForKey:@"alertID"], [old fireDate]);
     }
     
-    if (![alerts count]) {
+    if (![alertList count]) {
         // Handles the overlay
         UIViewController* c = [[UIViewController alloc] initWithNibName:@"SironaAlertNoneView" bundle:nil];
         UIView *overlayNone = [c view];
@@ -130,8 +111,7 @@
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-    // Save encoded data to NSUserDefaults in case there were alerts that were deleted
-    [self saveEncodedData];
+
 }
 
 
@@ -143,7 +123,7 @@
 - (NSInteger)tableView:(UITableView *)tableView
  numberOfRowsInSection:(NSInteger)section
 {
-    return [alerts count];
+    return [alertList count];
 }
 
 
@@ -159,7 +139,7 @@
         cell = (SironaTimeCellView *)[topLevelObjects objectAtIndex:0];
     }
 
-    SironaAlertItem *sai = [alerts objectAtIndex:[indexPath row]];
+    SironaAlertItem *sai = [alertList objectAtIndex:[indexPath row]];
     [[cell cellMain] setText:[[sai getLibraryItem] getName]];
     [[cell cellSecondary] setText:[[sai getLibraryItem] getDosage]];
     
@@ -184,7 +164,7 @@
 {
     
     SironaTimeEditAlertView *stevc = [[SironaTimeEditAlertView alloc] init];
-    SironaAlertItem *selectedItem = [alerts objectAtIndex:[indexPath row]];
+    SironaAlertItem *selectedItem = [alertList objectAtIndex:[indexPath row]];
     [stevc setItem:selectedItem];
     [[self navigationController] pushViewController:stevc animated:YES];
     
@@ -194,7 +174,7 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        [alerts removeObjectAtIndex:[indexPath row]];
+        [alertList removeObjectAtIndex:[indexPath row]];
         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:YES];
     }
     
@@ -203,7 +183,6 @@
 
 - (IBAction)addNewItem:(id)sender
 {
-    
     SironaTimeEditAlertView *stevc = [[SironaTimeEditAlertView alloc] init];
     SironaAlertItem *newItem = [[SironaAlertItem alloc] init];
     [newItem setAlertId];
@@ -277,15 +256,6 @@
         }
         
     }
-    
-}
-
-- (void)saveEncodedData
-{
-    
-    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-    NSData *encodedAlertList = [NSKeyedArchiver archivedDataWithRootObject:alerts];
-    [prefs setObject:encodedAlertList forKey:@"alertList"];
     
 }
 

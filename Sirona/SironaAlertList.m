@@ -11,24 +11,20 @@
 
 @implementation SironaAlertList
 
-+ (SironaAlertList *)sharedAlerts
-{
-    static SironaAlertList *sharedAlerts = nil;
-    if (!sharedAlerts)
-        sharedAlerts = [[super allocWithZone:nil] init];
-    return sharedAlerts;
-}
-
-+ (id)allocWithZone:(NSZone *)zone
-{
-    return [self sharedAlerts];
-}
-
 - (id)init
 {
     self = [super init];
-    if (self) {
-        allAlerts = [[NSMutableArray alloc] init];
+    if (self) {        
+        // Get previous allAlerts if possible
+        NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+        NSData *encodedAlertList = [prefs objectForKey:@"alertList"];
+        if (encodedAlertList) {
+            allAlerts = (NSMutableArray *)[NSKeyedUnarchiver unarchiveObjectWithData:encodedAlertList];
+        } else {
+            allAlerts = [[NSMutableArray alloc] init];
+            encodedAlertList = [NSKeyedArchiver archivedDataWithRootObject:allAlerts];
+            [prefs setObject:encodedAlertList forKey:@"alertList"];
+        }
     } return self;
 }
 
@@ -37,16 +33,63 @@
     return allAlerts;
 }
 
-- (void)createAlert:(SironaAlertItem *)alert
+- (void)addAlert:(SironaAlertItem *)alert
 {
+    // Remove possible duplicate
+    for (SironaAlertItem *sai in allAlerts) {
+        if ([[sai getAlertId] isEqualToString:[alert getAlertId]]) {
+            [allAlerts removeObject:sai];
+            break;
+        }
+    }
+    
     [allAlerts addObject:alert];
+    
+    // Resave prefs
+    [self savePrefs];
+
     NSLog(@"SironaAlertList.m: %@", alert);
 }
 
 - (void)deleteAlert:(SironaAlertItem *)alert
 {
-    [allAlerts delete:alert];
+    [allAlerts removeObject:alert];
+    
+    // Resave prefs
+    [self savePrefs];
 }
 
+- (int)count
+{
+    return [allAlerts count];
+}
+
+- (void)removeUnsaved
+{
+    NSMutableArray *discardedItems = [NSMutableArray array];
+    for (SironaAlertItem *sai in allAlerts) {
+        if (![sai isSaved]) {
+            [discardedItems addObject:sai];
+        }
+    }
+    [allAlerts removeObjectsInArray:discardedItems];
+    
+    [self savePrefs];
+}
+
+- (void)savePrefs
+{
+    NSData *encodedAlertList = [NSKeyedArchiver archivedDataWithRootObject:allAlerts];
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    [prefs setObject:encodedAlertList forKey:@"alertList"];
+}
+
+- (SironaAlertItem *)objectAtIndex:(NSUInteger)index {
+    return [allAlerts objectAtIndex:index];
+}
+
+- (void)removeObjectAtIndex:(NSUInteger)index {
+    [allAlerts removeObjectAtIndex:index];
+}
 
 @end

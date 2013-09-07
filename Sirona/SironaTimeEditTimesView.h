@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "SironaAlertItem.h"
+#import "SironaAlertList.h"
 
 @interface SironaTimeEditTimesView : UITableViewController
 {
@@ -15,7 +16,7 @@
 }
 
 @property SironaAlertItem *item;
-@property NSMutableArray *alertList;
+@property SironaAlertList *alertList;
 
 - (void)setItem:(SironaAlertItem *)item;
 - (IBAction)addTime:(id)sender;
