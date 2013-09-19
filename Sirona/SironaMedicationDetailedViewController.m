@@ -7,6 +7,7 @@
 //
 
 #import "SironaMedicationDetailedViewController.h"
+#import "Medicine.h"
 
 #define FONT_SIZE 14.0f
 #define CELL_CONTENT_WIDTH 320.0f
@@ -26,7 +27,7 @@
     
     NSString *name = [[textFields objectAtIndex:0] text];
     // Checks the name field, which cannot be blank. Shows an alert if it is.
-    if ([(UITextField *)[textFields objectAtIndex:0] textColor] == [UIColor lightGrayColor] || [name length] == 0) {
+    if ([name length] == 0) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error Saving"
                                                         message:@"Medication name cannot be blank"
                                                        delegate:nil
@@ -43,8 +44,9 @@
     for (int i = 0; i < [textFields count]; i++) {
         NSString *answer = [[textFields objectAtIndex:i] text];
         // If answer is blank somehow or if only filled with placeholder
-        if ([answer length] == 0 || (i != [textFields count] - 1 && [(UITextField *)[textFields objectAtIndex:i] textColor] == [UIColor lightGrayColor]))
+        if ([answer length] == 0) {
             answer = @"";
+        }
         [userAnswers replaceObjectAtIndex:i withObject:answer];
     }
     
@@ -160,15 +162,12 @@
             }
         }
         if (previousEntry.length == 0) {
-            previousEntry = [placeholderText objectAtIndex:inputField.tag];
-            inputField.textColor = [UIColor lightGrayColor];
-            inputField.font = [UIFont italicSystemFontOfSize:14];
+            inputField.placeholder = [placeholderText objectAtIndex:inputField.tag];
+            inputField.font = [UIFont fontWithName:@"Helvetica" size:14];
         } else {
+            inputField.text = previousEntry;
             inputField.font = [UIFont fontWithName:@"Helvetica" size:14];
         }
-        
-        // sets the placeholder text initially
-        inputField.text = previousEntry;
         
         [textFields replaceObjectAtIndex:inputField.tag withObject:inputField];
         
@@ -198,22 +197,13 @@
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    // If there is currently placeholder text, then change to input text
-    if (textField.textColor == [UIColor lightGrayColor]) {
-        textField.text = @"";
-        textField.textColor = [UIColor blackColor];
-        textField.font = [UIFont fontWithName:@"Helvetica" size:14];
-    }
+
 }
 
 // Once editing for a textfield is done, checks whether placeholder text should be added
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
-    if([textField.text length] == 0) {
-        textField.text = [placeholderText objectAtIndex:textField.tag];
-        textField.textColor = [UIColor lightGrayColor];
-        textField.font = [UIFont italicSystemFontOfSize:14];
-    } else {
+    if([textField.text length] != 0) {
         [inputtedText replaceObjectAtIndex:textField.tag withObject:textField.text];
     }
     [textFields replaceObjectAtIndex:textField.tag withObject:textField];
@@ -270,6 +260,9 @@
 }
 
 - (id)init {
+    
+    NSLog(@"detailed view controller");
+    
     if (self) {
         
         // Create a new bar button item that will send

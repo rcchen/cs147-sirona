@@ -29,9 +29,13 @@
 - (IBAction)saveMedicine:(id)sender
 {
     
+    for (int i = 0; i < [textFields count]; i++) {
+        NSLog(@"%@", [[textFields objectAtIndex:i] text]);
+    }
+    
     NSString *name = [[textFields objectAtIndex:0] text];
     // Checks the name field, which cannot be blank. Shows an alert if it is.
-    if ([(UITextField *)[textFields objectAtIndex:0] textColor] == [UIColor lightGrayColor] || [name length] == 0) {
+    if ([name length] == 0) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error Saving"
                                                         message:@"Medication name cannot be blank"
                                                        delegate:nil
@@ -112,11 +116,11 @@
 
         // sets the placeholder text initially
         if ([[inputtedText objectAtIndex:inputField.tag] length] == 0) {
-            inputField.text = [placeholderText objectAtIndex:inputField.tag];
-            inputField.textColor = [UIColor lightGrayColor];
+            inputField.placeholder = [placeholderText objectAtIndex:inputField.tag];
             inputField.font = [UIFont italicSystemFontOfSize:14];
         } else {
             inputField.text = [inputtedText objectAtIndex:inputField.tag];
+            inputField.textColor = [UIColor blackColor];
             inputField.font = [UIFont fontWithName:@"Helvetica" size:14];
         }
         [textFields replaceObjectAtIndex:inputField.tag withObject:inputField];
@@ -141,22 +145,13 @@
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
-    // If there is currently placeholder text, then change to input text
-    if (textField.textColor == [UIColor lightGrayColor]) {
-        textField.text = @"";
-        textField.textColor = [UIColor blackColor];
-        textField.font = [UIFont fontWithName:@"Helvetica" size:14];
-    }
+
 }
 
 // Once editing for a textfield is done, checks whether placeholder text should be added
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
-    if([textField.text length] == 0) {
-        textField.text = [placeholderText objectAtIndex:textField.tag];
-        textField.textColor = [UIColor lightGrayColor];
-        textField.font = [UIFont italicSystemFontOfSize:14];
-    } else {
+    if([textField.text length] != 0) {
         [inputtedText replaceObjectAtIndex:textField.tag withObject:textField.text];
     }
 }
