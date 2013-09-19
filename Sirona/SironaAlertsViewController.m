@@ -67,28 +67,31 @@
 - (void)viewDidLoad
 {
     
+    NSLog(@"Loading this view");
+    
     [super viewDidLoad];
     
-    UINib *nib = [UINib nibWithNibName:@"SironaTimeCellView" bundle:nil];
-    [alertsTable registerNib:nib forCellReuseIdentifier:@"SironaTimeCellView"];
-
 }
 
-
-- (void)viewWillAppear:(BOOL)animated
+- (void)viewDidAppear:(BOOL)animated
 {
+ 
+    NSLog(@"Appearing this view");
     
     [[UIApplication sharedApplication] cancelAllLocalNotifications];
-
+    
     [self initializeAlerts];
     
     // Programatically add a tableView to the thing
-    alertsTable = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
+    alertsTable = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
+    UINib *nib = [UINib nibWithNibName:@"SironaTimeCellView" bundle:nil];
+    [alertsTable registerNib:nib forCellReuseIdentifier:@"SironaTimeCellView"];
     self.alertsTable.dataSource = self;
     self.alertsTable.delegate = self;
     self.alertsTable.allowsSelection = NO;
     self.alertsTable.allowsSelectionDuringEditing = YES;
-    [[self alertsTable] reloadData];
+    alertsTable.frame = CGRectMake(0, 70, self.view.bounds.size.width, self.view.bounds.size.height); // HACKHACK
+    [alertsTable reloadData];
     [self.view addSubview:alertsTable];
     
     for (SironaAlertItem *alertItem in [alertList allAlerts]) {
@@ -107,6 +110,13 @@
         [self.view addSubview:overlayNone];
     }
 
+    
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    
+    
 }
 
 - (void)viewWillDisappear:(BOOL)animated
